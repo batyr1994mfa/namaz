@@ -62,14 +62,14 @@ body {
 .island-top-time {
   flex-direction: column;
   align-items: center;
-  align-self: flex-start;
+  align-self: flex-start; 
   padding: 8px 16px;
   width: auto !important; 
 }
 
 .island-middle-row {
   display: flex !important;
-  flex-direction: row !important;
+  flex-direction: row-reverse !important; 
   justify-content: space-between;
   align-items: center;
   align-self: stretch;
@@ -98,7 +98,7 @@ body {
   align-items: center;
   justify-content: center;
   text-align: left;
-  flex: 0; 
+  flex: 0 0 auto; 
   white-space: nowrap;
 }
 
@@ -114,7 +114,7 @@ body {
 .hijri-control-box {
   display: flex;
   align-items: center;
-  flex: 1; 
+  flex: 0 0 auto; 
   gap: 5px;
 }
 
@@ -286,7 +286,6 @@ body {
   text-shadow: 0 0 10px rgba(0, 229, 255, 0.7);
 }
 
-/* Новые кофейно-молочные стили для следующей молитвы в таблице */
 .pi.active .pi-name { 
   color: #ff8a80 !important; 
   text-shadow: 0 0 10px rgba(215, 204, 200, 0.6); 
@@ -298,6 +297,16 @@ body {
 
 .pi.sr .pi-name { color:#c87800; }
 .pi.sr .pi-time { color:#c87800; }
+
+@media (orientation: landscape) {
+  #app {
+    padding: 6px 12px; 
+    gap: 8px; 
+  }
+  .frame-box {
+    gap: 8px; 
+  }
+}
 </style>
 </head>
 <body>
@@ -309,10 +318,6 @@ body {
     </div>
     
     <div class="island-middle-row">
-      <div class="row-item item-address">
-        <div id="address-text">ул. Гагарина 37</div>
-      </div>
-      
       <div class="hijri-control-box">
         <button class="glass-btn" onclick="adjustHijri(-1)">-</button>
         
@@ -351,7 +356,6 @@ function adjustHijri(days) {
   tick(); 
 }
 
-// ── Хиджра: конвертация григорианской даты ────────────────────────────────
 const HIJRI_MONTHS = [
   'Мухаррам','Сафар','Раби аль-Авваль','Раби аль-Ахир',
   'Джумада I','Джумада II','Раджаб','Шаабан',
@@ -382,7 +386,6 @@ function fmtHijri(date) {
   return h.day + ' ' + HIJRI_MONTHS[h.month-1].toUpperCase() + ' ' + h.year;
 }
 
-// ── Прочие вспомогательные ────────────────────────────────────────────────
 const NAMES=['Фаджр','Зухр','Аср','Магриб','Иша'];
 const KEYS=['F','Z','A','M','I'];
 const WINS={"Фаджр":30*60,"Магриб":7*60};
@@ -420,7 +423,7 @@ function compute(){
     }
   }
   const tom=new Date(now);tom.setDate(tom.getDate()+1);
-  const fajr=getPrayers(tom)[0]; // Исправлен критический баг оригинального кода (добавлен индекс [0])
+  const fajr=getPrayers(tom)[0]; 
   return{state:'countdown',prayers,nxt:fajr,rem:Math.floor((fajr.time.getTime()-ms)/1000),sunrise};
 }
 
@@ -441,7 +444,6 @@ const $pt=document.getElementById('prayer-time-display');
 const $st=document.getElementById('status-label');
 const $b=document.getElementById('bottom-row');
 
-// Исправлено создание массива элементов нижней панели (убран баг с вложенным массивом)
 function renderBottom(prayers,nxt,cur,sunrise){
   $b.innerHTML='';const ms=Date.now();
   const items=[prayers[0],{name:'Восход',time:sunrise,isSr:true},...prayers.slice(1)];
@@ -468,20 +470,19 @@ function tick(){
   if(s.state==='active'){
     $t.textContent=fmt(s.rem);$t.className='red';
     $n.textContent=s.cur.name.toUpperCase();$n.className='red';
-    $st.textContent='время намаза — осталось';
+    $st.textContent='';
     $pt.textContent=fmtT(s.cur.time);
     renderBottom(s.prayers,null,s.cur,s.sunrise);
   } else if(s.state==='duha'){
     $t.textContent=fmt(s.rem);$t.className='red';
     $n.textContent='ДУХА';$n.className='red';
-    $st.textContent='до намаза духа';
+    $st.textContent='';
     $pt.textContent='';
     renderBottom(s.prayers,null,null,s.sunrise);
   } else {
-    const isVoskhod=s.nxt&&s.nxt.name==='Восход';
     $t.textContent=fmt(s.rem);$t.className='green';
     $n.textContent=s.nxt?s.nxt.name.toUpperCase():'';$n.className='green';
-    $st.textContent=isVoskhod ? '' : '';
+    $st.textContent='';
     $pt.textContent=s.nxt?fmtT(s.nxt.time):'';
     renderBottom(s.prayers,s.nxt,null,s.sunrise);
   }
