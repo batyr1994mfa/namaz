@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+html<!DOCTYPE html>
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
@@ -15,10 +15,13 @@
 html,body { width:100%; height:100%; background:#000; font-family:Arial,sans-serif; overflow:hidden; }
 body { display:flex; flex-direction:column; align-items:center; justify-content:center; }
 #app { width:100vw; height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:10px 8px; }
-#current-time { font-size:clamp(32px,8vw,56px); font-weight:900; color:#555; letter-spacing:6px; text-align:center; margin-bottom:10px; font-family:'Courier New',monospace; font-variant-numeric:tabular-nums; }
-#datebox { font-size:clamp(14px,3.5vw,22px); color:#555; font-weight:800; white-space:nowrap; text-align:center; margin-bottom:2px; }
+#current-time { font-size:clamp(38px,12vw,70px); font-weight:900; color:#999; letter-spacing:2px; text-align:center; margin-top:8px; margin-bottom:5px; font-family:'Courier New',monospace; font-variant-numeric:tabular-nums; }
+#hijri-wrap { display:flex; align-items:center; justify-content:center; gap:6px; margin-bottom:2px; }
+#hijri-date { font-size:clamp(17px,5vw,45px); color:#c87800; font-weight:700; white-space:nowrap; text-align:center; }
+.adj-btn { background:none; border:none; color:#333; font-size:clamp(14px,3.5vw,18px); cursor:pointer; padding:2px 5px; line-height:1; opacity:0.35; user-select:none; -webkit-tap-highlight-color:transparent; }
+.adj-btn:active { opacity:0.7; }
 #status-label { font-size:clamp(11px,3.5vw,16px); color:#555; letter-spacing:4px; text-transform:uppercase; text-align:center; margin-bottom:4px; }
-#prayer-name { font-size:clamp(22px,8vw,52px); font-weight:800; letter-spacing:3px; text-align:center; transition:color .4s; margin-bottom:2px; }
+#prayer-name { font-size:clamp(22px,8vw,52px); font-weight:400; letter-spacing:3px; text-align:center; transition:color .4s; margin-bottom:9px; }
 #prayer-time-display { display:none; }
 #timer { font-size:clamp(72px,18vw,120px); font-weight:900; letter-spacing:2px; line-height:.95; text-align:center; font-family:'Courier New',monospace; font-variant-numeric:tabular-nums; transition:color .4s; width:100%; display:flex; align-items:center; justify-content:center; }
 #timer.green { color:#00e676; }
@@ -28,17 +31,115 @@ body { display:flex; flex-direction:column; align-items:center; justify-content:
 #bottom-row { display:flex; gap:clamp(8px,2.5vw,20px); margin-top:14px; align-items:flex-start; justify-content:center; flex-wrap:wrap; }
 .pi { display:flex; flex-direction:column; align-items:center; gap:2px; opacity:.9; transition:opacity .3s; min-width:44px; }
 .pi.active { opacity:1; }
+.pi.active .pi-name { color:#00e676; }
+.pi.active .pi-time { color:#00e676; }
 .pi.done   { opacity:.9; }
 .pi-name { font-size:clamp(12px,3.2vw,17px); color:#999; letter-spacing:1px; text-transform:uppercase; }
 .pi-time { font-size:clamp(16px,4vw,23px); color:#ddd; font-weight:700; font-variant-numeric:tabular-nums; }
 .pi.sr .pi-name { color:#c87800; }
 .pi.sr .pi-time { color:#c87800; }
 
+/* === top bar: calendar + battery === */
+#top-bar { display:flex; align-items:center; justify-content:space-between; width:100%; max-width:420px; margin-bottom:8px; padding:0 4px; }
+#week-strip { display:flex; gap:4px; }
+.wd { width:clamp(28px,7vw,38px); height:clamp(28px,7vw,38px); display:flex; align-items:center; justify-content:center; border-radius:50%; font-size:clamp(12px,5vw,26px); font-weight:700; color:#555; letter-spacing:0; text-transform:uppercase; }
+.wd.today { color:#000; background:#00e676; }
+
+/* Сближение элементов на 20% (gap стал 4px вместо 5px) */
+#battery-box { display:flex; align-items:center; gap:1px; }
+
+/* Значок уменьшен на 20% */
+#battery-icon { position:relative; width:22px; height:11px; border:2px solid #555; border-radius:3px; }
+#battery-icon::after { content:''; position:absolute; top:50%; right:-5px; transform:translateY(-50%); width:3px; height:5px; background:#555; border-radius:0 2px 2px 0; }
+#battery-fill { position:absolute; top:1px; left:1px; bottom:1px; background:#555; border-radius:1px; transition:width .5s,background .5s; }
+
+/* Вертикальный режим: текст процентов увеличен на 20% */
+#battery-pct { font-size:clamp(13.2px,3.6vw,16.8px); font-weight:700; color:#555; font-variant-numeric:tabular-nums; min-width:36px; text-align:right; }
+
+/* === АДАПТИВ ДЛЯ ГОРИЗОНТАЛЬНОГО РЕЖИМА === */
+@media (orientation: landscape) {
+  #app {
+    padding: 4px 8px;
+    justify-content: space-around;
+  }
+  #top-bar {
+    margin-bottom: 0px;
+    max-width: 380px;
+  }
+  .wd {
+    width: clamp(22px, 5vw, 28px);
+    height: clamp(22px, 5vw, 28px);
+    font-size: clamp(12px,5vw,19px);
+  }
+  #hijri-wrap {
+    margin-bottom: 0px;
+  }
+  #hijri-date {
+    font-size: clamp(11px, 2.2vw, 15px);
+  }
+  #current-time {
+    font-size: clamp(24px, 5vw, 34px);
+    margin-top: -7px;
+    margin-bottom: 0px;
+  }
+  #status-label {
+    font-size: clamp(9px, 1.8vw, 12px);
+    margin-bottom: 0px;
+  }
+  #prayer-name {
+    font-size: clamp(18px, 4vw, 30px);
+    margin-bottom: 0px;
+    transform: translateY(-10px);
+  }
+  #timer {
+    font-size: clamp(50px, 20vw, 260px);
+    line-height: 0.9;
+  }
+  #bottom-row {
+    margin-top: 0px;
+    width: auto;
+    max-width: 420px;
+    gap: clamp(8px, 2.5vw, 20px);
+    justify-content: center;
+    flex-wrap: nowrap;
+  }
+  .pi {
+    min-width: 44px;
+    flex: none;
+  }
+  .pi-name { font-size: clamp(12px, 3.2vw, 17px); }
+  .pi-time { font-size: clamp(16px, 4vw, 23px); }
+
+  /* Горизонтальный режим: значок уменьшен, отступ приближен на 20%, проценты стандартные */
+  #battery-box { gap: 2px; }
+  #battery-icon { width: 22px; height: 11px; }
+  #battery-icon::after { height: 5px; }
+  #battery-pct { font-size: clamp(11px, 3vw, 14px); }
+}
 </style>
 </head>
 <body>
 <div id="app">
-  <div id="datebox"></div>
+  <div id="top-bar">
+    <div id="week-strip">
+      <div class="wd" data-d="1">ПН</div>
+      <div class="wd" data-d="2">ВТ</div>
+      <div class="wd" data-d="3">СР</div>
+      <div class="wd" data-d="4">ЧТ</div>
+      <div class="wd" data-d="5">ПТ</div>
+      <div class="wd" data-d="6">СБ</div>
+      <div class="wd" data-d="0">ВС</div>
+    </div>
+    <div id="battery-box">
+      <div id="battery-icon"><div id="battery-fill"></div></div>
+      <span id="battery-pct">—%</span>
+    </div>
+  </div>
+  <div id="hijri-wrap">
+    <button class="adj-btn" id="hijri-prev" onclick="adjustHijri(-1)">‹</button>
+    <div id="hijri-date">— — —</div>
+    <button class="adj-btn" id="hijri-next" onclick="adjustHijri(+1)">›</button>
+  </div>
   <div id="current-time">--:--:--</div>
   <div id="status-label"></div>
   <div id="prayer-name" class="green">—</div>
@@ -106,12 +207,38 @@ function compute(){
 
 function fmt(s){const h=Math.floor(s/3600),m=Math.floor((s%3600)/60),sec=s%60;return h>0?pad(h)+':'+pad(m)+':'+pad(sec):pad(m)+':'+pad(sec);}
 function fmtT(d){return pad(d.getHours())+':'+pad(d.getMinutes());}
-function fmtDate(d){const W=['Вс','Пн','Вт','Ср','Чт','Пт','Сб'],M=['янв','фев','мар','апр','май','июн','июл','авг','сен','окт','ноя','дек'];return W[d.getDay()]+' '+d.getDate()+' '+M[d.getMonth()]+' '+d.getFullYear();}
+function toHijri(date){
+  let gy=date.getFullYear(),gm=date.getMonth()+1,gd=date.getDate();
+  let jd=Math.floor((1461*(gy+4800+Math.floor((gm-14)/12)))/4)+
+    Math.floor((367*(gm-2-12*Math.floor((gm-14)/12)))/12)-
+    Math.floor((3*(Math.floor((gy+4900+Math.floor((gm-14)/12))/100)))/4)+gd-32075;
+  let l=jd-1948440+10632,n=Math.floor((l-1)/10631);
+  l=l-10631*n+354;
+  let j=Math.floor((10985-l)/5316)*Math.floor((50*l)/17719)+
+    Math.floor(l/5670)*Math.floor((43*l)/15238);
+  l=l-Math.floor((30-j)/15)*Math.floor((17719*j)/50)-
+    Math.floor(j/16)*Math.floor((15238*j)/43)+29;
+  let hm=Math.floor((24*l)/709),hd=l-Math.floor((709*hm)/24),hy=30*n+j-30;
+  return{d:hd,m:hm,y:hy};
+}
+const HM=['Мухаррам','Сафар','Раби I','Раби II','Джумада I','Джумада II','Раджаб','Шаабан','Рамадан','Шавваль','Зуль-каада','Зуль-хиджа'];
+let hijriOffset=parseInt(localStorage.getItem('hijriOffset')||'0',10);
+function adjustHijri(delta){
+  hijriOffset+=delta;
+  localStorage.setItem('hijriOffset',hijriOffset);
+  updateHijri();
+}
+function updateHijri(){
+  const now=new Date();
+  const d=new Date(now.getTime()+hijriOffset*86400000);
+  const h=toHijri(d);
+  document.getElementById('hijri-date').textContent=h.d+' '+HM[h.m-1]+' '+h.y;
+}
 
 const $ct=document.getElementById('current-time');
 const $t=document.getElementById('timer'),$n=document.getElementById('prayer-name');
 const $pt=document.getElementById('prayer-time-display'),$st=document.getElementById('status-label');
-const $b=document.getElementById('bottom-row'),$dt=document.getElementById('datebox');
+const $b=document.getElementById('bottom-row');
 
 function renderBottom(prayers,nxt,cur,sunrise){
   $b.innerHTML='';const ms=Date.now();
@@ -137,7 +264,7 @@ function renderBottom(prayers,nxt,cur,sunrise){
 function tick(){
   const now=new Date();
   $ct.textContent=pad(now.getHours())+':'+pad(now.getMinutes())+':'+pad(now.getSeconds());
-  $dt.textContent=fmtDate(now);
+  updateHijri();
   const s=compute();
 
   if(s.state==='active'){
@@ -163,6 +290,82 @@ function tick(){
 }
 
 tick();setInterval(tick,1000);
+
+// === Wake Lock: не давать экрану гаснуть ===
+let wakeLock=null;
+async function requestWakeLock(){
+  if('wakeLock' in navigator){
+    try{
+      wakeLock=await navigator.wakeLock.request('screen');
+    }catch(e){}
+  }
+}
+requestWakeLock();
+document.addEventListener('visibilitychange',()=>{
+  if(document.visibilityState==='visible') requestWakeLock();
+});
+
+// === Звук: 3 бипа при наступлении намаза ===
+let lastActivePrayer='';
+function beep3(){
+  try{
+    const ctx=new(window.AudioContext||window.webkitAudioContext)();
+    [0,0.4,0.8].forEach(delay=>{
+      const o=ctx.createOscillator(),g=ctx.createGain();
+      o.connect(g);g.connect(ctx.destination);
+      o.type='sine';o.frequency.value=880;
+      g.gain.setValueAtTime(0,ctx.currentTime+delay);
+      g.gain.linearRampToValueAtTime(0.6,ctx.currentTime+delay+0.05);
+      g.gain.linearRampToValueAtTime(0,ctx.currentTime+delay+0.25);
+      o.start(ctx.currentTime+delay);
+      o.stop(ctx.currentTime+delay+0.3);
+    });
+  }catch(e){}
+}
+// Перехватываем tick чтобы отслеживать смену намаза
+const _origTick=tick;
+// Переопределяем логику отслеживания внутри setInterval
+setInterval(()=>{
+  const s=compute();
+  if(s.state==='active'){
+    const key=s.cur.name;
+    if(key!==lastActivePrayer){
+      lastActivePrayer=key;
+      beep3();
+    }
+  } else {
+    lastActivePrayer='';
+  }
+},1000);
+
+// === Calendar: highlight today ===
+function updateWeek(){
+  const day=new Date().getDay(); // 0=Sun..6=Sat
+  document.querySelectorAll('.wd').forEach(el=>{
+    el.classList.toggle('today', parseInt(el.dataset.d)===day);
+  });
+}
+updateWeek();
+setInterval(updateWeek,60000);
+
+// === Battery ===
+function applyBattery(b){
+  const pct=Math.round(b.level*100);
+  document.getElementById('battery-pct').textContent=pct+'%';
+  const fill=document.getElementById('battery-fill');
+  fill.style.width=(pct)+'%';
+  const color = pct > 20 ? '#00e676' : '#ff1744';
+  fill.style.background=color;
+  document.getElementById('battery-icon').style.borderColor=color;
+  document.getElementById('battery-icon').style.setProperty('--cap',color);
+  document.getElementById('battery-pct').style.color=color;
+}
+if(navigator.getBattery){
+  navigator.getBattery().then(b=>{
+    applyBattery(b);
+    b.addEventListener('levelchange',()=>applyBattery(b));
+  });
+}
 document.addEventListener('click',()=>{if(document.documentElement.requestFullscreen)document.documentElement.requestFullscreen();});
 
 if('serviceWorker' in navigator){
