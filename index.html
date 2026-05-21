@@ -40,7 +40,7 @@ body { display:flex; flex-direction:column; align-items:center; justify-content:
 <div id="app">
   <div id="datebox"></div>
   <div id="current-time">--:--:--</div>
-  <div id="status-label">до намаза</div>
+  <div id="status-label"></div>
   <div id="prayer-name" class="green">—</div>
   <div id="prayer-time-display">—</div>
   <div id="timer" class="green">--:--</div>
@@ -143,7 +143,7 @@ function tick(){
   if(s.state==='active'){
     $t.textContent=fmt(s.rem);$t.className='red';
     $n.textContent=s.cur.name.toUpperCase();$n.className='red';
-    $st.textContent='ВРЕМЯ НАМАЗА — ОСТАЛОСЬ';
+    $st.textContent='';
     $pt.textContent=fmtT(s.cur.time);
     renderBottom(s.prayers,null,s.cur,s.sunrise);
   } else if(s.state==='duha'){
@@ -156,7 +156,7 @@ function tick(){
     const isVoskhod=s.nxt&&s.nxt.name==='Восход';
     $t.textContent=fmt(s.rem);$t.className='green';
     $n.textContent=s.nxt?s.nxt.name.toUpperCase():'';$n.className='green';
-    $st.textContent=isVoskhod?'до восхода':'до намаза';
+    $st.textContent=isVoskhod?'':'';
     $pt.textContent=s.nxt?fmtT(s.nxt.time):'';
     renderBottom(s.prayers,s.nxt,null,s.sunrise);
   }
