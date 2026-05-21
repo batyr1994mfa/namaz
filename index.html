@@ -197,7 +197,7 @@ function tick(){
   if(s.state==='active'){
     $t.textContent=fmt(s.rem);$t.className='red';
     $n.textContent=s.cur.name.toUpperCase();$n.className='red';
-    $st.textContent='ВРЕМЯ НАМАЗА — ОСТАЛОСЬ';
+    $st.textContent='';
     $pt.textContent=fmtT(s.cur.time);
     renderBottom(s.prayers,null,s.cur,s.sunrise);
   } else if(s.state==='duha'){
