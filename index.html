@@ -144,14 +144,14 @@ body {
 }
 /* Исправленный стиль для увеличения цифры исламского календаря */
 .hijri-day-num {
-  font-size: clamp(16px, 8vw, 34px) !important; /* Увеличивает только число */
+  font-size: clamp(16px, 8vw, 26px) !important; /* Увеличивает только число */
   font-weight: 700 !important;                     /* Делает число более жирным */
   color: #FFD60A !important;                       /* Золотистый цвет как у обычного календаря */
   display: inline-block !important;                /* Чтобы корректно применились размеры */
   margin-right: 3px !important;                    /* Отступ от текста месяца */
 }
 #hijri-date {
-  font-size:clamp(11px,6vw,13px); font-weight:600; color:rgba(255,255,255,1);
+  font-size:clamp(11px,6vw,11px); font-weight:600; color:rgba(255,255,255,1);
   font-family:-apple-system,system-ui,sans-serif; line-height:1.1;
   white-space:nowrap; text-align:right;
 }
@@ -213,8 +213,8 @@ body {
 }
 .pi.active .pi-name { color:#ff453a !important; }
 .pi.active .pi-time { color:#ff453a !important; }
-.pi.sr .pi-name { color:#FFC81E !important; }
-.pi.sr .pi-time { color:#FFC81E !important; }
+.pi.sr .pi-name { color:#FFD60A !important; }
+.pi.sr .pi-time { color:#FFD60A !important; }
 #cal-badge {
   display:flex; flex-direction:column; align-items:center; justify-content:center;
   min-width:44px; padding:2px 8px;
@@ -288,7 +288,7 @@ body {
     position:relative !important; display:block !important; text-align:center !important;
   }
   #timer {
-    font-size:clamp(20px,50vh,140px) !important;
+    font-size:clamp(20px,50vh,100px) !important;
     display:flex !important; align-items:center !important; justify-content:center !important;
     letter-spacing:-2px !important; line-height:0.9 !important;
     margin:0 auto !important; width:auto !important;
@@ -328,10 +328,10 @@ body {
           <div id="cal-badge"><span id="cal-badge-day">--</span><span id="cal-badge-month">---</span></div>
           
           <!-- Элементы внутри строки теперь выровнены по левому краю (кнопки и Хиджра прижаты к адресу) -->
-          <div style="display:flex; align-items:center; gap:12px; width:100%; justify-content:flex-start;">
+          <div style="display:flex; align-items:center; gap:6px; width:100%; justify-content:flex-start;">
             <div style="display:flex; flex-direction:column; gap:2px; align-items:center; flex-shrink:0;">
               <button class="glass-btn" onclick="event.stopPropagation();adjustHijri(1)" title="+1">▲</button>
-              <button class="glass-btn" onclick="event.stopPropagation();adjustHijri(-1)" title="-1">▼</button>
+              <button class="glass-btn" onclick="event.stopPropagation();adjustHijri(1)" title="-1">▼</button>
             </div>
             <div id="hijri-date">— — —</div>
           </div>
