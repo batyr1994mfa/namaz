@@ -146,7 +146,7 @@ body {
 .hijri-day-num {
   font-size: clamp(16px, 8vw, 26px) !important; /* Увеличивает только число */
   font-weight: 700 !important;                     /* Делает число более жирным */
-  color: #FFD60A !important;                       /* Золотистый цвет как у обычного календаря */
+  color: #FF8C00 !important;                       /* Золотистый цвет как у обычного календаря */
   display: inline-block !important;                /* Чтобы корректно применились размеры */
   margin-right: 3px !important;                    /* Отступ от текста месяца */
 }
@@ -415,9 +415,9 @@ function getIslamicEvents(hDay, hMonth, hYear, weekday) {
   // ── Muharram ──
   if (hMonth===1) {
     if (hDay===1)  ev.push({p:10, t:'🌙 Исламский Новый '+hYear+' год',     g:true});
-    if (hDay===9)  ev.push({p:8,  t:'📿 Пост накануне Ашура',               g:false});
+    if (hDay===9)  ev.push({p:8,  t:'☪️ Пост накануне Ашура',               g:false});
     if (hDay===10) ev.push({p:9,  t:'⭐ Ашура — пост желателен',            g:true});
-    if (hDay===11) ev.push({p:7,  t:'📿 Пост после Ашура',                  g:false});
+    if (hDay===11) ev.push({p:7,  t:'☪️ Пост после Ашура',                  g:false});
   }
   // ── Раби аль-Авваль ──
   if (hMonth===3 && hDay===12) ev.push({p:9, t:'🌹 Ан-Наби ﷺ', g:true});
@@ -437,11 +437,11 @@ function getIslamicEvents(hDay, hMonth, hYear, weekday) {
   // ── Шавваль ──
   if (hMonth===10) {
     if (hDay===1) ev.push({p:10, t:'🎉 Ид аль-Фитр — Ураза-Байрам!', g:true});
-    if (hDay>=2 && hDay<=7) ev.push({p:8, t:'📿 Пост Шавваля — '+(hDay-1)+'-й из 6 дней', g:false});
+    if (hDay>=2 && hDay<=7) ev.push({p:8, t:'☪️ Пост Шавваля — '+(hDay-1)+'-й из 6 дней', g:false});
   }
   // ── Зуль-Хиджа ──
   if (hMonth===12) {
-    if (hDay>=1 && hDay<=8) ev.push({p:9, t:'📿 Пост Зуль-Хиджа ('+hDay+'-й день)', g:true});
+    if (hDay>=1 && hDay<=8) ev.push({p:9, t:'☪️ Пост Зуль-Хиджа ('+hDay+'-й день)', g:true});
     if (hDay===9) ev.push({p:10, t:'🤲 День Арафа — пост за два года!', g:true});
     if (hDay===10) ev.push({p:10, t:'🐑 Ид аль-Адха — Курбан-Байрам!', g:true});
     if (hDay>=11 && hDay<=13) ev.push({p:8, t:'🕋 Дни ат-Ташрик — '+hDay+' Зуль-Хиджа', g:false});
@@ -453,8 +453,8 @@ function getIslamicEvents(hDay, hMonth, hYear, weekday) {
     ev.push({p:6, t:'🌕 Белые дни — '+(hDay-12)+'-й день (пост сунна)', g:false});
   }
   // ── Еженедельные посты ──
-  if (weekday===1) ev.push({p:4, t:'📅 Пост в Понедельник (сунна)', g:false});
-  if (weekday===4) ev.push({p:4, t:'📅 Пост в Четверг (сунна)',     g:false});
+  if (weekday===1) ev.push({p:4, t:'🌴 Пост в Понедельник (сунна)', g:false});
+  if (weekday===4) ev.push({p:4, t:'🌴 Пост в Четверг (сунна)',     g:false});
 
   ev.sort((a,b)=>b.p-a.p);
   return ev.slice(0,2);
