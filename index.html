@@ -337,6 +337,7 @@ body {
     <div class="island-top-row">
       <div class="glass-island island-top-time">
         <div id="current-time">--:--:--</div>
+        <div id="battery-status" style="display:flex;align-items:center;justify-content:center;gap:4px;margin-top:10px;"></div>
       </div>
       <div class="glass-island island-address">
         <div class="addr-date-row">
@@ -697,6 +698,82 @@ if('serviceWorker' in navigator){ navigator.serviceWorker.register('sw.js').catc
 })();
 </script>
 
+
+<style>
+#battery-status {
+  font-family: -apple-system, system-ui, sans-serif;
+  font-size: clamp(10px, 3vw, 13px);
+  font-weight: 500;
+  color: rgba(255,255,255,0.7);
+  letter-spacing: 0.3px;
+  line-height: 1;
+  transform: translateY(15%);
+}
+#battery-status .bat-icon {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  width: 18px;
+  height: 10px;
+}
+#battery-status .bat-icon svg {
+  width: 18px;
+  height: 10px;
+}
+#battery-status.bat-low { color: #ff453a !important; }
+#battery-status.bat-mid { color: #FFD60A !important; }
+#battery-status.bat-ok  { color: rgba(255,255,255,0.75) !important; }
+#battery-status.bat-full { color: #30d158 !important; }
+</style>
+<script>
+(function(){
+  var el = document.getElementById('battery-status');
+  if (!el) return;
+
+  function getBatColor(pct, charging) {
+    if (charging) return '#30d158';
+    if (pct <= 20) return '#ff453a';
+    if (pct <= 40) return '#FFD60A';
+    return 'rgba(255,255,255,0.75)';
+  }
+
+  function renderBattery(pct, charging) {
+    if (!el) return;
+    var p = Math.round(pct * 100);
+    var color = getBatColor(p, charging);
+    el.className = '';
+    if (charging) el.classList.add('bat-full');
+    else if (p <= 20) el.classList.add('bat-low');
+    else if (p <= 40) el.classList.add('bat-mid');
+    else el.classList.add('bat-ok');
+
+    var fillW = Math.max(0, Math.min(12, Math.round(p / 100 * 12)));
+    var chargingSymbol = charging ? '⚡' : '';
+    el.style.flexDirection = 'column';
+    el.style.alignItems = 'center';
+    el.style.gap = '2px';
+    el.innerHTML =
+      '<svg viewBox="0 0 18 10" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:36px;height:20px;flex-shrink:0;">' +
+        '<rect x="0.5" y="0.5" width="15" height="9" rx="2" stroke="' + color + '" stroke-width="1"/>' +
+        '<rect x="15.5" y="3" width="2" height="4" rx="1" fill="' + color + '"/>' +
+        '<rect x="1.5" y="1.5" width="' + fillW + '" height="7" rx="1.5" fill="' + color + '"/>' +
+      '</svg>' +
+      '<span style="color:' + color + ';font-size:clamp(10px,6vw,14px);font-weight:700;line-height:1;">' + p + '%' + chargingSymbol + '</span>';
+  }
+
+  if ('getBattery' in navigator) {
+    navigator.getBattery().then(function(bat) {
+      renderBattery(bat.level, bat.charging);
+      bat.addEventListener('levelchange',   function(){ renderBattery(bat.level, bat.charging); });
+      bat.addEventListener('chargingchange',function(){ renderBattery(bat.level, bat.charging); });
+    }).catch(function(){
+      el.style.display = 'none';
+    });
+  } else {
+    el.style.display = 'none';
+  }
+})();
+</script>
 
 <div id="pwa-install-bar" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;padding:10px 16px;background:rgba(26,74,46,0.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-top:1px solid rgba(200,168,75,0.4);flex-direction:row;align-items:center;justify-content:space-between;gap:10px;">
   <span style="color:#c8a84b;font-size:14px;font-weight:600;text-shadow:0 1px 3px rgba(0,0,0,0.6);">☪ Добавить на рабочий стол</span>
