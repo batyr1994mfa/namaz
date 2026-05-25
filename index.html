@@ -288,7 +288,7 @@ body {
     position:relative !important; display:block !important; text-align:center !important;
   }
   #timer {
-    font-size:clamp(20px,50vh,90px) !important;
+    font-size:clamp(20px,50vh,75px) !important;
     display:flex !important; align-items:center !important; justify-content:center !important;
     letter-spacing:-2px !important; line-height:0.9 !important;
     margin:0 auto !important; width:auto !important;
@@ -298,8 +298,8 @@ body {
   #prayer-name   { font-size:clamp(12px,8vh,50px) !important; margin:0 !important; }
   #hijri-date    { font-size:clamp(12px,6vh,24px) !important; }
   #datebox       { font-size:clamp(11px,2.2vh,14px) !important; }
-  .pi-name       { font-size:clamp(10px,4vh,14px) !important; }
-  .pi-time       { font-size:clamp(16px,4.2vw,24px) !important; }
+  .pi-name       { font-size:clamp(10px,4vh,10px) !important; }
+  .pi-time       { font-size:clamp(16px,4.2vw,16px) !important; }
   #cal-badge-day { font-size:clamp(16px,8vh,22px) !important; }
   #address-name  { font-size:clamp(8px,2vh,11px) !important; }
   .divider       { margin:2px 0 !important; height:1px !important; }
@@ -350,7 +350,7 @@ body {
               <button class="glass-btn" onclick="event.stopPropagation();adjustHijri(-1)" title="-1">▼</button>
             </div>
             <div style="display:flex;flex-direction:column;gap:1px;flex:1;min-width:0;">
-              <span style="font-size:clamp(10px,8vw,14px);font-weight:500;color:#FFD60A;text-transform:uppercase;letter-spacing:0.5px;line-height:1;text-shadow:0 1px 3px rgba(0,0,0,0.6);">Сегодня</span>
+              <span style="font-size:clamp(10px,8vw,14px);font-weight:500;color:#ff453a;text-transform:uppercase;letter-spacing:0.5px;line-height:1;text-shadow:0 1px 3px rgba(0,0,0,0.6);">Сегодня</span>
               <div id="islamic-event" style="display:flex;flex-direction:column;gap:2px;min-width:0;"></div>
             </div>
           </div>
@@ -465,10 +465,12 @@ function updateIslamicEvent(now) {
   const events = getIslamicEvents(h.day, h.month, h.year, weekday);
   const el = document.getElementById('islamic-event');
   if (!el) return;
+  const monthName = HIJRI_MONTHS[h.month - 1] || '';
+  const dateHtml = '<span class="ev-line gold"><span class="hijri-day-num">' + h.day + '</span> ' + monthName + ' ' + h.year + '</span>';
   if (events.length === 0) {
-    el.innerHTML = '<span class="ev-line white" style="opacity:0.45;">— нет событий —</span>';
+    el.innerHTML = dateHtml;
   } else {
-    el.innerHTML = events.map(e =>
+    el.innerHTML = dateHtml + events.map(e =>
       '<span class="ev-line '+(e.g?'gold':'white')+'">'+e.t+'</span>'
     ).join('');
   }
@@ -584,7 +586,7 @@ if('serviceWorker' in navigator){ navigator.serviceWorker.register('sw.js').catc
   opacity:0.9; transition:opacity .3s,transform .3s; flex:1; min-width:0; height:32px;
 }
 .cal-day .pi-name {
-  color:rgba(255,255,255,1) !important; font-size:1.38rem !important;
+  color:rgba(255,255,255,1) !important; font-size:1rem !important;
   font-weight:500 !important; letter-spacing:0 !important;
   text-shadow:0 1.3px 3.9px rgba(0,0,0,0.65),0 2.6px 7.8px rgba(0,0,0,0.39) !important; opacity:1;
 }
@@ -601,7 +603,7 @@ if('serviceWorker' in navigator){ navigator.serviceWorker.register('sw.js').catc
 }
 .cal-day.battery-box .pi-name { color:rgba(255,255,255,0.55) !important; }
 .cal-day.battery-box .pi-time {
-  font-size:clamp(12px,4.8vw,20px) !important; /* Уменьшили размер для даты */
+  font-size:clamp(12px,4.8vw,16px) !important; /* Уменьшили размер для даты */
   color:#ff453a !important;
   text-shadow: 0 1.3px 3.9px rgba(0,0,0,0.65), 0 2.6px 7.8px rgba(0,0,0,0.39) !important; 
   font-family:-apple-system,system-ui,sans-serif !important;
