@@ -486,8 +486,8 @@ function getIslamicEvents(hDay, hMonth, hYear, weekday) {
   if (hMonth===12) {
     if (hDay>=1 && hDay<=8) ev.push({p:9, t:'☪️ Пост Зуль-Хиджа ('+hDay+'-й день)', g:true});
     if (hDay===9) ev.push({p:10, t:'🤲 День Арафа — пост за два года!', g:true});
-    if (hDay===10) ev.push({p:10, t:'🐑 Ид аль-Адха — Курбан-Байрам!', g:true});
-    if (hDay>=11 && hDay<=13) ev.push({p:8, t:'🕋 Дни ат-Ташрик — '+hDay+' Зуль-Хиджа', g:false});
+    if (hDay===10) ev.push({p:10, t:'🐑 Ид аль-Адха(Пост запрещен)', g:true});
+    if (hDay>=11 && hDay<=13) ev.push({p:8, t:'🕋 Дни ат-Ташрик(Пост запрещен)', g:false});
   }
   // ── Священные месяцы (Зуль-Каада) ──
   if (hMonth===11 && hDay===1) ev.push({p:5, t:'🌙 Начало Зуль-Каада', g:false});
