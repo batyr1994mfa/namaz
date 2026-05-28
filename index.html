@@ -375,16 +375,8 @@ body {
 <div id="app">
   <div class="frame-box">
 
-    <!-- ── БЛОКНОТ ── -->
-    <div id="notepad-block">
-      <div id="notepad-label">
-        <span>📝 Блокнот</span>
-        <button id="notepad-clear-btn" onclick="event.stopPropagation();notepadClear()">Очистить</button>
-      </div>
-      <textarea id="notepad-textarea" placeholder="Записывайте заметки…" oninput="notepadSave()" onclick="event.stopPropagation()"></textarea>
-      <div id="notepad-saved-hint"></div>
-    </div>
-
+    <!-- 1) Календарь — вставляется JS (#top-calendar-row) -->
+    <!-- 2) Текущее время + хиджра -->
     <div class="island-top-row">
       <div class="glass-island island-top-time">
         <div id="current-time">--:--:--</div>
@@ -414,6 +406,7 @@ body {
       </div>
     </div>
     
+    <!-- 3) Таймер -->
     <div class="glass-island island-center-timer">
       <div id="status-label"></div>
       <div id="prayer-name" class="green">—</div>
@@ -421,10 +414,23 @@ body {
       <div id="timer" class="green">--:--</div>
       <div id="prayer-time-display">—</div>
     </div>
-    
+
+    <!-- 4) Расписание молитв -->
+    <div class="glass-island" id="bottom-row"></div>
+
+    <!-- 5) Хадис — вставляется JS (#hadith-block) -->
+
+    <!-- 6) Блокнот -->
+    <div id="notepad-block">
+      <div id="notepad-label">
+        <span>📝 Блокнот</span>
+        <button id="notepad-clear-btn" onclick="event.stopPropagation();notepadClear()">Очистить</button>
+      </div>
+      <textarea id="notepad-textarea" placeholder="Записывайте заметки…" oninput="notepadSave()" onclick="event.stopPropagation()"></textarea>
+      <div id="notepad-saved-hint"></div>
+    </div>
+
   </div>
-  
-  <div class="glass-island" id="bottom-row"></div>
 </div>
 <script>
 
@@ -1045,7 +1051,7 @@ if('serviceWorker' in navigator){ navigator.serviceWorker.register('sw.js').catc
     batDiv.innerHTML = '<span class="pi-name"></span><span class="pi-time" id="ext-bat-val">...</span>';
     topRow.appendChild(batDiv);
     frameBox.insertBefore(topRow, frameBox.firstChild);
-    frameBox.insertBefore(hadithBlock, topRow);
+    frameBox.insertBefore(hadithBlock, document.getElementById('notepad-block'));
   }
 
   function playNokia() {
