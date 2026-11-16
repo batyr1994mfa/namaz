@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -57,6 +58,79 @@ body {
     0 2px 8px rgba(0,0,0,0.12) !important;
   display:flex; width:100%; max-width:480px;
 }
+
+/* ── 99 имён Аллаха ── */
+#asma-block {
+  width:100%; max-width:480px;
+  margin:0 auto 10px auto;
+  border-radius:22px;
+  background:rgba(255,255,255,0.01) !important;
+  backdrop-filter:blur(28px) saturate(180%) brightness(1.1) !important;
+  -webkit-backdrop-filter:blur(28px) saturate(180%) brightness(1.1) !important;
+  border:1px solid rgba(255,255,255,0.0) !important;
+  box-shadow:
+    inset 0 1.5px 0 rgba(255,255,255,0.0),
+    inset 0 -1px 0 rgba(255,255,255,0.0),
+    0 8px 32px rgba(0,0,0,0.18),
+    0 2px 8px rgba(0,0,0,0.12) !important;
+  padding:12px 16px;
+  text-align:center;
+  /* фикс бага iOS Safari: backdrop-filter + анимация opacity у детей
+     иногда приводит к исчезновению блока после сворачивания PWA.
+     Принудительно даём блоку свой композитный слой. */
+  transform:translateZ(0);
+  -webkit-transform:translateZ(0);
+  will-change:transform;
+  isolation:isolate;
+}
+#asma-label {
+  font-size:clamp(9px,2.2vw,11px); font-weight:700;
+  color:#c8a84b; text-transform:uppercase; letter-spacing:1px;
+  font-family:-apple-system,system-ui,sans-serif;
+  text-shadow:0 1px 3px rgba(0,0,0,0.6);
+  margin-bottom:4px;
+}
+#asma-name-ar {
+  font-size:clamp(26px,7vw,36px); font-weight:700;
+  color:#FFD700;
+  direction:rtl;
+  font-family:-apple-system,system-ui,sans-serif;
+  text-shadow:0 1px 6px rgba(0,0,0,0.6);
+  transition:opacity 0.4s ease;
+  margin-bottom:4px;
+  line-height:1.3;
+}
+#asma-name {
+  font-size:clamp(15px,4vw,18px); font-weight:700;
+  color:rgba(255,255,255,0.95);
+  font-family:-apple-system,system-ui,sans-serif;
+  text-shadow:0 1px 4px rgba(0,0,0,0.6);
+  transition:opacity 0.4s ease;
+}
+#asma-meaning {
+  font-size:clamp(11px,2.8vw,13px); font-weight:400;
+  color:rgba(255,255,255,0.65);
+  font-family:-apple-system,system-ui,sans-serif;
+  margin-top:3px;
+  transition:opacity 0.4s ease;
+}
+#asma-block { cursor:pointer; -webkit-tap-highlight-color:transparent; }
+#asma-block:active { opacity:0.85; }
+.asma-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.72);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);z-index:99999;display:none;align-items:center;justify-content:center;padding:20px;}
+.asma-overlay.show{display:flex;}
+.asma-modal{background:rgba(20,20,24,0.97);border:1px solid rgba(255,255,255,0.12);border-radius:20px;width:100%;max-width:440px;max-height:86vh;overflow-y:auto;padding:20px;box-shadow:0 20px 60px rgba(0,0,0,0.6);font-family:inherit;}
+.asma-modal-header{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px;position:sticky;top:-20px;background:rgba(20,20,24,0.97);padding-top:4px;}
+.asma-modal-title{color:#fff;font-size:17px;font-weight:700;}
+.asma-modal-close{padding:6px 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.18);background:#FFC81E;color:#000;font-size:13px;font-weight:700;cursor:pointer;}
+.asma-row{display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.08);}
+.asma-row:last-child{border-bottom:none;}
+.asma-row-num{flex:0 0 auto;min-width:22px;color:#c8a84b;font-size:12px;font-weight:700;padding-top:2px;}
+.asma-row-body{flex:1;min-width:0;}
+.asma-row-ar{color:#c8a84b;font-size:16px;font-weight:700;direction:rtl;margin-bottom:2px;}
+.asma-row-name{color:#fff;font-size:14px;font-weight:700;margin-bottom:2px;}
+.asma-row-meaning{color:rgba(255,255,255,0.6);font-size:12px;line-height:1.4;}
+.asma-modal[dir="rtl"] .asma-row{flex-direction:row-reverse;}
+.asma-modal[dir="rtl"] .asma-row-name,.asma-modal[dir="rtl"] .asma-row-meaning{text-align:right;}
 .row-item {
   border-radius:22px;
   background:rgba(255,255,255,0.01) !important;
@@ -136,6 +210,7 @@ body {
 .island-center-timer {
   flex-direction:column; align-items:center; align-self:center;
   width:100%; padding:12px 20px; margin-top:0 !important;
+  position:relative;
 }
 #current-time {
   font-size:clamp(14px,11vh,10px); font-weight:700; color:#ffffff;
@@ -172,9 +247,10 @@ body {
 }
 #prayer-name {
   font-size:clamp(24px,7.5vw,46px); font-weight:700; letter-spacing:-0.5px;
-  text-align:center; transition:color .4s; margin-top:1px;
+  text-align:left; align-self:flex-start; transition:color .4s; margin-top:1px;
   font-family:-apple-system,system-ui,sans-serif; line-height:1;
 }
+.event-in-suffix { font-size:0.7em; color:inherit; font-weight:700; }
 #timer {
   font-size:clamp(24px,50vw,70px); font-weight:700; letter-spacing:-2px;
   line-height:.95; text-align:center; font-family:-apple-system,system-ui,sans-serif;
@@ -184,6 +260,8 @@ body {
 #timer.green { color:#E4FF30; text-shadow:0 2.6px 7.8px rgba(0,0,0,0.78),0 5.2px 15.6px rgba(0,0,0,0.52); }
 #prayer-name.green { color:#E4FF30; text-shadow:0 2.6px 7.8px rgba(0,0,0,0.78),0 5.2px 15.6px rgba(0,0,0,0.52); }
 #timer.red,#prayer-name.red { color:#ff453a; text-shadow:0 2.6px 7.8px rgba(0,0,0,0.78),0 5.2px 15.6px rgba(0,0,0,0.52); }
+#timer.sky,#prayer-name.sky { color:#30B4FF; text-shadow:0 2.6px 7.8px rgba(0,0,0,0.78),0 5.2px 15.6px rgba(0,0,0,0.52); }
+#timer.sun,#prayer-name.sun { color:#FFD60A; text-shadow:0 2.6px 7.8px rgba(0,0,0,0.78),0 5.2px 15.6px rgba(0,0,0,0.52); }
 #prayer-time-display { display:none; }
 #bottom-row {
   display:flex !important; flex-direction:row !important;
@@ -259,10 +337,15 @@ body {
 #islamic-event .ev-line.gold { color:#FFD60A; }
 #islamic-event .ev-line.white { color:rgba(255,255,255,0.85); }
 
-/* ── Блокнот ── */
+/* ── Блокнот / Планы — кнопки-лончеры ── */
 #notepad-block {
   width:100%; max-width:480px;
-  border-radius:22px;
+  display:flex; flex-direction:row; gap:10px;
+}
+.launcher-btn {
+  flex:1 1 0; min-width:0;
+  display:flex; align-items:center; justify-content:center; gap:6px;
+  border-radius:18px;
   background:rgba(255,255,255,0.01) !important;
   backdrop-filter:blur(28px) saturate(180%) brightness(1.1) !important;
   -webkit-backdrop-filter:blur(28px) saturate(180%) brightness(1.1) !important;
@@ -272,9 +355,43 @@ body {
     inset 0 -1px 0 rgba(255,255,255,0.0),
     0 8px 32px rgba(0,0,0,0.18),
     0 2px 8px rgba(0,0,0,0.12) !important;
-  padding:12px 16px;
-  display:flex; flex-direction:column; gap:8px;
+  padding:14px 10px;
+  font-size:clamp(11px,3vw,13px); font-weight:700;
+  color:rgba(255,255,255,0.92);
+  font-family:-apple-system,system-ui,sans-serif;
+  text-shadow:0 1px 3px rgba(0,0,0,0.6);
+  cursor:pointer; transition:transform 0.15s, background 0.15s;
+  white-space:nowrap;
 }
+.launcher-btn:active { transform:scale(0.96); background:rgba(255,255,255,0.06) !important; }
+
+/* ── Блокнот: модальное окно ── */
+#notepad-modal-overlay {
+  position:fixed; inset:0; z-index:10000;
+  background:rgba(0,0,0,0.5);
+  backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);
+  display:none; align-items:flex-end; justify-content:center;
+  padding:0 16px calc(16px + env(safe-area-inset-bottom,0px));
+  opacity:0; transition:opacity 0.25s ease;
+}
+#notepad-modal-overlay.open { display:flex; opacity:1; }
+#notepad-modal {
+  width:100%; max-width:480px;
+  border-radius:22px;
+  background:rgba(26,26,32,0.92) !important;
+  backdrop-filter:blur(28px) saturate(180%) brightness(1.1) !important;
+  -webkit-backdrop-filter:blur(28px) saturate(180%) brightness(1.1) !important;
+  border:1px solid rgba(255,255,255,0.08) !important;
+  box-shadow:
+    inset 0 1.5px 0 rgba(255,255,255,0.05),
+    0 8px 32px rgba(0,0,0,0.4),
+    0 2px 8px rgba(0,0,0,0.3) !important;
+  padding:14px 16px calc(14px + env(safe-area-inset-bottom,0px));
+  display:flex; flex-direction:column; gap:8px;
+  transform:translateY(24px); transition:transform 0.25s ease;
+  margin-bottom:14px;
+}
+#notepad-modal-overlay.open #notepad-modal { transform:translateY(0); }
 #notepad-label {
   font-size:clamp(9px,2.2vw,11px); font-weight:700;
   color:#c8a84b; text-transform:uppercase; letter-spacing:1px;
@@ -282,21 +399,23 @@ body {
   text-shadow:0 1px 3px rgba(0,0,0,0.6);
   display:flex; align-items:center; justify-content:space-between; gap:5px;
 }
-#notepad-clear-btn {
+#notepad-label-actions { display:flex; align-items:center; gap:8px; }
+#notepad-clear-btn, #notepad-close-btn {
   font-size:10px; font-weight:600; color:rgba(200,168,75,0.6);
   background:none; border:1px solid rgba(200,168,75,0.3);
   border-radius:8px; padding:2px 8px; cursor:pointer;
   font-family:-apple-system,system-ui,sans-serif;
   transition:all 0.2s;
 }
-#notepad-clear-btn:active { color:#c8a84b; border-color:#c8a84b; background:rgba(200,168,75,0.1); }
+#notepad-close-btn { font-size:12px; padding:2px 7px; }
+#notepad-clear-btn:active, #notepad-close-btn:active { color:#c8a84b; border-color:#c8a84b; background:rgba(200,168,75,0.1); }
 #notepad-textarea {
-  width:100%; min-height:80px; max-height:180px;
+  width:100%; min-height:140px; max-height:50vh;
   background:rgba(255,255,255,0.04);
   border:1px solid rgba(255,255,255,0.0);
   border-radius:12px;
   color:rgba(255,255,255,0.92);
-  font-size:clamp(12px,3vw,14px);
+  font-size:clamp(13px,3.4vw,15px);
   font-family:-apple-system,system-ui,sans-serif;
   font-weight:400;
   line-height:1.5;
@@ -311,6 +430,115 @@ body {
   font-family:-apple-system,system-ui,sans-serif;
   text-align:right; min-height:13px; transition:opacity 0.5s;
 }
+
+/* ── Планы: модальное окно (встроенное приложение-планировщик) ── */
+#plans-modal-overlay {
+  position:fixed; inset:0; z-index:10001;
+  background:rgba(0,0,0,0.6);
+  backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);
+  display:none; align-items:flex-end; justify-content:center;
+  opacity:0; transition:opacity 0.25s ease;
+}
+#plans-modal-overlay.open { display:flex; opacity:1; }
+#plans-modal {
+  /* Переменные темы планировщика скопированы (scoped) сюда, чтобы не затрагивать остальной сайт */
+  --pbg: #0a0a0f; --pbg2: #12121a; --pcard: #1a1a24; --pcard2: #22222e;
+  --pborder: #2a2a3a; --ptext: #e8e8f0; --pmuted: #8a8a9a;
+  --paccent: #8b5cf6; --paccent2: #ec4899;
+  --pgreen: #10b981; --pred: #ef4444; --pyellow: #f59e0b; --pblue: #3b82f6;
+
+  width:100%; max-width:600px; height:92vh; max-height:92vh;
+  margin-top:auto;
+  border-radius:24px 24px 0 0;
+  background: var(--pbg);
+  background-image:
+    radial-gradient(circle at 20% 0%, rgba(139,92,246,0.15), transparent 50%),
+    radial-gradient(circle at 80% 100%, rgba(236,72,153,0.1), transparent 50%);
+  color: var(--ptext);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  display:flex; flex-direction:column;
+  overflow:hidden;
+  transform:translateY(40px); transition:transform 0.25s ease;
+  box-shadow:0 -8px 40px rgba(0,0,0,0.5);
+}
+#plans-modal-overlay.open #plans-modal { transform:translateY(0); }
+#plans-modal-header {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:16px 18px; flex-shrink:0;
+  border-bottom:1px solid var(--pborder);
+  font-size:15px; font-weight:700; color:var(--ptext);
+}
+#plans-close-btn {
+  width:30px; height:30px; border-radius:50%;
+  background:var(--pbg2); border:1px solid var(--pborder); color:var(--ptext);
+  font-size:14px; cursor:pointer; display:flex; align-items:center; justify-content:center;
+}
+#plans-close-btn:active { background:var(--pcard2); }
+#plans-modal-scroll {
+  flex:1; overflow-y:auto; -webkit-overflow-scrolling:touch;
+  padding:16px 16px calc(16px + env(safe-area-inset-bottom,0px));
+}
+
+.pl-stats { background:var(--pcard); border:1px solid var(--pborder); border-radius:16px; padding:18px; margin-bottom:16px; }
+.pl-stats-row { display:flex; justify-content:space-between; margin-bottom:12px; gap:10px; flex-wrap:wrap; }
+.pl-stat-item { flex:1; min-width:80px; text-align:center; }
+.pl-stat-num { font-size:24px; font-weight:700; background:linear-gradient(135deg,var(--paccent),var(--paccent2)); -webkit-background-clip:text; background-clip:text; color:transparent; }
+.pl-stat-label { font-size:10px; color:var(--pmuted); text-transform:uppercase; letter-spacing:1px; }
+.pl-progress { height:8px; background:var(--pbg2); border-radius:4px; overflow:hidden; }
+.pl-progress-bar { height:100%; background:linear-gradient(90deg,var(--paccent),var(--paccent2)); transition:width 0.5s ease; border-radius:4px; }
+
+.pl-add-form { background:var(--pcard); border:1px solid var(--pborder); border-radius:16px; padding:16px; margin-bottom:16px; }
+.pl-form-row { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:10px; }
+.pl-form-row:last-child { margin-bottom:0; }
+.pl-form-row:nth-of-type(2) { flex-direction:column; }
+.pl-form-row input[type="text"] { flex:1; padding:14px; background:var(--pbg2); border:1px solid var(--pborder); border-radius:12px; color:var(--ptext); font-size:16px; }
+.pl-form-row input[type="text"]:focus { outline:none; border-color:var(--paccent); box-shadow:0 0 0 3px rgba(139,92,246,0.2); }
+.pl-form-row select { width:100%; padding:14px; background:var(--pbg2); border:1px solid var(--pborder); border-radius:12px; color:var(--ptext); font-size:16px; cursor:pointer; }
+.pl-form-row select:focus { outline:none; border-color:var(--paccent); }
+.pl-add-btn { width:100%; padding:14px; background:linear-gradient(135deg,var(--pgreen),#059669); border:none; border-radius:12px; color:#fff; font-weight:600; cursor:pointer; font-size:15px; }
+.pl-add-btn:active { transform:scale(0.98); }
+
+.pl-filters {
+  display:flex; gap:5px; margin-bottom:14px; flex-wrap:nowrap;
+  overflow-x:auto; -webkit-overflow-scrolling:touch;
+  scrollbar-width:none; -ms-overflow-style:none;
+}
+.pl-filters::-webkit-scrollbar { display:none; height:0; }
+.pl-filter-btn { padding:7px 11px; background:var(--pcard); border:1px solid var(--pborder); border-radius:18px; color:var(--pmuted); cursor:pointer; font-size:11.5px; white-space:nowrap; flex-shrink:0; }
+.pl-filter-btn.active { background:linear-gradient(135deg,var(--paccent),var(--paccent2)); color:#fff; border-color:transparent; }
+
+.pl-tasks { display:flex; flex-direction:column; gap:10px; }
+.pl-task { background:var(--pcard); border:1px solid var(--pborder); border-radius:14px; padding:14px; animation:plSlideIn 0.3s ease; }
+@keyframes plSlideIn { from{opacity:0; transform:translateY(-10px);} to{opacity:1; transform:translateY(0);} }
+.pl-task.done { opacity:0.5; }
+.pl-task.done .pl-task-text { text-decoration:line-through; color:var(--pmuted); }
+.pl-task-header { display:flex; align-items:center; gap:6px; margin-bottom:8px; flex-wrap:wrap; }
+.pl-task-text { flex:1; font-size:15px; font-weight:500; min-width:0; width:100%; word-break:break-word; }
+.pl-badge { padding:3px 8px; border-radius:12px; font-size:10px; font-weight:600; text-transform:uppercase; letter-spacing:0.5px; }
+.pl-badge.buy { background:rgba(59,130,246,0.2); color:var(--pblue); }
+.pl-badge.do { background:rgba(139,92,246,0.2); color:var(--paccent); }
+.pl-badge.other { background:rgba(245,158,11,0.2); color:var(--pyellow); }
+.pl-priority { padding:3px 8px; border-radius:12px; font-size:10px; font-weight:600; }
+.pl-priority.high { background:rgba(239,68,68,0.2); color:var(--pred); }
+.pl-priority.medium { background:rgba(245,158,11,0.2); color:var(--pyellow); }
+.pl-priority.low { background:rgba(16,185,129,0.2); color:var(--pgreen); }
+.pl-task-date { font-size:11px; color:var(--pmuted); width:100%; order:10; }
+.pl-task-actions { display:flex; gap:6px; margin-top:10px; flex-wrap:wrap; }
+.pl-action-btn { flex:1 1 auto; min-width:0; justify-content:center; padding:11px 8px; border:1px solid var(--pborder); background:var(--pbg2); border-radius:10px; color:var(--ptext); cursor:pointer; font-size:12.5px; display:flex; align-items:center; gap:5px; }
+.pl-action-btn.done-btn { background:rgba(16,185,129,0.15); border-color:var(--pgreen); color:var(--pgreen); }
+.pl-action-btn.resume-btn { background:rgba(245,158,11,0.15); border-color:var(--pyellow); color:var(--pyellow); }
+.pl-action-btn.delete-btn:active { background:var(--pred); border-color:var(--pred); color:#fff; }
+
+.pl-empty { text-align:center; padding:50px 16px; color:var(--pmuted); }
+.pl-empty-icon { font-size:56px; margin-bottom:10px; }
+
+.pl-toast {
+  position:fixed; bottom:calc(16px + env(safe-area-inset-bottom,0px)); left:12px; right:12px;
+  background:var(--pcard); border:1px solid var(--paccent); padding:12px 20px; border-radius:12px;
+  color:var(--ptext); box-shadow:0 10px 30px rgba(0,0,0,0.5); z-index:10002; text-align:center;
+  animation:plToastIn 0.3s ease;
+}
+@keyframes plToastIn { from{opacity:0; transform:translateY(20px);} to{opacity:1; transform:translateY(0);} }
 
 /* ── Хадис ── */
 #hadith-block {
@@ -395,6 +623,25 @@ body {
 </script>
 
 <div id="app">
+
+  <!-- 0) 99 имён Аллаха — меняется с каждым намазом -->
+  <div id="asma-block">
+    <div id="asma-label">99 ИМЁН АЛЛАХА</div>
+    <div id="asma-name-ar"></div>
+    <div id="asma-name"></div>
+    <div id="asma-meaning"></div>
+  </div>
+
+  <div class="asma-overlay" id="asma-overlay">
+    <div class="asma-modal" id="asma-modal">
+      <div class="asma-modal-header">
+        <div class="asma-modal-title" id="asma-modal-title"></div>
+        <button type="button" class="asma-modal-close" id="asma-modal-close"></button>
+      </div>
+      <div id="asma-list"></div>
+    </div>
+  </div>
+
   <div class="frame-box">
 
     <!-- 1) Календарь — вставляется JS (#top-calendar-row) -->
@@ -419,7 +666,7 @@ body {
               <button class="glass-btn" onclick="event.stopPropagation();adjustEventOffset(-1)" title="-1 день события">▼</button>
             </div>
             <div style="display:flex;flex-direction:column;gap:1px;flex:1;min-width:0;">
-              <span style="font-size:clamp(10px,8vw,14px);font-weight:500;color:#ff453a;text-transform:uppercase;letter-spacing:0.5px;line-height:1;text-shadow:0 1px 3px rgba(0,0,0,0.6);">Сегодня</span>
+              <span id="today-label" style="font-size:clamp(10px,8vw,14px);font-weight:500;color:#ff453a;text-transform:uppercase;letter-spacing:0.5px;line-height:1;text-shadow:0 1px 3px rgba(0,0,0,0.6);">Сегодня</span>
               <div id="islamic-event" style="display:flex;flex-direction:column;gap:2px;min-width:0;"></div>
             </div>
           </div>
@@ -433,6 +680,7 @@ body {
     
     <!-- 3) Таймер -->
     <div class="glass-island island-center-timer">
+      <button type="button" id="ps-gear-btn" onclick="event.stopPropagation();window.openPrayerSettings&&window.openPrayerSettings();" title="Настройки" aria-label="Настройки">⚙</button>
       <div id="status-label"></div>
       <div id="prayer-name" class="green">—</div>
       <div class="divider"></div>
@@ -445,14 +693,78 @@ body {
 
     <!-- 5) Хадис — вставляется JS (#hadith-block) -->
 
-    <!-- 6) Блокнот -->
+    <!-- 6) Блокнот / Планы -->
     <div id="notepad-block">
-      <div id="notepad-label">
-        <span>📝 Блокнот</span>
-        <button id="notepad-clear-btn" onclick="event.stopPropagation();notepadClear()">Очистить</button>
+      <button id="notepad-launch-btn" class="launcher-btn" onclick="event.stopPropagation();openNotepadModal()">
+        <span id="notepad-btn-title">📝 Блокнот</span>
+      </button>
+      <button id="plans-launch-btn" class="launcher-btn" onclick="event.stopPropagation();openPlansModal()">
+        <span id="plans-btn-title">📋 Планы</span>
+      </button>
+    </div>
+
+    <div id="plans-modal-overlay" onclick="closePlansModal()">
+      <div id="plans-modal" onclick="event.stopPropagation()">
+        <div id="plans-modal-header">
+          <span id="plans-modal-title">📋 Планы</span>
+          <button id="plans-close-btn" onclick="event.stopPropagation();closePlansModal()">✕</button>
+        </div>
+        <div id="plans-modal-scroll">
+          <div class="pl-stats">
+            <div class="pl-stats-row">
+              <div class="pl-stat-item"><div class="pl-stat-num" id="pl-totalCount">0</div><div class="pl-stat-label">Всего</div></div>
+              <div class="pl-stat-item"><div class="pl-stat-num" id="pl-doneCount">0</div><div class="pl-stat-label">Выполнено</div></div>
+              <div class="pl-stat-item"><div class="pl-stat-num" id="pl-activeCount">0</div><div class="pl-stat-label">Активных</div></div>
+              <div class="pl-stat-item"><div class="pl-stat-num" id="pl-percentCount">0%</div><div class="pl-stat-label">Прогресс</div></div>
+            </div>
+            <div class="pl-progress"><div class="pl-progress-bar" id="pl-progressBar" style="width:0%"></div></div>
+          </div>
+
+          <div class="pl-add-form">
+            <div class="pl-form-row">
+              <input type="text" id="pl-taskInput" placeholder="Что нужно сделать или купить?" maxlength="200">
+            </div>
+            <div class="pl-form-row">
+              <select id="pl-category">
+                <option value="buy">🛒 Купить</option>
+                <option value="do">⚡ Реализовать</option>
+                <option value="other">📌 Другое</option>
+              </select>
+              <select id="pl-priority">
+                <option value="low">🟢 Низкий</option>
+                <option value="medium" selected>🟡 Средний</option>
+                <option value="high">🔴 Высокий</option>
+              </select>
+              <button class="pl-add-btn" id="pl-addBtn">➕ Добавить</button>
+            </div>
+          </div>
+
+          <div class="pl-filters">
+            <button class="pl-filter-btn active" data-filter="all">Все</button>
+            <button class="pl-filter-btn" data-filter="active">Активные</button>
+            <button class="pl-filter-btn" data-filter="done">Выполненные</button>
+            <button class="pl-filter-btn" data-filter="buy">🛒 Купить</button>
+            <button class="pl-filter-btn" data-filter="do">⚡ Реализовать</button>
+            <button class="pl-filter-btn" data-filter="other">📌 Другое</button>
+          </div>
+
+          <div class="pl-tasks" id="pl-tasksList"></div>
+        </div>
       </div>
-      <textarea id="notepad-textarea" placeholder="Записывайте заметки…" oninput="notepadSave()" onclick="event.stopPropagation()"></textarea>
-      <div id="notepad-saved-hint"></div>
+    </div>
+
+    <div id="notepad-modal-overlay" onclick="closeNotepadModal()">
+      <div id="notepad-modal" onclick="event.stopPropagation()">
+        <div id="notepad-label">
+          <span id="notepad-title">📝 Блокнот</span>
+          <div id="notepad-label-actions">
+            <button id="notepad-clear-btn" onclick="event.stopPropagation();notepadClear()">Очистить</button>
+            <button id="notepad-close-btn" onclick="event.stopPropagation();closeNotepadModal()">✕</button>
+          </div>
+        </div>
+        <textarea id="notepad-textarea" placeholder="Записывайте заметки…" oninput="notepadSave()" onclick="event.stopPropagation()"></textarea>
+        <div id="notepad-saved-hint"></div>
+      </div>
     </div>
 
   </div>
@@ -463,13 +775,17 @@ body {
 const P={"01-01":{"F":"6:05","Z":"12:11","A":"14:14","M":"16:32","I":"18:02"},"01-02":{"F":"6:05","Z":"12:11","A":"14:15","M":"16:33","I":"18:03"},"01-03":{"F":"6:05","Z":"12:12","A":"14:15","M":"16:34","I":"18:04"},"01-04":{"F":"6:05","Z":"12:12","A":"14:16","M":"16:35","I":"18:05"},"01-05":{"F":"6:05","Z":"12:13","A":"14:17","M":"16:36","I":"18:06"},"01-06":{"F":"6:05","Z":"12:13","A":"14:18","M":"16:37","I":"18:07"},"01-07":{"F":"6:04","Z":"12:14","A":"14:19","M":"16:38","I":"18:08"},"01-08":{"F":"6:04","Z":"12:14","A":"14:20","M":"16:39","I":"18:09"},"01-09":{"F":"6:04","Z":"12:14","A":"14:21","M":"16:40","I":"18:10"},"01-10":{"F":"6:04","Z":"12:15","A":"14:22","M":"16:41","I":"18:11"},"01-11":{"F":"6:04","Z":"12:15","A":"14:23","M":"16:43","I":"18:12"},"01-12":{"F":"6:04","Z":"12:15","A":"14:24","M":"16:44","I":"18:13"},"01-13":{"F":"6:04","Z":"12:15","A":"14:25","M":"16:45","I":"18:14"},"01-14":{"F":"6:03","Z":"12:15","A":"14:26","M":"16:46","I":"18:15"},"01-15":{"F":"6:03","Z":"12:15","A":"14:27","M":"16:47","I":"18:17"},"01-16":{"F":"6:03","Z":"12:15","A":"14:28","M":"16:48","I":"18:18"},"01-17":{"F":"6:03","Z":"12:15","A":"14:29","M":"16:49","I":"18:19"},"01-18":{"F":"6:02","Z":"12:15","A":"14:30","M":"16:50","I":"18:20"},"01-19":{"F":"6:02","Z":"12:15","A":"14:31","M":"16:52","I":"18:22"},"01-20":{"F":"6:02","Z":"12:15","A":"14:32","M":"16:53","I":"18:23"},"01-21":{"F":"6:02","Z":"12:15","A":"14:33","M":"16:54","I":"18:24"},"01-22":{"F":"6:02","Z":"12:15","A":"14:34","M":"16:55","I":"18:25"},"01-23":{"F":"6:01","Z":"12:15","A":"14:35","M":"16:57","I":"18:27"},"01-24":{"F":"6:00","Z":"12:15","A":"14:36","M":"16:58","I":"18:28"},"01-25":{"F":"5:59","Z":"12:15","A":"14:37","M":"16:59","I":"18:29"},"01-26":{"F":"5:58","Z":"12:15","A":"14:39","M":"17:01","I":"18:31"},"01-27":{"F":"5:57","Z":"12:15","A":"14:40","M":"17:02","I":"18:32"},"01-28":{"F":"5:57","Z":"12:15","A":"14:41","M":"17:03","I":"18:33"},"01-29":{"F":"5:56","Z":"12:15","A":"14:42","M":"17:05","I":"18:35"},"01-30":{"F":"5:55","Z":"12:15","A":"14:43","M":"17:06","I":"18:36"},"01-31":{"F":"5:54","Z":"12:15","A":"14:44","M":"17:07","I":"18:37"},"02-01":{"F":"5:52","Z":"12:15","A":"14:45","M":"17:09","I":"18:39"},"02-02":{"F":"5:51","Z":"12:15","A":"14:46","M":"17:10","I":"18:40"},"02-03":{"F":"5:50","Z":"12:15","A":"14:47","M":"17:11","I":"18:41"},"02-04":{"F":"5:50","Z":"12:15","A":"14:48","M":"17:13","I":"18:43"},"02-05":{"F":"5:49","Z":"12:15","A":"14:50","M":"17:14","I":"18:44"},"02-06":{"F":"5:48","Z":"12:15","A":"14:51","M":"17:15","I":"18:45"},"02-07":{"F":"5:47","Z":"12:15","A":"14:52","M":"17:17","I":"18:47"},"02-08":{"F":"5:45","Z":"12:15","A":"14:53","M":"17:18","I":"18:48"},"02-09":{"F":"5:44","Z":"12:15","A":"14:54","M":"17:19","I":"18:49"},"02-10":{"F":"5:43","Z":"12:15","A":"14:55","M":"17:21","I":"18:51"},"02-11":{"F":"5:41","Z":"12:15","A":"14:56","M":"17:22","I":"18:52"},"02-12":{"F":"5:40","Z":"12:15","A":"14:57","M":"17:23","I":"18:53"},"02-13":{"F":"5:39","Z":"12:15","A":"14:58","M":"17:25","I":"18:55"},"02-14":{"F":"5:37","Z":"12:15","A":"14:59","M":"17:26","I":"18:56"},"02-15":{"F":"5:36","Z":"12:15","A":"15:00","M":"17:27","I":"18:57"},"02-16":{"F":"5:34","Z":"12:15","A":"15:01","M":"17:29","I":"18:59"},"02-17":{"F":"5:33","Z":"12:15","A":"15:02","M":"17:30","I":"19:00"},"02-18":{"F":"5:31","Z":"12:15","A":"15:03","M":"17:31","I":"19:01"},"02-19":{"F":"5:30","Z":"12:14","A":"15:04","M":"17:33","I":"19:03"},"02-20":{"F":"5:28","Z":"12:14","A":"15:05","M":"17:34","I":"19:04"},"02-21":{"F":"5:27","Z":"12:14","A":"15:06","M":"17:35","I":"19:05"},"02-22":{"F":"5:25","Z":"12:14","A":"15:07","M":"17:36","I":"19:06"},"02-23":{"F":"5:24","Z":"12:14","A":"15:08","M":"17:38","I":"19:08"},"02-24":{"F":"5:22","Z":"12:14","A":"15:09","M":"17:39","I":"19:09"},"02-25":{"F":"5:21","Z":"12:14","A":"15:10","M":"17:40","I":"19:10"},"02-26":{"F":"5:19","Z":"12:14","A":"15:11","M":"17:42","I":"19:12"},"02-27":{"F":"5:17","Z":"12:14","A":"15:12","M":"17:43","I":"19:13"},"02-28":{"F":"5:16","Z":"12:14","A":"15:13","M":"17:44","I":"19:14"},"02-29":{"F":"5:16","Z":"12:14","A":"15:13","M":"17:44","I":"19:14"},"03-01":{"F":"5:15","Z":"12:14","A":"15:13","M":"17:45","I":"19:15"},"03-02":{"F":"5:14","Z":"12:14","A":"15:14","M":"17:47","I":"19:17"},"03-03":{"F":"5:13","Z":"12:13","A":"15:15","M":"17:48","I":"19:18"},"03-04":{"F":"5:11","Z":"12:13","A":"15:16","M":"17:49","I":"19:19"},"03-05":{"F":"5:10","Z":"12:13","A":"15:17","M":"17:50","I":"19:20"},"03-06":{"F":"5:09","Z":"12:13","A":"15:18","M":"17:52","I":"19:22"},"03-07":{"F":"5:07","Z":"12:13","A":"15:18","M":"17:53","I":"19:23"},"03-08":{"F":"5:06","Z":"12:13","A":"15:19","M":"17:54","I":"19:24"},"03-09":{"F":"5:04","Z":"12:13","A":"15:20","M":"17:55","I":"19:25"},"03-10":{"F":"5:02","Z":"12:13","A":"15:21","M":"17:57","I":"19:27"},"03-11":{"F":"5:01","Z":"12:13","A":"15:21","M":"17:58","I":"19:28"},"03-12":{"F":"4:59","Z":"12:12","A":"15:22","M":"17:59","I":"19:29"},"03-13":{"F":"4:57","Z":"12:12","A":"15:23","M":"18:00","I":"19:30"},"03-14":{"F":"4:55","Z":"12:12","A":"15:24","M":"18:01","I":"19:31"},"03-15":{"F":"4:54","Z":"12:12","A":"15:24","M":"18:03","I":"19:33"},"03-16":{"F":"4:52","Z":"12:12","A":"15:25","M":"18:04","I":"19:34"},"03-17":{"F":"4:50","Z":"12:12","A":"15:26","M":"18:05","I":"19:35"},"03-18":{"F":"4:48","Z":"12:12","A":"15:26","M":"18:06","I":"19:36"},"03-19":{"F":"4:46","Z":"12:12","A":"15:27","M":"18:07","I":"19:37"},"03-20":{"F":"4:45","Z":"12:12","A":"15:28","M":"18:09","I":"19:39"},"03-21":{"F":"4:43","Z":"12:12","A":"15:29","M":"18:10","I":"19:40"},"03-22":{"F":"4:41","Z":"12:11","A":"15:29","M":"18:11","I":"19:41"},"03-23":{"F":"4:40","Z":"12:11","A":"15:30","M":"18:12","I":"19:42"},"03-24":{"F":"4:38","Z":"12:11","A":"15:30","M":"18:13","I":"19:43"},"03-25":{"F":"4:36","Z":"12:11","A":"15:31","M":"18:15","I":"19:45"},"03-26":{"F":"4:34","Z":"12:11","A":"15:31","M":"18:16","I":"19:46"},"03-27":{"F":"4:32","Z":"12:11","A":"15:32","M":"18:17","I":"19:47"},"03-28":{"F":"4:31","Z":"12:11","A":"15:33","M":"18:18","I":"19:48"},"03-29":{"F":"4:29","Z":"12:10","A":"15:33","M":"18:19","I":"19:49"},"03-30":{"F":"4:27","Z":"12:10","A":"15:34","M":"18:20","I":"19:50"},"03-31":{"F":"4:25","Z":"12:10","A":"15:34","M":"18:22","I":"19:52"},"04-01":{"F":"4:23","Z":"12:10","A":"15:35","M":"18:23","I":"19:53"},"04-02":{"F":"4:22","Z":"12:10","A":"15:35","M":"18:24","I":"19:54"},"04-03":{"F":"4:20","Z":"12:10","A":"15:36","M":"18:25","I":"19:55"},"04-04":{"F":"4:18","Z":"12:10","A":"15:36","M":"18:26","I":"19:56"},"04-05":{"F":"4:17","Z":"12:10","A":"15:37","M":"18:27","I":"19:57"},"04-06":{"F":"4:15","Z":"12:10","A":"15:37","M":"18:29","I":"19:59"},"04-07":{"F":"4:13","Z":"12:10","A":"15:38","M":"18:30","I":"20:00"},"04-08":{"F":"4:11","Z":"12:10","A":"15:38","M":"18:31","I":"20:01"},"04-09":{"F":"4:10","Z":"12:10","A":"15:39","M":"18:32","I":"20:02"},"04-10":{"F":"4:08","Z":"12:10","A":"15:39","M":"18:33","I":"20:03"},"04-11":{"F":"4:06","Z":"12:10","A":"15:40","M":"18:34","I":"20:04"},"04-12":{"F":"4:05","Z":"12:10","A":"15:40","M":"18:36","I":"20:06"},"04-13":{"F":"4:03","Z":"12:10","A":"15:40","M":"18:37","I":"20:07"},"04-14":{"F":"4:01","Z":"12:10","A":"15:41","M":"18:38","I":"20:08"},"04-15":{"F":"4:00","Z":"12:10","A":"15:41","M":"18:39","I":"20:09"},"04-16":{"F":"3:58","Z":"12:10","A":"15:42","M":"18:40","I":"20:10"},"04-17":{"F":"3:56","Z":"12:10","A":"15:42","M":"18:41","I":"20:11"},"04-18":{"F":"3:55","Z":"12:10","A":"15:43","M":"18:43","I":"20:13"},"04-19":{"F":"3:53","Z":"12:10","A":"15:43","M":"18:44","I":"20:14"},"04-20":{"F":"3:52","Z":"12:10","A":"15:43","M":"18:45","I":"20:15"},"04-21":{"F":"3:50","Z":"12:10","A":"15:44","M":"18:46","I":"20:16"},"04-22":{"F":"3:49","Z":"12:10","A":"15:44","M":"18:47","I":"20:17"},"04-23":{"F":"3:47","Z":"12:10","A":"15:45","M":"18:48","I":"20:18"},"04-24":{"F":"3:45","Z":"12:10","A":"15:45","M":"18:50","I":"20:20"},"04-25":{"F":"3:42","Z":"12:10","A":"15:45","M":"18:51","I":"20:21"},"04-26":{"F":"3:40","Z":"12:09","A":"15:46","M":"18:52","I":"20:22"},"04-27":{"F":"3:38","Z":"12:09","A":"15:46","M":"18:53","I":"20:23"},"04-28":{"F":"3:37","Z":"12:09","A":"15:47","M":"18:54","I":"20:24"},"04-29":{"F":"3:35","Z":"12:09","A":"15:47","M":"18:55","I":"20:25"},"04-30":{"F":"3:34","Z":"12:09","A":"15:47","M":"18:57","I":"20:27"},"05-01":{"F":"3:31","Z":"12:09","A":"15:48","M":"18:58","I":"20:28"},"05-02":{"F":"3:29","Z":"12:09","A":"15:48","M":"18:59","I":"20:29"},"05-03":{"F":"3:27","Z":"12:09","A":"15:48","M":"19:00","I":"20:30"},"05-04":{"F":"3:25","Z":"12:09","A":"15:49","M":"19:01","I":"20:31"},"05-05":{"F":"3:23","Z":"12:09","A":"15:49","M":"19:02","I":"20:32"},"05-06":{"F":"3:21","Z":"12:09","A":"15:50","M":"19:03","I":"20:33"},"05-07":{"F":"3:19","Z":"12:09","A":"15:50","M":"19:05","I":"20:35"},"05-08":{"F":"3:17","Z":"12:09","A":"15:50","M":"19:06","I":"20:36"},"05-09":{"F":"3:15","Z":"12:09","A":"15:51","M":"19:07","I":"20:37"},"05-10":{"F":"3:13","Z":"12:09","A":"15:51","M":"19:08","I":"20:38"},"05-11":{"F":"3:11","Z":"12:08","A":"15:51","M":"19:09","I":"20:39"},"05-12":{"F":"3:10","Z":"12:08","A":"15:52","M":"19:10","I":"20:40"},"05-13":{"F":"3:09","Z":"12:08","A":"15:52","M":"19:11","I":"20:41"},"05-14":{"F":"3:08","Z":"12:08","A":"15:52","M":"19:12","I":"20:42"},"05-15":{"F":"3:07","Z":"12:08","A":"15:53","M":"19:13","I":"20:43"},"05-16":{"F":"3:06","Z":"12:07","A":"15:53","M":"19:14","I":"20:44"},"05-17":{"F":"3:05","Z":"12:07","A":"15:53","M":"19:16","I":"20:46"},"05-18":{"F":"3:04","Z":"12:07","A":"15:54","M":"19:17","I":"20:47"},"05-19":{"F":"3:03","Z":"12:06","A":"15:54","M":"19:18","I":"20:48"},"05-20":{"F":"3:02","Z":"12:06","A":"15:54","M":"19:19","I":"20:49"},"05-21":{"F":"3:01","Z":"12:06","A":"15:55","M":"19:20","I":"20:50"},"05-22":{"F":"3:00","Z":"12:06","A":"15:55","M":"19:21","I":"20:51"},"05-23":{"F":"2:59","Z":"12:06","A":"15:56","M":"19:22","I":"20:52"},"05-24":{"F":"2:58","Z":"12:05","A":"15:56","M":"19:23","I":"20:53"},"05-25":{"F":"2:56","Z":"12:05","A":"15:56","M":"19:23","I":"20:53"},"05-26":{"F":"2:55","Z":"12:05","A":"15:57","M":"19:24","I":"20:54"},"05-27":{"F":"2:54","Z":"12:05","A":"15:57","M":"19:25","I":"20:55"},"05-28":{"F":"2:53","Z":"12:05","A":"15:57","M":"19:26","I":"20:56"},"05-29":{"F":"2:52","Z":"12:05","A":"15:58","M":"19:27","I":"20:57"},"05-30":{"F":"2:51","Z":"12:05","A":"15:58","M":"19:28","I":"20:58"},"05-31":{"F":"2:50","Z":"12:05","A":"15:58","M":"19:29","I":"20:59"},"06-01":{"F":"2:49","Z":"12:05","A":"15:59","M":"19:30","I":"21:00"},"06-02":{"F":"2:49","Z":"12:05","A":"15:59","M":"19:31","I":"21:01"},"06-03":{"F":"2:49","Z":"12:05","A":"15:59","M":"19:31","I":"21:01"},"06-04":{"F":"2:48","Z":"12:05","A":"16:00","M":"19:32","I":"21:02"},"06-05":{"F":"2:48","Z":"12:05","A":"16:00","M":"19:33","I":"21:03"},"06-06":{"F":"2:47","Z":"12:05","A":"16:00","M":"19:33","I":"21:03"},"06-07":{"F":"2:47","Z":"12:05","A":"16:00","M":"19:34","I":"21:04"},"06-08":{"F":"2:47","Z":"12:05","A":"16:01","M":"19:35","I":"21:05"},"06-09":{"F":"2:47","Z":"12:05","A":"16:01","M":"19:35","I":"21:05"},"06-10":{"F":"2:46","Z":"12:05","A":"16:01","M":"19:36","I":"21:06"},"06-11":{"F":"2:46","Z":"12:05","A":"16:02","M":"19:37","I":"21:07"},"06-12":{"F":"2:46","Z":"12:05","A":"16:02","M":"19:37","I":"21:07"},"06-13":{"F":"2:45","Z":"12:05","A":"16:03","M":"19:38","I":"21:08"},"06-14":{"F":"2:45","Z":"12:05","A":"16:03","M":"19:38","I":"21:08"},"06-15":{"F":"2:45","Z":"12:05","A":"16:03","M":"19:38","I":"21:08"},"06-16":{"F":"2:45","Z":"12:06","A":"16:03","M":"19:39","I":"21:09"},"06-17":{"F":"2:45","Z":"12:06","A":"16:03","M":"19:39","I":"21:09"},"06-18":{"F":"2:45","Z":"12:06","A":"16:04","M":"19:40","I":"21:10"},"06-19":{"F":"2:45","Z":"12:06","A":"16:04","M":"19:40","I":"21:10"},"06-20":{"F":"2:45","Z":"12:06","A":"16:04","M":"19:40","I":"21:10"},"06-21":{"F":"2:46","Z":"12:06","A":"16:04","M":"19:40","I":"21:10"},"06-22":{"F":"2:46","Z":"12:07","A":"16:04","M":"19:40","I":"21:10"},"06-23":{"F":"2:46","Z":"12:07","A":"16:05","M":"19:41","I":"21:11"},"06-24":{"F":"2:46","Z":"12:07","A":"16:05","M":"19:41","I":"21:11"},"06-25":{"F":"2:47","Z":"12:07","A":"16:05","M":"19:41","I":"21:11"},"06-26":{"F":"2:47","Z":"12:07","A":"16:05","M":"19:41","I":"21:11"},"06-27":{"F":"2:47","Z":"12:08","A":"16:05","M":"19:41","I":"21:11"},"06-28":{"F":"2:48","Z":"12:08","A":"16:06","M":"19:41","I":"21:11"},"06-29":{"F":"2:48","Z":"12:08","A":"16:06","M":"19:41","I":"21:11"},"06-30":{"F":"2:49","Z":"12:08","A":"16:06","M":"19:41","I":"21:11"},"07-01":{"F":"2:49","Z":"12:08","A":"16:06","M":"19:41","I":"21:11"},"07-02":{"F":"2:50","Z":"12:09","A":"16:06","M":"19:40","I":"21:10"},"07-03":{"F":"2:50","Z":"12:09","A":"16:06","M":"19:40","I":"21:10"},"07-04":{"F":"2:51","Z":"12:09","A":"16:06","M":"19:40","I":"21:10"},"07-05":{"F":"2:51","Z":"12:09","A":"16:06","M":"19:40","I":"21:10"},"07-06":{"F":"2:52","Z":"12:10","A":"16:06","M":"19:39","I":"21:09"},"07-07":{"F":"2:53","Z":"12:10","A":"16:06","M":"19:39","I":"21:09"},"07-08":{"F":"2:53","Z":"12:10","A":"16:07","M":"19:39","I":"21:09"},"07-09":{"F":"2:54","Z":"12:10","A":"16:07","M":"19:38","I":"21:08"},"07-10":{"F":"2:55","Z":"12:10","A":"16:06","M":"19:38","I":"21:08"},"07-11":{"F":"2:56","Z":"12:10","A":"16:06","M":"19:37","I":"21:07"},"07-12":{"F":"2:56","Z":"12:10","A":"16:06","M":"19:37","I":"21:07"},"07-13":{"F":"2:57","Z":"12:10","A":"16:06","M":"19:36","I":"21:06"},"07-14":{"F":"2:57","Z":"12:10","A":"16:06","M":"19:36","I":"21:06"},"07-15":{"F":"2:58","Z":"12:11","A":"16:06","M":"19:35","I":"21:05"},"07-16":{"F":"2:59","Z":"12:11","A":"16:06","M":"19:34","I":"21:04"},"07-17":{"F":"3:00","Z":"12:11","A":"16:06","M":"19:34","I":"21:04"},"07-18":{"F":"3:00","Z":"12:11","A":"16:06","M":"19:33","I":"21:03"},"07-19":{"F":"3:01","Z":"12:11","A":"16:06","M":"19:32","I":"21:02"},"07-20":{"F":"3:02","Z":"12:11","A":"16:06","M":"19:31","I":"21:01"},"07-21":{"F":"3:03","Z":"12:11","A":"16:05","M":"19:30","I":"21:00"},"07-22":{"F":"3:04","Z":"12:11","A":"16:05","M":"19:29","I":"20:59"},"07-23":{"F":"3:05","Z":"12:11","A":"16:05","M":"19:29","I":"20:59"},"07-24":{"F":"3:06","Z":"12:11","A":"16:05","M":"19:28","I":"20:58"},"07-25":{"F":"3:07","Z":"12:11","A":"16:04","M":"19:27","I":"20:57"},"07-26":{"F":"3:08","Z":"12:11","A":"16:04","M":"19:26","I":"20:56"},"07-27":{"F":"3:09","Z":"12:11","A":"16:04","M":"19:25","I":"20:55"},"07-28":{"F":"3:10","Z":"12:11","A":"16:03","M":"19:24","I":"20:54"},"07-29":{"F":"3:11","Z":"12:11","A":"16:03","M":"19:22","I":"20:52"},"07-30":{"F":"3:12","Z":"12:11","A":"16:03","M":"19:21","I":"20:51"},"07-31":{"F":"3:13","Z":"12:11","A":"16:02","M":"19:20","I":"20:50"},"08-01":{"F":"3:15","Z":"12:12","A":"16:02","M":"19:19","I":"20:49"},"08-02":{"F":"3:16","Z":"12:13","A":"16:02","M":"19:18","I":"20:48"},"08-03":{"F":"3:17","Z":"12:13","A":"16:01","M":"19:17","I":"20:47"},"08-04":{"F":"3:18","Z":"12:13","A":"16:01","M":"19:15","I":"20:45"},"08-05":{"F":"3:19","Z":"12:14","A":"16:00","M":"19:14","I":"20:44"},"08-06":{"F":"3:20","Z":"12:14","A":"16:00","M":"19:13","I":"20:43"},"08-07":{"F":"3:21","Z":"12:15","A":"15:59","M":"19:12","I":"20:42"},"08-08":{"F":"3:23","Z":"12:15","A":"15:58","M":"19:10","I":"20:40"},"08-09":{"F":"3:24","Z":"12:15","A":"15:58","M":"19:09","I":"20:39"},"08-10":{"F":"3:25","Z":"12:15","A":"15:57","M":"19:07","I":"20:37"},"08-11":{"F":"3:26","Z":"12:15","A":"15:57","M":"19:06","I":"20:36"},"08-12":{"F":"3:27","Z":"12:15","A":"15:56","M":"19:05","I":"20:35"},"08-13":{"F":"3:28","Z":"12:15","A":"15:55","M":"19:03","I":"20:33"},"08-14":{"F":"3:29","Z":"12:15","A":"15:55","M":"19:02","I":"20:32"},"08-15":{"F":"3:30","Z":"12:15","A":"15:54","M":"19:00","I":"20:30"},"08-16":{"F":"3:32","Z":"12:15","A":"15:53","M":"18:59","I":"20:29"},"08-17":{"F":"3:33","Z":"12:15","A":"15:53","M":"18:57","I":"20:27"},"08-18":{"F":"3:34","Z":"12:14","A":"15:52","M":"18:56","I":"20:26"},"08-19":{"F":"3:35","Z":"12:14","A":"15:51","M":"18:54","I":"20:24"},"08-20":{"F":"3:37","Z":"12:14","A":"15:50","M":"18:53","I":"20:23"},"08-21":{"F":"3:38","Z":"12:14","A":"15:49","M":"18:51","I":"20:21"},"08-22":{"F":"3:39","Z":"12:14","A":"15:49","M":"18:49","I":"20:19"},"08-23":{"F":"3:40","Z":"12:14","A":"15:48","M":"18:48","I":"20:18"},"08-24":{"F":"3:41","Z":"12:14","A":"15:47","M":"18:46","I":"20:16"},"08-25":{"F":"3:42","Z":"12:14","A":"15:46","M":"18:44","I":"20:14"},"08-26":{"F":"3:43","Z":"12:14","A":"15:45","M":"18:43","I":"20:13"},"08-27":{"F":"3:44","Z":"12:14","A":"15:44","M":"18:41","I":"20:11"},"08-28":{"F":"3:45","Z":"12:14","A":"15:43","M":"18:39","I":"20:09"},"08-29":{"F":"3:46","Z":"12:14","A":"15:42","M":"18:38","I":"20:08"},"08-30":{"F":"3:47","Z":"12:14","A":"15:41","M":"18:36","I":"20:06"},"08-31":{"F":"3:49","Z":"12:14","A":"15:40","M":"18:34","I":"20:04"},"09-01":{"F":"3:51","Z":"12:13","A":"15:39","M":"18:33","I":"20:03"},"09-02":{"F":"3:52","Z":"12:13","A":"15:38","M":"18:31","I":"20:01"},"09-03":{"F":"3:54","Z":"12:13","A":"15:37","M":"18:29","I":"19:59"},"09-04":{"F":"3:55","Z":"12:13","A":"15:36","M":"18:27","I":"19:57"},"09-05":{"F":"3:56","Z":"12:12","A":"15:35","M":"18:26","I":"19:56"},"09-06":{"F":"3:58","Z":"12:12","A":"15:34","M":"18:24","I":"19:54"},"09-07":{"F":"3:59","Z":"12:12","A":"15:33","M":"18:22","I":"19:52"},"09-08":{"F":"4:00","Z":"12:11","A":"15:32","M":"18:20","I":"19:50"},"09-09":{"F":"4:01","Z":"12:11","A":"15:31","M":"18:18","I":"19:48"},"09-10":{"F":"4:02","Z":"12:11","A":"15:30","M":"18:17","I":"19:47"},"09-11":{"F":"4:04","Z":"12:10","A":"15:28","M":"18:15","I":"19:45"},"09-12":{"F":"4:05","Z":"12:10","A":"15:27","M":"18:13","I":"19:43"},"09-13":{"F":"4:07","Z":"12:09","A":"15:26","M":"18:11","I":"19:41"},"09-14":{"F":"4:08","Z":"12:09","A":"15:25","M":"18:10","I":"19:40"},"09-15":{"F":"4:10","Z":"12:09","A":"15:24","M":"18:08","I":"19:38"},"09-16":{"F":"4:11","Z":"12:08","A":"15:22","M":"18:06","I":"19:36"},"09-17":{"F":"4:12","Z":"12:08","A":"15:21","M":"18:04","I":"19:34"},"09-18":{"F":"4:13","Z":"12:08","A":"15:20","M":"18:02","I":"19:32"},"09-19":{"F":"4:15","Z":"12:07","A":"15:19","M":"18:00","I":"19:30"},"09-20":{"F":"4:16","Z":"12:07","A":"15:18","M":"17:59","I":"19:29"},"09-21":{"F":"4:18","Z":"12:07","A":"15:16","M":"17:57","I":"19:27"},"09-22":{"F":"4:19","Z":"12:06","A":"15:15","M":"17:55","I":"19:25"},"09-23":{"F":"4:20","Z":"12:06","A":"15:14","M":"17:53","I":"19:23"},"09-24":{"F":"4:22","Z":"12:06","A":"15:13","M":"17:51","I":"19:21"},"09-25":{"F":"4:23","Z":"12:05","A":"15:11","M":"17:50","I":"19:20"},"09-26":{"F":"4:25","Z":"12:05","A":"15:10","M":"17:48","I":"19:18"},"09-27":{"F":"4:26","Z":"12:05","A":"15:09","M":"17:46","I":"19:16"},"09-28":{"F":"4:27","Z":"12:05","A":"15:07","M":"17:44","I":"19:14"},"09-29":{"F":"4:28","Z":"12:05","A":"15:06","M":"17:42","I":"19:12"},"09-30":{"F":"4:29","Z":"12:05","A":"15:05","M":"17:41","I":"19:11"},"10-01":{"F":"4:31","Z":"12:05","A":"15:04","M":"17:39","I":"19:09"},"10-02":{"F":"4:33","Z":"12:05","A":"15:02","M":"17:37","I":"19:07"},"10-03":{"F":"4:35","Z":"12:05","A":"15:01","M":"17:35","I":"19:05"},"10-04":{"F":"4:36","Z":"12:05","A":"15:00","M":"17:34","I":"19:04"},"10-05":{"F":"4:38","Z":"12:05","A":"14:58","M":"17:32","I":"19:02"},"10-06":{"F":"4:40","Z":"12:05","A":"14:57","M":"17:30","I":"19:00"},"10-07":{"F":"4:41","Z":"12:05","A":"14:56","M":"17:28","I":"18:58"},"10-08":{"F":"4:42","Z":"12:04","A":"14:54","M":"17:27","I":"18:57"},"10-09":{"F":"4:44","Z":"12:04","A":"14:53","M":"17:25","I":"18:55"},"10-10":{"F":"4:45","Z":"12:04","A":"14:52","M":"17:23","I":"18:53"},"10-11":{"F":"4:46","Z":"12:04","A":"14:51","M":"17:21","I":"18:51"},"10-12":{"F":"4:48","Z":"12:04","A":"14:49","M":"17:20","I":"18:50"},"10-13":{"F":"4:49","Z":"12:04","A":"14:48","M":"17:18","I":"18:48"},"10-14":{"F":"4:50","Z":"12:04","A":"14:47","M":"17:16","I":"18:46"},"10-15":{"F":"4:52","Z":"12:03","A":"14:45","M":"17:15","I":"18:45"},"10-16":{"F":"4:53","Z":"12:03","A":"14:44","M":"17:13","I":"18:43"},"10-17":{"F":"4:54","Z":"12:03","A":"14:43","M":"17:11","I":"18:41"},"10-18":{"F":"4:55","Z":"12:03","A":"14:42","M":"17:10","I":"18:40"},"10-19":{"F":"4:56","Z":"12:03","A":"14:40","M":"17:08","I":"18:38"},"10-20":{"F":"4:58","Z":"12:03","A":"14:39","M":"17:07","I":"18:37"},"10-21":{"F":"4:59","Z":"12:03","A":"14:38","M":"17:05","I":"18:35"},"10-22":{"F":"5:00","Z":"12:02","A":"14:37","M":"17:04","I":"18:34"},"10-23":{"F":"5:01","Z":"12:02","A":"14:36","M":"17:02","I":"18:32"},"10-24":{"F":"5:03","Z":"12:02","A":"14:34","M":"17:01","I":"18:31"},"10-25":{"F":"5:04","Z":"12:02","A":"14:33","M":"16:59","I":"18:29"},"10-26":{"F":"5:05","Z":"12:02","A":"14:32","M":"16:58","I":"18:28"},"10-27":{"F":"5:06","Z":"12:02","A":"14:31","M":"16:56","I":"18:26"},"10-28":{"F":"5:08","Z":"12:02","A":"14:30","M":"16:55","I":"18:25"},"10-29":{"F":"5:09","Z":"12:01","A":"14:29","M":"16:53","I":"18:23"},"10-30":{"F":"5:10","Z":"12:01","A":"14:28","M":"16:52","I":"18:22"},"10-31":{"F":"5:12","Z":"12:01","A":"14:26","M":"16:51","I":"18:21"},"11-01":{"F":"5:13","Z":"12:01","A":"14:25","M":"16:49","I":"18:18"},"11-02":{"F":"5:14","Z":"12:01","A":"14:24","M":"16:48","I":"18:18"},"11-03":{"F":"5:15","Z":"12:01","A":"14:23","M":"16:47","I":"18:17"},"11-04":{"F":"5:17","Z":"12:00","A":"14:22","M":"16:46","I":"18:16"},"11-05":{"F":"5:18","Z":"12:00","A":"14:21","M":"16:44","I":"18:14"},"11-06":{"F":"5:19","Z":"12:00","A":"14:20","M":"16:43","I":"18:13"},"11-07":{"F":"5:20","Z":"12:00","A":"14:19","M":"16:42","I":"18:12"},"11-08":{"F":"5:22","Z":"12:00","A":"14:18","M":"16:41","I":"18:11"},"11-09":{"F":"5:23","Z":"12:00","A":"14:17","M":"16:39","I":"18:09"},"11-10":{"F":"5:24","Z":"12:00","A":"14:17","M":"16:39","I":"18:08"},"11-11":{"F":"5:25","Z":"12:00","A":"14:16","M":"16:37","I":"18:07"},"11-12":{"F":"5:26","Z":"12:00","A":"14:15","M":"16:36","I":"18:06"},"11-13":{"F":"5:27","Z":"12:00","A":"14:14","M":"16:35","I":"18:05"},"11-14":{"F":"5:28","Z":"12:00","A":"14:13","M":"16:34","I":"18:04"},"11-15":{"F":"5:30","Z":"12:00","A":"14:13","M":"16:33","I":"18:03"},"11-16":{"F":"5:31","Z":"12:00","A":"14:12","M":"16:32","I":"18:02"},"11-17":{"F":"5:32","Z":"12:00","A":"14:11","M":"16:32","I":"18:02"},"11-18":{"F":"5:34","Z":"12:00","A":"14:10","M":"16:31","I":"18:01"},"11-19":{"F":"5:35","Z":"12:00","A":"14:10","M":"16:30","I":"18:00"},"11-20":{"F":"5:36","Z":"12:00","A":"14:09","M":"16:29","I":"17:59"},"11-21":{"F":"5:37","Z":"12:01","A":"14:09","M":"16:28","I":"17:58"},"11-22":{"F":"5:39","Z":"12:01","A":"14:08","M":"16:28","I":"17:58"},"11-23":{"F":"5:40","Z":"12:01","A":"14:08","M":"16:27","I":"17:57"},"11-24":{"F":"5:41","Z":"12:01","A":"14:07","M":"16:26","I":"17:56"},"11-25":{"F":"5:42","Z":"12:02","A":"14:07","M":"16:26","I":"17:56"},"11-26":{"F":"5:43","Z":"12:02","A":"14:06","M":"16:25","I":"17:55"},"11-27":{"F":"5:45","Z":"12:02","A":"14:06","M":"16:25","I":"17:55"},"11-28":{"F":"5:46","Z":"12:03","A":"14:06","M":"16:24","I":"17:54"},"11-29":{"F":"5:47","Z":"12:03","A":"14:05","M":"16:24","I":"17:54"},"11-30":{"F":"5:48","Z":"12:03","A":"14:05","M":"16:23","I":"17:53"},"12-01":{"F":"5:49","Z":"12:04","A":"14:05","M":"16:23","I":"17:53"},"12-02":{"F":"5:50","Z":"12:04","A":"14:04","M":"16:23","I":"17:53"},"12-03":{"F":"5:51","Z":"12:04","A":"14:04","M":"16:22","I":"17:52"},"12-04":{"F":"5:51","Z":"12:04","A":"14:04","M":"16:22","I":"17:52"},"12-05":{"F":"5:52","Z":"12:04","A":"14:04","M":"16:22","I":"17:52"},"12-06":{"F":"5:53","Z":"12:05","A":"14:04","M":"16:22","I":"17:52"},"12-07":{"F":"5:54","Z":"12:05","A":"14:04","M":"16:22","I":"17:52"},"12-08":{"F":"5:54","Z":"12:05","A":"14:04","M":"16:22","I":"17:52"},"12-09":{"F":"5:55","Z":"12:05","A":"14:04","M":"16:22","I":"17:52"},"12-10":{"F":"5:55","Z":"12:06","A":"14:04","M":"16:22","I":"17:52"},"12-11":{"F":"5:56","Z":"12:06","A":"14:04","M":"16:22","I":"17:52"},"12-12":{"F":"5:57","Z":"12:06","A":"14:04","M":"16:22","I":"17:52"},"12-13":{"F":"5:57","Z":"12:07","A":"14:04","M":"16:22","I":"17:52"},"12-14":{"F":"5:58","Z":"12:07","A":"14:04","M":"16:22","I":"17:52"},"12-15":{"F":"5:58","Z":"12:07","A":"14:05","M":"16:22","I":"17:52"},"12-16":{"F":"5:58","Z":"12:07","A":"14:05","M":"16:23","I":"17:53"},"12-17":{"F":"5:59","Z":"12:07","A":"14:05","M":"16:23","I":"17:53"},"12-18":{"F":"5:59","Z":"12:07","A":"14:06","M":"16:23","I":"17:53"},"12-19":{"F":"6:00","Z":"12:08","A":"14:06","M":"16:24","I":"17:54"},"12-20":{"F":"6:00","Z":"12:08","A":"14:07","M":"16:24","I":"17:54"},"12-21":{"F":"6:00","Z":"12:08","A":"14:07","M":"16:25","I":"17:55"},"12-22":{"F":"6:01","Z":"12:08","A":"14:08","M":"16:25","I":"17:55"},"12-23":{"F":"6:01","Z":"12:08","A":"14:08","M":"16:26","I":"17:56"},"12-24":{"F":"6:02","Z":"12:08","A":"14:09","M":"16:26","I":"17:56"},"12-25":{"F":"6:02","Z":"12:09","A":"14:10","M":"16:27","I":"17:57"},"12-26":{"F":"6:03","Z":"12:09","A":"14:10","M":"16:27","I":"17:57"},"12-27":{"F":"6:03","Z":"12:10","A":"14:11","M":"16:28","I":"17:58"},"12-28":{"F":"6:03","Z":"12:10","A":"14:12","M":"16:29","I":"17:59"},"12-29":{"F":"6:03","Z":"12:10","A":"14:12","M":"16:30","I":"18:00"},"12-30":{"F":"6:04","Z":"12:10","A":"14:13","M":"16:30","I":"18:00"},"12-31":{"F":"6:04","Z":"12:11","A":"14:14","M":"16:31","I":"18:01"}};
 const SR={"01-01":"7:25","01-02":"7:25","01-03":"7:25","01-04":"7:25","01-05":"7:25","01-06":"7:25","01-07":"7:24","01-08":"7:24","01-09":"7:24","01-10":"7:24","01-11":"7:23","01-12":"7:23","01-13":"7:23","01-14":"7:22","01-15":"7:22","01-16":"7:21","01-17":"7:21","01-18":"7:20","01-19":"7:20","01-20":"7:19","01-21":"7:18","01-22":"7:18","01-23":"7:17","01-24":"7:16","01-25":"7:15","01-26":"7:14","01-27":"7:13","01-28":"7:13","01-29":"7:12","01-30":"7:11","01-31":"7:10","02-01":"7:08","02-02":"7:07","02-03":"7:06","02-04":"7:05","02-05":"7:04","02-06":"7:03","02-07":"7:02","02-08":"7:00","02-09":"6:59","02-10":"6:58","02-11":"6:56","02-12":"6:55","02-13":"6:54","02-14":"6:52","02-15":"6:51","02-16":"6:49","02-17":"6:48","02-18":"6:46","02-19":"6:45","02-20":"6:43","02-21":"6:42","02-22":"6:40","02-23":"6:39","02-24":"6:37","02-25":"6:36","02-26":"6:34","02-27":"6:32","02-28":"6:31","02-29":"6:31","03-01":"6:29","03-02":"6:27","03-03":"6:26","03-04":"6:24","03-05":"6:22","03-06":"6:21","03-07":"6:19","03-08":"6:18","03-09":"6:16","03-10":"6:14","03-11":"6:13","03-12":"6:11","03-13":"6:09","03-14":"6:07","03-15":"6:06","03-16":"6:04","03-17":"6:02","03-18":"6:00","03-19":"5:58","03-20":"5:57","03-21":"5:55","03-22":"5:53","03-23":"5:52","03-24":"5:50","03-25":"5:48","03-26":"5:46","03-27":"5:44","03-28":"5:43","03-29":"5:41","03-30":"5:39","03-31":"5:37","04-01":"5:34","04-02":"5:32","04-03":"5:30","04-04":"5:28","04-05":"5:27","04-06":"5:25","04-07":"5:23","04-08":"5:21","04-09":"5:20","04-10":"5:18","04-11":"5:16","04-12":"5:15","04-13":"5:13","04-14":"5:11","04-15":"5:10","04-16":"5:08","04-17":"5:06","04-18":"5:05","04-19":"5:03","04-20":"5:02","04-21":"5:00","04-22":"4:59","04-23":"4:57","04-24":"4:55","04-25":"4:54","04-26":"4:52","04-27":"4:51","04-28":"4:50","04-29":"4:48","04-30":"4:47","05-01":"4:44","05-02":"4:42","05-03":"4:40","05-04":"4:38","05-05":"4:37","05-06":"4:36","05-07":"4:34","05-08":"4:33","05-09":"4:32","05-10":"4:31","05-11":"4:29","05-12":"4:28","05-13":"4:27","05-14":"4:26","05-15":"4:25","05-16":"4:24","05-17":"4:23","05-18":"4:22","05-19":"4:21","05-20":"4:20","05-21":"4:19","05-22":"4:18","05-23":"4:18","05-24":"4:17","05-25":"4:16","05-26":"4:15","05-27":"4:15","05-28":"4:14","05-29":"4:13","05-30":"4:13","05-31":"4:12","06-01":"4:11","06-02":"4:11","06-03":"4:11","06-04":"4:10","06-05":"4:10","06-06":"4:09","06-07":"4:09","06-08":"4:09","06-09":"4:09","06-10":"4:08","06-11":"4:08","06-12":"4:08","06-13":"4:08","06-14":"4:08","06-15":"4:08","06-16":"4:08","06-17":"4:08","06-18":"4:08","06-19":"4:08","06-20":"4:08","06-21":"4:09","06-22":"4:09","06-23":"4:09","06-24":"4:09","06-25":"4:10","06-26":"4:10","06-27":"4:10","06-28":"4:11","06-29":"4:11","06-30":"4:12","07-01":"4:12","07-02":"4:13","07-03":"4:13","07-04":"4:14","07-05":"4:14","07-06":"4:15","07-07":"4:16","07-08":"4:16","07-09":"4:17","07-10":"4:18","07-11":"4:19","07-12":"4:19","07-13":"4:20","07-14":"4:21","07-15":"4:22","07-16":"4:23","07-17":"4:24","07-18":"4:24","07-19":"4:25","07-20":"4:26","07-21":"4:27","07-22":"4:28","07-23":"4:29","07-24":"4:30","07-25":"4:31","07-26":"4:32","07-27":"4:33","07-28":"4:34","07-29":"4:35","07-30":"4:36","07-31":"4:37","08-01":"4:38","08-02":"4:39","08-03":"4:40","08-04":"4:41","08-05":"4:42","08-06":"4:43","08-07":"4:44","08-08":"4:46","08-09":"4:47","08-10":"4:48","08-11":"4:49","08-12":"4:50","08-13":"4:51","08-14":"4:52","08-15":"4:53","08-16":"4:54","08-17":"4:55","08-18":"4:56","08-19":"4:57","08-20":"4:59","08-21":"5:00","08-22":"5:01","08-23":"5:02","08-24":"5:03","08-25":"5:04","08-26":"5:05","08-27":"5:06","08-28":"5:07","08-29":"5:08","08-30":"5:09","08-31":"5:11","09-01":"5:13","09-02":"5:14","09-03":"5:15","09-04":"5:16","09-05":"5:17","09-06":"5:19","09-07":"5:20","09-08":"5:21","09-09":"5:22","09-10":"5:23","09-11":"5:25","09-12":"5:26","09-13":"5:28","09-14":"5:29","09-15":"5:30","09-16":"5:31","09-17":"5:32","09-18":"5:33","09-19":"5:35","09-20":"5:36","09-21":"5:38","09-22":"5:39","09-23":"5:40","09-24":"5:42","09-25":"5:43","09-26":"5:45","09-27":"5:46","09-28":"5:47","09-29":"5:48","09-30":"5:49","10-01":"5:50","10-02":"5:51","10-03":"5:52","10-04":"5:53","10-05":"5:54","10-06":"5:55","10-07":"5:56","10-08":"5:58","10-09":"5:59","10-10":"6:00","10-11":"6:01","10-12":"6:02","10-13":"6:03","10-14":"6:04","10-15":"6:06","10-16":"6:07","10-17":"6:08","10-18":"6:09","10-19":"6:10","10-20":"6:12","10-21":"6:13","10-22":"6:14","10-23":"6:15","10-24":"6:17","10-25":"6:18","10-26":"6:19","10-27":"6:20","10-28":"6:22","10-29":"6:23","10-30":"6:24","10-31":"6:25","11-01":"6:27","11-02":"6:28","11-03":"6:29","11-04":"6:31","11-05":"6:32","11-06":"6:33","11-07":"6:34","11-08":"6:36","11-09":"6:37","11-10":"6:38","11-11":"6:40","11-12":"6:41","11-13":"6:42","11-14":"6:43","11-15":"6:45","11-16":"6:46","11-17":"6:47","11-18":"6:49","11-19":"6:50","11-20":"6:51","11-21":"6:52","11-22":"6:54","11-23":"6:55","11-24":"6:56","11-25":"6:57","11-26":"6:58","11-27":"7:00","11-28":"7:01","11-29":"7:02","11-30":"7:03","12-01":"7:04","12-02":"7:05","12-03":"7:06","12-04":"7:07","12-05":"7:08","12-06":"7:09","12-07":"7:10","12-08":"7:11","12-09":"7:12","12-10":"7:13","12-11":"7:14","12-12":"7:15","12-13":"7:16","12-14":"7:17","12-15":"7:17","12-16":"7:18","12-17":"7:19","12-18":"7:19","12-19":"7:20","12-20":"7:21","12-21":"7:21","12-22":"7:22","12-23":"7:22","12-24":"7:23","12-25":"7:23","12-26":"7:23","12-27":"7:24","12-28":"7:24","12-29":"7:24","12-30":"7:24","12-31":"7:24"};
 
-let hijriOffset = localStorage.getItem('hijri_offset') !== null ? parseInt(localStorage.getItem('hijri_offset')) : 0;
+let hijriOffset = localStorage.getItem('hijri_offset') !== null ? parseInt(localStorage.getItem('hijri_offset')) : 1;
+// Разовый сдвиг числа хиджры на +1 день (применяется один раз, не трогает последующие ручные правки через ▲/▼)
+if(!localStorage.getItem('hijri_shift_v1')){ hijriOffset += 1; localStorage.setItem('hijri_offset', hijriOffset); localStorage.setItem('hijri_shift_v1','1'); }
+// Исправление бага: из-за старого кода смещение могло задвоиться (1 (по умолчанию) + 1 (разовый сдвиг) = 2),
+// из-за чего число хиджры показывалось на день больше нужного. Разовая коррекция возвращает верное смещение (1)
+// всем пользователям — и новым, и тем, кто уже успел получить задвоенное значение.
+if(!localStorage.getItem('hijri_fix_v2')){ hijriOffset = 1; localStorage.setItem('hijri_offset', hijriOffset); localStorage.setItem('hijri_fix_v2','1'); }
 function adjustHijri(days) { hijriOffset += days; localStorage.setItem('hijri_offset', hijriOffset); tick(); }
 
 let eventOffset = localStorage.getItem('event_offset') !== null ? parseInt(localStorage.getItem('event_offset')) : 0;
 function adjustEventOffset(days) { eventOffset += days; localStorage.setItem('event_offset', eventOffset); tick(); }
-
-const HIJRI_MONTHS = ['Мухаррам','Сафар','Раби аль-Авваль','Раби ас-Сани','Джумада аль-Уля','Джумада аль-Ахир','Раджаб','Шаабан','Рамадан','Шавваль','Зуль-Када','Зуль-Хиджа'];
 
 // Таблица точных дат начала хиджра-месяцев (по данным исламского календаря)
 // Формат: [дата_начала_григ, номер_месяца, год_хиджры]
@@ -486,7 +802,7 @@ const HIJRI_TABLE_MS = [
   [new Date('2026-02-17T21:00:00Z').getTime(),9,1447],
   [new Date('2026-03-19T21:00:00Z').getTime(),10,1447],
   [new Date('2026-04-17T21:00:00Z').getTime(),11,1447],
-  [new Date('2026-05-18T21:00:00Z').getTime(),12,1447],
+  [new Date('2026-05-17T21:00:00Z').getTime(),12,1447],
   [new Date('2026-06-16T21:00:00Z').getTime(),1,1448],
   [new Date('2026-07-15T21:00:00Z').getTime(),2,1448],
   [new Date('2026-08-14T21:00:00Z').getTime(),3,1448],
@@ -498,7 +814,7 @@ const HIJRI_TABLE_MS = [
   [new Date('2027-02-07T21:00:00Z').getTime(),9,1448],
   [new Date('2027-03-09T21:00:00Z').getTime(),10,1448],
   [new Date('2027-04-08T21:00:00Z').getTime(),11,1448],
-  [new Date('2027-05-08T21:00:00Z').getTime(),12,1448],
+  [new Date('2027-05-07T21:00:00Z').getTime(),12,1448],
   [new Date('2027-06-05T21:00:00Z').getTime(),1,1449],
   [new Date('2027-07-04T21:00:00Z').getTime(),2,1449],
   [new Date('2027-08-02T21:00:00Z').getTime(),3,1449],
@@ -2361,47 +2677,47 @@ function getIslamicEvents(hDay, hMonth, hYear, weekday) {
   const ev = [];
   // ── Muharram ──
   if (hMonth===1) {
-    if (hDay===1)  ev.push({p:10, t:'🌙 Исламский Новый '+hYear+' год',     g:true});
-    if (hDay===9)  ev.push({p:8,  t:'☪️ Пост в день Тасуа',               g:false});
-    if (hDay===10) ev.push({p:9,  t:'⭐ Пост в день Ашура',            g:true});
-    if (hDay===11) ev.push({p:7,  t:'☪️ Пост после Ашура (желательно)',                  g:false});
+    if (hDay===1)  ev.push({p:10, t:evT('newYear',hYear), g:true});
+    if (hDay===9)  ev.push({p:8,  t:evT('tasua'),         g:false});
+    if (hDay===10) ev.push({p:9,  t:evT('ashura'),        g:true});
+    if (hDay===11) ev.push({p:7,  t:evT('afterAshura'),   g:false});
   }
   // ── Раби аль-Авваль ──
-  if (hMonth===3 && hDay===12) ev.push({p:9, t:'🌹 Ан-Наби ﷺ', g:true});
+  if (hMonth===3 && hDay===12) ev.push({p:9, t:evT('mawlid'), g:true});
   // ── Раджаб ──
   if (hMonth===7) {
-    if (hDay===1)  ev.push({p:6, t:'🌙 Начало Раджаба', g:false});
-    if (hDay===27) ev.push({p:9, t:"✨ Исра вальМи'радж", g:true});
+    if (hDay===1)  ev.push({p:6, t:evT('rajabStart'), g:false});
+    if (hDay===27) ev.push({p:9, t:evT('isra'), g:true});
   }
   // ── Шаабан ──
-  if (hMonth===8 && hDay===15) ev.push({p:8, t:'🌕 Нисф Шаабан', g:true});
+  if (hMonth===8 && hDay===15) ev.push({p:8, t:evT('nisfShaban'), g:true});
   // ── Рамадан ──
   if (hMonth===9) {
-    if (hDay===1) ev.push({p:10, t:'🌙 Начало Рамадана!', g:true});
-    else if (hDay>=21 && hDay%2===1) ev.push({p:9, t:'✨ Поиск Ночи Предопределения', g:true});
-    else ev.push({p:10, t:'🌙 Рамадан — '+hDay+'-й день поста', g:true});
+    if (hDay===1) ev.push({p:10, t:evT('ramadanStart'), g:true});
+    else if (hDay>=21 && hDay%2===1) ev.push({p:9, t:evT('laylatulQadr'), g:true});
+    else ev.push({p:10, t:evT('ramadanDay',hDay), g:true});
   }
   // ── Шавваль ──
   if (hMonth===10) {
-    if (hDay===1) ev.push({p:10, t:'🎉 Ид аль-Фитр — Ураза-Байрам!', g:true});
-    if (hDay>=2 && hDay<=7) ev.push({p:8, t:'☪️ Пост Шавваля — '+(hDay-1)+'-й из 6 дней', g:false});
+    if (hDay===1) ev.push({p:10, t:evT('eidFitr'), g:true});
+    if (hDay>=2 && hDay<=7) ev.push({p:8, t:evT('shawwalFast',hDay-1), g:false});
   }
   // ── Зуль-Хиджа ──
   if (hMonth===12) {
-    if (hDay>=1 && hDay<=8) ev.push({p:9, t:'☪️ Пост Зуль-Хиджа ('+hDay+'-й день)', g:true});
-    if (hDay===9) ev.push({p:10, t:'🤲 День Арафа — пост за два года!', g:true});
-    if (hDay===10) ev.push({p:10, t:'🐑 Ид аль-Адха(Пост запрещен)', g:true});
-    if (hDay>=11 && hDay<=13) ev.push({p:8, t:'🕋 Дни ат-Ташрик(Пост запрещен)', g:false});
+    if (hDay>=1 && hDay<=8) ev.push({p:9, t:evT('dhulHijjaFast',hDay), g:true});
+    if (hDay===9) ev.push({p:10, t:evT('arafah'), g:true});
+    if (hDay===10) ev.push({p:10, t:evT('eidAdha'), g:true});
+    if (hDay>=11 && hDay<=13) ev.push({p:8, t:evT('tashriq'), g:false});
   }
   // ── Священные месяцы (Зуль-Каада) ──
-  if (hMonth===11 && hDay===1) ev.push({p:5, t:'🌙 Начало Зуль-Каада', g:false});
+  if (hMonth===11 && hDay===1) ev.push({p:5, t:evT('dhulQadaStart'), g:false});
   // ── Белые дни (13,14,15 кроме 1 Шавваль) ──
   if ([13,14,15].includes(hDay) && hMonth!==9 && !(hMonth===10&&hDay===1)) {
-    ev.push({p:6, t:'🌕 Белые дни — '+(hDay-12)+'-й день (пост сунна)', g:false});
+    ev.push({p:6, t:evT('whiteDays',hDay-12), g:false});
   }
   // ── Еженедельные посты ──
-  if (weekday===1) ev.push({p:4, t:'🌴 Пост в Понедельник (сунна)', g:false});
-  if (weekday===4) ev.push({p:4, t:'🌴 Пост в Четверг (сунна)',     g:false});
+  if (weekday===1) ev.push({p:4, t:evT('mondayFast'), g:false});
+  if (weekday===4) ev.push({p:4, t:evT('thursdayFast'), g:false});
 
   ev.sort((a,b)=>b.p-a.p);
   return ev.slice(0,2);
@@ -2415,7 +2731,7 @@ function updateIslamicEvent(now) {
   const events = getIslamicEvents(hEv.day, hEv.month, hEv.year, realWeekday);
   const el = document.getElementById('islamic-event');
   if (!el) return;
-  const monthName = HIJRI_MONTHS[h.month - 1] || '';
+  const monthName = trHijriMonth(h.month - 1) || '';
   const dateHtml = '<span class="ev-line gold"><span class="hijri-day-num">' + h.day + '</span> ' + monthName + ' ' + h.year + '</span>';
   if (events.length === 0) {
     el.innerHTML = dateHtml;
@@ -2426,6 +2742,158 @@ function updateIslamicEvent(now) {
   }
 }
 
+// ── Ручные сдвиги времени намазов (в минутах), хранятся на устройстве ──
+let PRAYER_OFFSETS = {};
+try{ PRAYER_OFFSETS = JSON.parse(localStorage.getItem('prayer_offsets')||'{}'); }catch(e){ PRAYER_OFFSETS = {}; }
+function getPrayerOffset(key){ return PRAYER_OFFSETS[key]||0; }
+function savePrayerOffsets(){ try{ localStorage.setItem('prayer_offsets', JSON.stringify(PRAYER_OFFSETS)); }catch(e){} }
+
+// ── Пользовательская таблица намазов на год (может заменить встроенную) ──
+// По умолчанию ничего не меняется: если пользователь ни разу не применил
+// свою таблицу, getActiveTable()/getActiveSR() возвращают null, и
+// getPrayers()/getSunrise() работают ровно как раньше, используя встроенные P и SR.
+let CUSTOM_TABLE = null; // {P:{...}, SR:{...}}
+let CUSTOM_TABLE_META = null;
+try {
+  const _rawCT = localStorage.getItem('custom_prayer_table');
+  if (_rawCT) {
+    const _parsedCT = JSON.parse(_rawCT);
+    if (_parsedCT && _parsedCT.P && _parsedCT.SR) {
+      // Если таблица была сохранена от геолокации — автоматически сбрасываем.
+      // Геолокация без интернета/GPS даёт неточные координаты.
+      if (_parsedCT.meta && _parsedCT.meta.source === 'geo') {
+        localStorage.removeItem('custom_prayer_table');
+      } else {
+        CUSTOM_TABLE = { P: _parsedCT.P, SR: _parsedCT.SR };
+        CUSTOM_TABLE_META = _parsedCT.meta || null;
+      }
+    }
+  }
+} catch(e) { CUSTOM_TABLE = null; CUSTOM_TABLE_META = null; }
+function getActiveTable(){ return (CUSTOM_TABLE && CUSTOM_TABLE.P) ? CUSTOM_TABLE.P : null; }
+function getActiveSR(){ return (CUSTOM_TABLE && CUSTOM_TABLE.SR) ? CUSTOM_TABLE.SR : null; }
+function getCustomTableMeta(){ return CUSTOM_TABLE_META; }
+function saveCustomTable(tableP, tableSR, meta){
+  CUSTOM_TABLE = { P: tableP, SR: tableSR };
+  CUSTOM_TABLE_META = meta || null;
+  try{ localStorage.setItem('custom_prayer_table', JSON.stringify({P:tableP, SR:tableSR, meta:meta})); }catch(e){}
+}
+function clearCustomTable(){
+  CUSTOM_TABLE = null;
+  CUSTOM_TABLE_META = null;
+  try{ localStorage.removeItem('custom_prayer_table'); }catch(e){}
+}
+
+// ── Язык интерфейса (ru / en / ar) ──
+let APP_LANG = localStorage.getItem('app_lang') || 'ru';
+function saveAppLang(l){ APP_LANG=l; try{ localStorage.setItem('app_lang', l); }catch(e){} }
+const NAME_TR = {
+  'Фаджр':{ru:'Фаджр',en:'Fajr',ar:'الفجر'},
+  'Зухр':{ru:'Зухр',en:'Dhuhr',ar:'الظهر'},
+  'Аср':{ru:'Аср',en:'Asr',ar:'العصر'},
+  'Магриб':{ru:'Магриб',en:'Maghrib',ar:'المغرب'},
+  'Иша':{ru:'Иша',en:'Isha',ar:'العشاء'},
+  'Восход':{ru:'Восход',en:'Sunrise',ar:'الشروق'},
+  'Джума':{ru:'Джума',en:"Jumu'ah",ar:'الجمعة'},
+  'ДЖУМА':{ru:'ДЖУМА',en:"JUMU'AH",ar:'الجمعة'},
+  'ДУХА':{ru:'ДУХА',en:'DUHA',ar:'الضحى'},
+};
+function trName(name){ const e=NAME_TR[name]; return e ? (e[APP_LANG]||e.ru) : name; }
+const UI_TR = {
+  title:{ru:'Настройка времени намазов',en:'Prayer Time Settings',ar:'إعدادات أوقات الصلاة'},
+  reset:{ru:'Сбросить',en:'Reset',ar:'إعادة ضبط'},
+  resetAll:{ru:'Сбросить всё',en:'Reset all',ar:'إعادة ضبط الكل'},
+  close:{ru:'Готово',en:'Done',ar:'تم'},
+  min:{ru:'мин',en:'min',ar:'د'},
+  hint:{ru:'Нажмите на значок ⚙ рядом с таймером, чтобы открыть это окно снова',en:'Tap the ⚙ icon next to the timer to open this window again',ar:'اضغط على أيقونة ⚙ بجانب المؤقت لفتح هذه النافذة مجددًا'},
+  today:{ru:'Сегодня',en:'Today',ar:'اليوم'},
+  noEvents:{ru:'нет событий',en:'no events',ar:'لا توجد أحداث'},
+  pwaAdd:{ru:'☪ Добавить на рабочий стол',en:'☪ Add to home screen',ar:'☪ إضافة إلى الشاشة الرئيسية'},
+  pwaInstall:{ru:'Установить',en:'Install',ar:'تثبيت'},
+  qrMsg:{ru:'Сперва подключитесь к Wi-Fi «Мечеть» — иначе QR-код не сработает',en:'First connect to the "Мечеть" Wi-Fi — otherwise the QR code won\'t work',ar:'اتصل أولاً بشبكة Wi-Fi «Мечеть» — وإلا فلن يعمل رمز QR'},
+  notepadTitle:{ru:'📝 Блокнот',en:'📝 Notepad',ar:'📝 المفكرة'},
+  plansTitle:{ru:'📋 Планы',en:'📋 Plans',ar:'📋 الخطط'},
+  notepadClear:{ru:'Очистить',en:'Clear',ar:'مسح'},
+  notepadPlaceholder:{ru:'Записывайте заметки…',en:'Write your notes…',ar:'اكتب ملاحظاتك…'},
+  saved:{ru:'✓ Сохранено',en:'✓ Saved',ar:'✓ تم الحفظ'},
+  cleared:{ru:'Очищено',en:'Cleared',ar:'تم المسح'},
+  hadithIn:{ru:'Хадис обновится через',en:'Hadith updates in',ar:'يتحدّث الحديث خلال'},
+  eventIn:{ru:'через',en:'in',ar:'خلال'},
+  ytTitle:{ru:'Таблица намазов на год',en:'Year prayer table',ar:'جدول الصلاة السنوي'},
+  ytStatusBuiltin:{ru:'Сейчас используется встроенная таблица',en:'Currently using the built-in table',ar:'يُستخدم حاليًا الجدول المدمج'},
+  ytStatusCsv:{ru:'Сейчас используется своя таблица (загружена {date})',en:'Currently using a custom table (loaded {date})',ar:'يُستخدم حاليًا جدول مخصص (تم التحميل بتاريخ {date})'},
+  ytStatusGeo:{ru:'Сейчас используется расчёт по геолокации ({method}, {date})',en:'Currently using geolocation calculation ({method}, {date})',ar:'يُستخدم حاليًا حساب بالموقع الجغرافي ({method}, {date})'},
+  ytTextareaPlaceholder:{ru:'Вставьте таблицу: дата;фаджр;восход;зухр;аср;магриб;иша — по одному дню на строку. Например:\n01.01;06:05;07:25;12:11;14:14;16:32;18:02\n01.02;06:05;07:25;12:11;14:15;16:33;18:03',en:'Paste the table: date;fajr;sunrise;dhuhr;asr;maghrib;isha — one day per line. Example:\n01.01;06:05;07:25;12:11;14:14;16:32;18:02\n01.02;06:05;07:25;12:11;14:15;16:33;18:03',ar:'الصق الجدول: التاريخ;الفجر;الشروق;الظهر;العصر;المغرب;العشاء — يوم واحد لكل سطر. مثال:\n01.01;06:05;07:25;12:11;14:14;16:32;18:02'},
+  ytFileBtn:{ru:'Файл',en:'File',ar:'ملف'},
+  ytApplyBtn:{ru:'Применить таблицу',en:'Apply table',ar:'تطبيق الجدول'},
+  ytParseTooFew:{ru:'Распознано только {count} дней (из ~365). Проверьте формат и попробуйте снова — таблица не применена.',en:'Only {count} days recognized (out of ~365). Check the format and try again — table not applied.',ar:'تم التعرف على {count} يومًا فقط (من أصل ~365). تحقق من التنسيق وحاول مرة أخرى — لم يتم تطبيق الجدول.'},
+  ytParseOk:{ru:'Распознано {count} дней. Таблица применена.',en:'{count} days recognized. Table applied.',ar:'تم التعرف على {count} يومًا. تم تطبيق الجدول.'},
+  ytParseEmpty:{ru:'Вставьте таблицу в текстовое поле или загрузите файл.',en:'Paste the table into the text field or upload a file.',ar:'الصق الجدول في الحقل النصي أو قم بتحميل ملف.'},
+  ytGeoBtn:{ru:'📍 Определить по геолокации',en:'📍 Detect by geolocation',ar:'📍 تحديد بالموقع الجغرافي'},
+  ytMethodLabel:{ru:'Метод расчёта (спросите у имама, если не уверены)',en:'Calculation method (ask your imam if unsure)',ar:'طريقة الحساب (اسأل الإمام إذا لم تكن متأكدًا)'},
+  ytAsrLabel:{ru:'Метод расчёта Аср',en:'Asr calculation method',ar:'طريقة حساب العصر'},
+  ytAsrShafi:{ru:'Стандартный (шафиитский)',en:'Standard (Shafi)',ar:'قياسي (شافعي)'},
+  ytAsrHanafi:{ru:'Ханафитский',en:'Hanafi',ar:'حنفي'},
+  ytGeoApplyBtn:{ru:'Рассчитать и применить',en:'Calculate and apply',ar:'حساب وتطبيق'},
+  ytGeoAsking:{ru:'Определяем местоположение…',en:'Detecting location…',ar:'جارٍ تحديد الموقع…'},
+  ytGeoDenied:{ru:'Не удалось получить местоположение. Проверьте разрешения браузера/устройства.',en:'Could not get location. Check browser/device permissions.',ar:'تعذّر الحصول على الموقع. تحقق من أذونات المتصفح/الجهاز.'},
+  ytGeoCalculating:{ru:'Считаем расписание на год…',en:'Calculating the year schedule…',ar:'جارٍ حساب جدول السنة…'},
+  ytGeoApplied:{ru:'Готово: координаты {lat}, {lng}. Обязательно сверьте несколько ближайших дней с имамом.',en:'Done: coordinates {lat}, {lng}. Please double-check the next few days with your imam.',ar:'تم: الإحداثيات {lat}, {lng}. يرجى مراجعة الأيام القليلة القادمة مع الإمام.'},
+  ytGeoHighLat:{ru:'Внимание: на вашей широте для части дней (около летнего солнцестояния) точный угол недостижим — использован приближённый метод. Обязательно сверьтесь с имамом.',en:'Note: at your latitude, for part of the year (near summer solstice) the exact angle is unreachable — an approximate method was used. Please verify with your imam.',ar:'ملاحظة: عند خط عرضك، في جزء من العام (قرب الانقلاب الصيفي) لا يمكن بلوغ الزاوية الدقيقة — تم استخدام طريقة تقريبية. يرجى التحقق مع الإمام.'},
+  ytRestoreBtn:{ru:'Восстановить встроенное расписание',en:'Restore built-in schedule',ar:'استعادة الجدول المدمج'},
+  ytRestoreConfirm:{ru:'Вернуть встроенное расписание вместо своей таблицы?',en:'Restore the built-in schedule instead of your custom table?',ar:'هل تريد استعادة الجدول المدمج بدلاً من جدولك المخصص؟'},
+  ytApplyConfirm:{ru:'Заменить расписание на весь год новой таблицей? Обязательно сверьте несколько дней с имамом после применения.',en:"Replace the whole year's schedule with the new table? Please double-check a few days with your imam afterwards.",ar:'هل تريد استبدال جدول السنة بالكامل بالجدول الجديد؟ يرجى مراجعة بضعة أيام مع الإمام بعد التطبيق.'},
+  ytGeoInsecure:{ru:'Определение по геолокации недоступно на этой странице (нужен доступ по https). Используйте вставку таблицы или файл.',en:'Geolocation is unavailable on this page (requires https access). Use table paste or file upload instead.',ar:'تحديد الموقع الجغرافي غير متاح في هذه الصفحة (يتطلب الوصول عبر https). استخدم لصق الجدول أو تحميل ملف بدلاً من ذلك.'},
+  asmaAllTitle:{ru:'99 имён Аллаха',en:'99 Names of Allah',ar:'أسماء الله الحسنى'}
+};
+function trUI(key){ const e=UI_TR[key]; return e ? (e[APP_LANG]||e.ru) : key; }
+
+// ── Дни недели / месяцы / хиджри-месяцы на трёх языках ──
+const WEEKDAY_TR = {
+  ru:['ВС','ПН','ВТ','СР','ЧТ','ПТ','СБ'],
+  en:['SUN','MON','TUE','WED','THU','FRI','SAT'],
+  ar:['ح','ن','ث','ر','خ','ج','س']
+};
+function trWeekday(idx){ return (WEEKDAY_TR[APP_LANG]||WEEKDAY_TR.ru)[idx]; }
+const MONTH_ABBR_TR = {
+  ru:['ЯНВ','ФЕВ','МАР','АПР','МАЙ','ИЮН','ИЮЛ','АВГ','СЕН','ОКТ','НОЯ','ДЕК'],
+  en:['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'],
+  ar:['ينا','فبر','مار','أبر','ماي','يون','يول','أغس','سبت','أكت','نوف','ديس']
+};
+function trMonthAbbr(idx){ return (MONTH_ABBR_TR[APP_LANG]||MONTH_ABBR_TR.ru)[idx]; }
+const HIJRI_MONTHS_TR = {
+  ru:['Мухаррам','Сафар','Раби аль-Авваль','Раби ас-Сани','Джумада аль-Уля','Джумада аль-Ахир','Раджаб','Шаабан','Рамадан','Шавваль','Зуль-Када','Зуль-Хиджа'],
+  en:['Muharram','Safar','Rabi al-Awwal','Rabi al-Thani','Jumada al-Awwal','Jumada al-Thani','Rajab',"Sha'ban",'Ramadan','Shawwal',"Dhu al-Qi'dah",'Dhu al-Hijjah'],
+  ar:['محرم','صفر','ربيع الأول','ربيع الآخر','جمادى الأولى','جمادى الآخرة','رجب','شعبان','رمضان','شوال','ذو القعدة','ذو الحجة']
+};
+function trHijriMonth(idx){ return (HIJRI_MONTHS_TR[APP_LANG]||HIJRI_MONTHS_TR.ru)[idx]; }
+
+// ── Тексты исламских событий на трёх языках ──
+const EVENT_TR = {
+  newYear:{ru:(y)=>'🌙 Исламский Новый '+y+' год',en:(y)=>'🌙 Islamic New Year '+y,ar:(y)=>'🌙 رأس السنة الهجرية '+y},
+  tasua:{ru:()=>'☪️ Пост в день Тасуа',en:()=>"☪️ Day of Tasu'a fast",ar:()=>'☪️ صيام يوم تاسوعاء'},
+  ashura:{ru:()=>'⭐ Пост в день Ашура',en:()=>'⭐ Day of Ashura fast',ar:()=>'⭐ صيام يوم عاشوراء'},
+  afterAshura:{ru:()=>'☪️ Пост после Ашура (желательно)',en:()=>'☪️ Fast after Ashura (recommended)',ar:()=>'☪️ صيام بعد عاشوراء (مستحب)'},
+  mawlid:{ru:()=>'🌹 Ан-Наби ﷺ',en:()=>"🌹 Prophet's Birthday ﷺ",ar:()=>'🌹 المولد النبوي ﷺ'},
+  rajabStart:{ru:()=>'🌙 Начало Раджаба',en:()=>'🌙 Start of Rajab',ar:()=>'🌙 بداية شهر رجب'},
+  isra:{ru:()=>"✨ Исра вальМи'радж",en:()=>"✨ Isra and Mi'raj",ar:()=>'✨ الإسراء والمعراج'},
+  nisfShaban:{ru:()=>'🌕 Нисф Шаабан',en:()=>"🌕 Mid-Sha'ban",ar:()=>'🌕 ليلة النصف من شعبان'},
+  ramadanStart:{ru:()=>'🌙 Начало Рамадана!',en:()=>'🌙 Start of Ramadan!',ar:()=>'🌙 بداية شهر رمضان!'},
+  laylatulQadr:{ru:()=>'✨ Поиск Ночи Предопределения',en:()=>'✨ Seeking Laylat al-Qadr',ar:()=>'✨ التماس ليلة القدر'},
+  ramadanDay:{ru:(d)=>'🌙 Рамадан — '+d+'-й день поста',en:(d)=>'🌙 Ramadan — day '+d+' of fasting',ar:(d)=>'🌙 رمضان — اليوم '+d+' من الصيام'},
+  eidFitr:{ru:()=>'🎉 Ид аль-Фитр — Ураза-Байрам!',en:()=>'🎉 Eid al-Fitr!',ar:()=>'🎉 عيد الفطر!'},
+  shawwalFast:{ru:(d)=>'☪️ Пост Шавваля — '+d+'-й из 6 дней',en:(d)=>'☪️ Shawwal fast — day '+d+' of 6',ar:(d)=>'☪️ صيام شوال — اليوم '+d+' من 6'},
+  dhulHijjaFast:{ru:(d)=>'☪️ Пост Зуль-Хиджа ('+d+'-й день)',en:(d)=>'☪️ Dhul-Hijjah fast (day '+d+')',ar:(d)=>'☪️ صيام ذي الحجة (اليوم '+d+')'},
+  arafah:{ru:()=>'🤲 День Арафа — пост за два года!',en:()=>'🤲 Day of Arafah — fast for two years!',ar:()=>'🤲 يوم عرفة — صيام يكفّر سنتين!'},
+  eidAdha:{ru:()=>'🐑 Ид аль-Адха(Пост запрещен)',en:()=>'🐑 Eid al-Adha (fasting forbidden)',ar:()=>'🐑 عيد الأضحى (الصيام محرّم)'},
+  tashriq:{ru:()=>'🕋 Дни ат-Ташрик(Пост запрещен)',en:()=>'🕋 Days of Tashriq (fasting forbidden)',ar:()=>'🕋 أيام التشريق (الصيام محرّم)'},
+  dhulQadaStart:{ru:()=>'🌙 Начало Зуль-Каада',en:()=>"🌙 Start of Dhul-Qa'dah",ar:()=>'🌙 بداية ذي القعدة'},
+  whiteDays:{ru:(d)=>'🌕 Белые дни — '+d+'-й день (пост сунна)',en:(d)=>'🌕 White Days — day '+d+' (sunnah fast)',ar:(d)=>'🌕 الأيام البيض — اليوم '+d+' (صيام سنة)'},
+  mondayFast:{ru:()=>'🌴 Пост в Понедельник (сунна)',en:()=>'🌴 Monday fast (sunnah)',ar:()=>'🌴 صيام الاثنين (سنة)'},
+  thursdayFast:{ru:()=>'🌴 Пост в Четверг (сунна)',en:()=>'🌴 Thursday fast (sunnah)',ar:()=>'🌴 صيام الخميس (سنة)'}
+};
+function evT(key){ const e=EVENT_TR[key]; if(!e) return ''; const fn=e[APP_LANG]||e.ru; return fn.apply(null,Array.prototype.slice.call(arguments,1)); }
+
 const NAMES=['Фаджр','Зухр','Аср','Магриб','Иша'];
 const KEYS=['F','Z','A','M','I'];
 const WINS={"Фаджр":30*60,"Магриб":7*60};
@@ -2434,8 +2902,8 @@ const DUHA_DELAY=15*60;
 
 function pad(n){return String(n).padStart(2,'0');}
 function getKey(d){return pad(d.getMonth()+1)+'-'+pad(d.getDate());}
-function getPrayers(date){const row=P[getKey(date)]||P['02-28'];return KEYS.map((c,i)=>{const[h,m]=row[c].split(':').map(Number);const t=new Date(date);t.setHours(h,m,0,0);return{name:NAMES[i],time:t};});}
-function getSunrise(date){const s=SR[getKey(date)]||SR['02-28'];const[h,m]=s.split(':').map(Number);const t=new Date(date);t.setHours(h,m,0,0);return t;}
+function getPrayers(date){const _k=getKey(date);const _at=getActiveTable();const row=(_at&&_at[_k])||P[_k]||P['02-28'];return KEYS.map((c,i)=>{const[h,m]=row[c].split(':').map(Number);const t=new Date(date);t.setHours(h,m,0,0);t.setMinutes(t.getMinutes()+getPrayerOffset(KEYS[i]));return{name:NAMES[i],time:t};});}
+function getSunrise(date){const _k=getKey(date);const _asr=getActiveSR();const s=(_asr&&_asr[_k])||SR[_k]||SR['02-28'];const[h,m]=s.split(':').map(Number);const t=new Date(date);t.setHours(h,m,0,0);return t;}
 
 function compute(){
   const now=new Date(),ms=now.getTime(),prayers=getPrayers(now);
@@ -2480,7 +2948,7 @@ function renderBottom(prayers,nxt,cur,sunrise){
     if(isDone&&!isA)d.classList.add('done');
     const isFri=(new Date().getDay()===5);
     const pName=(isFri&&p.name==='Зухр')?'Джума':p.name;
-    d.innerHTML='<span class="pi-name">'+pName+'</span><span class="pi-time">'+fmtT(p.time)+'</span>';
+    d.innerHTML='<span class="pi-name">'+trName(pName)+'</span><span class="pi-time">'+fmtT(p.time)+'</span>';
     $b.appendChild(d);
   });
 }
@@ -2498,36 +2966,38 @@ function tick(){
       const jumaNext=s.prayers.find(p=>p.time>s.cur.time);
       const jumaRem=jumaNext?Math.max(0,Math.floor((jumaNext.time-Date.now())/1000)):0;
       $t.textContent=jumaNext?fmt(jumaRem):'';$t.className='green';
-      $n.textContent=jumaNext?jumaNext.name.toUpperCase():'';$n.className='green';
+      $n.innerHTML=jumaNext?(trName(jumaNext.name).toUpperCase()+' <span class="event-in-suffix">'+trUI('eventIn')+'</span>'):'';$n.className='green';
       $st.textContent='';$pt.textContent=jumaNext?fmtT(jumaNext.time):'';
       renderBottom(s.prayers,jumaNext,null,s.sunrise);
     } else {
       $t.textContent=fmt(s.rem);$t.className='red';
-      $n.textContent=s.cur.name.toUpperCase();$n.className='red';
+      $n.textContent=trName(s.cur.name).toUpperCase();$n.className='red';
       $st.textContent='';$pt.textContent=fmtT(s.cur.time);
       renderBottom(s.prayers,null,s.cur,s.sunrise);
     }
   } else if(s.state==='duha'){
-    $t.textContent=fmt(s.rem);$t.className='red';
-    $n.textContent='ДУХА';$n.className='red';
+    $t.textContent=fmt(s.rem);$t.className='sun';
+    $n.innerHTML=trName('ДУХА')+' <span class="event-in-suffix">'+trUI('eventIn')+'</span>';$n.className='sun';
     $st.textContent='';$pt.textContent='';
     renderBottom(s.prayers,null,null,s.sunrise);
   } else {
     const isFridayC=(new Date().getDay()===5);
-    const nxtDisplay=s.nxt?(isFridayC&&s.nxt.name==='Зухр'?'ДЖУМА':s.nxt.name.toUpperCase()):'';
-    $t.textContent=fmt(s.rem);$t.className='green';
-    $n.textContent=nxtDisplay;$n.className='green';
+    const nxtDisplay=s.nxt?(isFridayC&&s.nxt.name==='Зухр'?trName('ДЖУМА'):trName(s.nxt.name).toUpperCase()):'';
+    const nxtClass=(s.nxt&&s.nxt.name==='Восход')?'sky':'green';
+    $t.textContent=fmt(s.rem);$t.className=nxtClass;
+    $n.innerHTML=nxtDisplay?(nxtDisplay+' <span class="event-in-suffix">'+trUI('eventIn')+'</span>'):'';$n.className=nxtClass;
     $st.textContent='';$pt.textContent=s.nxt?fmtT(s.nxt.time):'';
     renderBottom(s.prayers,s.nxt,null,s.sunrise);
   }
+  if(window.reapplyDynamicFS) reapplyDynamicFS();
 }
 
 tick();setInterval(tick,1000);
 document.addEventListener('click',(e)=>{
-  if(e.target.tagName==='BUTTON') return;
+  if(e.target.tagName==='BUTTON'||e.target.tagName==='LABEL'||e.target.tagName==='INPUT'||e.target.tagName==='SELECT'||e.target.tagName==='TEXTAREA') return;
   if(document.documentElement.requestFullscreen)document.documentElement.requestFullscreen();
 });
-if('serviceWorker' in navigator){ navigator.serviceWorker.register('sw.js').catch(()=>{}); }
+
 </script>
 
 <style>
@@ -2642,13 +3112,12 @@ if('serviceWorker' in navigator){ navigator.serviceWorker.register('sw.js').catc
   if (frameBox) {
     const topRow = document.createElement('div');
     topRow.id = 'top-calendar-row';
-    const daysOfWeek = ['ВС','ПН','ВТ','СР','ЧТ','ПТ','СБ'];
     const orderedIndices = [1,2,3,4,5,6,0];
     orderedIndices.forEach(idx => {
       const dayDiv = document.createElement('div');
       dayDiv.className = 'cal-day';
       dayDiv.setAttribute('data-day-idx', idx);
-      dayDiv.innerHTML = '<span class="pi-name">'+daysOfWeek[idx]+'</span>';
+      dayDiv.innerHTML = '<span class="pi-name">'+trWeekday(idx)+'</span>';
       topRow.appendChild(dayDiv);
     });
     const batDiv = document.createElement('div');
@@ -2676,15 +3145,17 @@ if('serviceWorker' in navigator){ navigator.serviceWorker.register('sw.js').catc
   function updateExtensions() {
     const now = new Date(), currentDayIdx = now.getDay();
     document.querySelectorAll('.cal-day[data-day-idx]').forEach(el => {
-      parseInt(el.getAttribute('data-day-idx')) === currentDayIdx
+      const idx=parseInt(el.getAttribute('data-day-idx'));
+      const nameEl=el.querySelector('.pi-name');
+      if(nameEl) nameEl.textContent=trWeekday(idx);
+      idx === currentDayIdx
         ? el.classList.add('current') : el.classList.remove('current');
     });
 
     // Дата в ячейке батареи
     const el = document.getElementById('ext-bat-val');
     if (el) {
-      const MONTHS_RU=['ЯНВ','ФЕВ','МАР','АПР','МАЙ','ИЮН','ИЮЛ','АВГ','СЕН','ОКТ','НОЯ','ДЕК'];
-      el.textContent = now.getDate() + ' ' + MONTHS_RU[now.getMonth()];
+      el.textContent = now.getDate() + ' ' + trMonthAbbr(now.getMonth());
     }
 
     // Обновление хадиса по слоту намаза
@@ -2723,16 +3194,15 @@ if('serviceWorker' in navigator){ navigator.serviceWorker.register('sw.js').catc
 
 <script>
 (function(){
-  var MONTHS_RU=['ЯНВ','ФЕВ','МАР','АПР','МАЙ','ИЮН','ИЮЛ','АВГ','СЕН','ОКТ','НОЯ','ДЕК'];
   function updateCalBadge(){
     var now=new Date();
     var d=document.getElementById('cal-badge-day');
     var m=document.getElementById('cal-badge-month');
     if(d) d.textContent=now.getDate();
-    if(m) m.textContent=MONTHS_RU[now.getMonth()];
+    if(m) m.textContent=trMonthAbbr(now.getMonth());
   }
   updateCalBadge();
-  setInterval(updateCalBadge,60000);
+  setInterval(updateCalBadge,1000);
 })();
 </script>
 
@@ -2814,9 +3284,9 @@ if('serviceWorker' in navigator){ navigator.serviceWorker.register('sw.js').catc
 </script>
 
 <div id="pwa-install-bar" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;padding:10px 16px;background:rgba(26,74,46,0.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-top:1px solid rgba(200,168,75,0.4);flex-direction:row;align-items:center;justify-content:space-between;gap:10px;">
-  <span style="color:#c8a84b;font-size:14px;font-weight:600;text-shadow:0 1px 3px rgba(0,0,0,0.6);">☪ Добавить на рабочий стол</span>
+  <span id="pwa-add-text" style="color:#c8a84b;font-size:14px;font-weight:600;text-shadow:0 1px 3px rgba(0,0,0,0.6);">☪ Добавить на рабочий стол</span>
   <div style="display:flex;gap:8px;">
-    <button onclick="installPWA()" style="background:#c8a84b;color:#1a4a2e;border:none;border-radius:10px;padding:7px 14px;font-size:13px;font-weight:700;cursor:pointer;">Установить</button>
+    <button id="pwa-install-btn" onclick="installPWA()" style="background:#c8a84b;color:#1a4a2e;border:none;border-radius:10px;padding:7px 14px;font-size:13px;font-weight:700;cursor:pointer;">Установить</button>
     <button onclick="document.getElementById('pwa-install-bar').style.display='none'" style="background:rgba(255,255,255,0.15);color:#fff;border:1px solid rgba(255,255,255,0.3);border-radius:10px;padding:7px 10px;font-size:13px;cursor:pointer;">✕</button>
   </div>
 </div>
@@ -2848,7 +3318,7 @@ window.addEventListener('appinstalled',()=>{document.getElementById('pwa-install
     saveTimer = setTimeout(function(){
       localStorage.setItem('notepad_text', TA.value);
       hint.style.opacity = '1';
-      hint.textContent = '✓ Сохранено';
+      hint.textContent = trUI('saved');
       setTimeout(function(){ hint.style.opacity = '0'; }, 1500);
     }, 600);
   };
@@ -2857,12 +3327,199 @@ window.addEventListener('appinstalled',()=>{document.getElementById('pwa-install
     TA.value = '';
     localStorage.removeItem('notepad_text');
     hint.style.opacity = '1';
-    hint.textContent = 'Очищено';
+    hint.textContent = trUI('cleared');
     setTimeout(function(){ hint.style.opacity = '0'; }, 1500);
+  };
+
+  // ── Открытие/закрытие блокнота как модального окна ──
+  window.openNotepadModal = function(){
+    var ov = document.getElementById('notepad-modal-overlay');
+    if (!ov) return;
+    ov.style.display = 'flex';
+    requestAnimationFrame(function(){ ov.classList.add('open'); });
+    setTimeout(function(){ if (TA) TA.focus(); }, 260);
+  };
+  window.closeNotepadModal = function(){
+    var ov = document.getElementById('notepad-modal-overlay');
+    if (!ov) return;
+    ov.classList.remove('open');
+    setTimeout(function(){ ov.style.display = 'none'; }, 250);
+  };
+
+  // ── Открытие/закрытие «Планов» как модального окна внутри этого же сайта ──
+  window.openPlansModal = function(){
+    var ov = document.getElementById('plans-modal-overlay');
+    if (!ov) return;
+    ov.style.display = 'flex';
+    requestAnimationFrame(function(){ ov.classList.add('open'); });
+    if (window.plRender) window.plRender();
+  };
+  window.closePlansModal = function(){
+    var ov = document.getElementById('plans-modal-overlay');
+    if (!ov) return;
+    ov.classList.remove('open');
+    setTimeout(function(){ ov.style.display = 'none'; }, 250);
   };
 })();
 
 
+</script>
+
+<script>
+// ── Планы (встроенный планировщик задач) ──
+(function(){
+  var tasks = JSON.parse(localStorage.getItem('tasks') || '[]');
+  var currentFilter = 'all';
+
+  var $ = function(id){ return document.getElementById(id); };
+  var tasksList, taskInput;
+
+  function save() {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+  }
+
+  function formatDate(ts) {
+    var d = new Date(ts);
+    return d.toLocaleDateString('ru-RU', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' });
+  }
+
+  function escapeHtml(s) {
+    return s.replace(/[&<>"']/g, function(c){
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+    });
+  }
+
+  function render() {
+    tasksList = tasksList || $('pl-tasksList');
+    if (!tasksList) return;
+
+    var filtered = tasks.filter(function(t){
+      if (currentFilter === 'active' && t.done) return false;
+      if (currentFilter === 'done' && !t.done) return false;
+      if (['buy','do','other'].indexOf(currentFilter) !== -1 && t.category !== currentFilter) return false;
+      return true;
+    });
+
+    var prio = { high: 0, medium: 1, low: 2 };
+    filtered.sort(function(a, b){
+      if (a.done !== b.done) return a.done ? 1 : -1;
+      if (prio[a.priority] !== prio[b.priority]) return prio[a.priority] - prio[b.priority];
+      return b.created - a.created;
+    });
+
+    var catLabels = {buy:'Купить',do:'Реализовать',other:'Другое'};
+    var prioLabels = {high:'Высокий',medium:'Средний',low:'Низкий'};
+
+    if (filtered.length === 0) {
+      tasksList.innerHTML = '<div class="pl-empty"><div class="pl-empty-icon">🗒️</div><div>' +
+        (tasks.length === 0 ? 'Пока нет планов. Добавь первый!' : 'Ничего не найдено') + '</div></div>';
+    } else {
+      tasksList.innerHTML = filtered.map(function(t){
+        return '' +
+        '<div class="pl-task ' + (t.done ? 'done' : '') + '" data-id="' + t.id + '">' +
+          '<div class="pl-task-header">' +
+            '<span class="pl-badge ' + t.category + '">' + catLabels[t.category] + '</span>' +
+            '<span class="pl-priority ' + t.priority + '">' + prioLabels[t.priority] + '</span>' +
+            '<span class="pl-task-date">' + formatDate(t.created) + '</span>' +
+          '</div>' +
+          '<div class="pl-task-text">' + escapeHtml(t.text) + '</div>' +
+          '<div class="pl-task-actions">' +
+            (t.done
+              ? '<button class="pl-action-btn resume-btn" onclick="plToggleTask(' + t.id + ')">▶️ Возобновить</button>'
+              : '<button class="pl-action-btn done-btn" onclick="plToggleTask(' + t.id + ')">✅ Выполнил</button>') +
+            '<button class="pl-action-btn" onclick="plEditTask(' + t.id + ')">✏️ Изменить</button>' +
+            '<button class="pl-action-btn delete-btn" onclick="plDeleteTask(' + t.id + ')">🗑️ Удалить</button>' +
+          '</div>' +
+        '</div>';
+      }).join('');
+    }
+
+    var total = tasks.length;
+    var done = tasks.filter(function(t){ return t.done; }).length;
+    var active = total - done;
+    var percent = total ? Math.round(done / total * 100) : 0;
+    if ($('pl-totalCount')) $('pl-totalCount').textContent = total;
+    if ($('pl-doneCount')) $('pl-doneCount').textContent = done;
+    if ($('pl-activeCount')) $('pl-activeCount').textContent = active;
+    if ($('pl-percentCount')) $('pl-percentCount').textContent = percent + '%';
+    if ($('pl-progressBar')) $('pl-progressBar').style.width = percent + '%';
+  }
+  window.plRender = render;
+
+  function showToast(msg) {
+    var old = document.querySelector('.pl-toast');
+    if (old) old.remove();
+    var t = document.createElement('div');
+    t.className = 'pl-toast';
+    t.textContent = msg;
+    document.body.appendChild(t);
+    setTimeout(function(){ t.remove(); }, 2500);
+  }
+
+  function addTask() {
+    taskInput = taskInput || $('pl-taskInput');
+    if (!taskInput) return;
+    var text = taskInput.value.trim();
+    if (!text) { showToast('⚠️ Введите текст задачи'); return; }
+    tasks.push({
+      id: Date.now(),
+      text: text,
+      category: $('pl-category').value,
+      priority: $('pl-priority').value,
+      done: false,
+      created: Date.now()
+    });
+    taskInput.value = '';
+    save(); render();
+    showToast('✨ Задача добавлена');
+  }
+
+  window.plToggleTask = function(id){
+    var t = tasks.find(function(x){ return x.id === id; });
+    if (t) { t.done = !t.done; save(); render(); showToast(t.done ? '🎉 Отлично!' : '🔄 Возобновлено'); }
+  };
+
+  window.plDeleteTask = function(id){
+    if (!confirm('Удалить задачу?')) return;
+    tasks = tasks.filter(function(x){ return x.id !== id; });
+    save(); render();
+    showToast('🗑️ Удалено');
+  };
+
+  window.plEditTask = function(id){
+    var t = tasks.find(function(x){ return x.id === id; });
+    if (!t) return;
+    var newText = prompt('Редактировать задачу:', t.text);
+    if (newText !== null && newText.trim()) {
+      t.text = newText.trim();
+      save(); render();
+      showToast('✏️ Обновлено');
+    }
+  };
+
+  function wireUpUI(){
+    tasksList = $('pl-tasksList');
+    taskInput = $('pl-taskInput');
+    var addBtn = $('pl-addBtn');
+    if (addBtn) addBtn.addEventListener('click', addTask);
+    if (taskInput) taskInput.addEventListener('keypress', function(e){ if (e.key === 'Enter') addTask(); });
+    document.querySelectorAll('.pl-filter-btn').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        document.querySelectorAll('.pl-filter-btn').forEach(function(b){ b.classList.remove('active'); });
+        btn.classList.add('active');
+        currentFilter = btn.dataset.filter;
+        render();
+      });
+    });
+    render();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', wireUpUI);
+  } else {
+    wireUpUI();
+  }
+})();
 </script>
 
 <div id="notif-btn-wrap" style="
@@ -2898,7 +3555,8 @@ window.addEventListener('appinstalled',()=>{document.getElementById('pwa-install
     clock:    {'#current-time': 32},
     battery:  {'#battery-status': 14, '#ext-bat-val': 16},
     calendar: {'.cal-day .pi-name': 14, '.cal-day .pi-time': 16},
-    hijri:    {'.hijri-day-num': 26, '#hijri-date': 11, '#islamic-event': 12},
+    hijri_day:   {'.hijri-day-num': 26},
+    hijri_event: {'#islamic-event': 12},
     timer:    {'#timer': 70, '#prayer-name': 46},
     prayer:   {'#bottom-row .pi-name': 18, '#bottom-row .pi-time': 24}
   };
@@ -2924,6 +3582,18 @@ window.addEventListener('appinstalled',()=>{document.getElementById('pwa-install
 
   window.getFontSize = function(k) {
     return parseFloat(localStorage.getItem('fs_'+k) || '1.0');
+  };
+
+  // Секции, которые перерисовываются на каждом тике (innerHTML), из-за чего
+  // применённый через applyFS() размер шрифта слетает — переустанавливаем его
+  // заново после каждой такой перерисовки.
+  window.reapplyDynamicFS = function() {
+    ['hijri_day', 'hijri_event', 'prayer'].forEach(function(k) {
+      var saved = localStorage.getItem('fs_'+k);
+      if (saved && Math.abs(parseFloat(saved) - 1.0) > 0.05) {
+        window.applyFS(k, parseFloat(saved));
+      }
+    });
   };
 
   // Восстанавливаем при загрузке — только если пользователь менял
@@ -2986,5 +3656,833 @@ if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('./sw.js').catch(function(){});
 }
 </script>
+
+<style>
+#ps-gear-btn{position:absolute;top:8px;right:8px;z-index:20;width:26px;height:26px;border-radius:8px;border:1px solid rgba(255,255,255,0.28);background:rgba(255,255,255,0.10);color:rgba(255,255,255,0.85);font-size:13px;line-height:1;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);}
+#ps-gear-btn:active{background:rgba(255,255,255,0.22);transform:scale(0.94);}
+.ps-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.72);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);z-index:99999;display:none;align-items:center;justify-content:center;padding:20px;}
+.ps-overlay.show{display:flex;}
+.ps-modal{background:rgba(20,20,24,0.97);border:1px solid rgba(255,255,255,0.12);border-radius:20px;width:100%;max-width:420px;max-height:86vh;overflow-y:auto;padding:20px;box-shadow:0 20px 60px rgba(0,0,0,0.6);font-family:inherit;}
+.ps-header{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px;flex-wrap:wrap;}
+.ps-title{color:#fff;font-size:17px;font-weight:700;}
+.ps-langs{display:flex;gap:6px;}
+.ps-lang-btn{padding:6px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.18);background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.75);font-size:13px;font-weight:700;cursor:pointer;}
+.ps-lang-btn.active{background:#FFC81E;color:#000;border-color:#FFC81E;}
+.ps-hint{color:rgba(255,255,255,0.4);font-size:11px;margin-bottom:10px;line-height:1.4;}
+.ps-row{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.08);gap:8px;}
+.ps-row:last-child{border-bottom:none;}
+.ps-row-name{color:#fff;font-size:15px;font-weight:700;}
+.ps-row-time{color:rgba(255,255,255,0.55);font-size:13px;margin-top:2px;}
+.ps-row-ctrl{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end;}
+.ps-stepbtn{width:34px;height:34px;border-radius:10px;border:1px solid rgba(255,255,255,0.18);background:rgba(255,255,255,0.08);color:#fff;font-size:18px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;user-select:none;}
+.ps-stepbtn:active{background:rgba(255,255,255,0.25);}
+.ps-offset-val{min-width:52px;text-align:center;color:#FFC81E;font-size:13px;font-weight:700;}
+.ps-row-reset{background:none;border:none;color:rgba(255,255,255,0.4);font-size:11px;cursor:pointer;text-decoration:underline;padding:4px;}
+.ps-footer{display:flex;gap:10px;margin-top:16px;}
+.ps-btn{flex:1;padding:12px;border-radius:12px;border:none;font-size:14px;font-weight:700;cursor:pointer;}
+.ps-btn-secondary{background:rgba(255,255,255,0.08);color:#fff;}
+.ps-btn-primary{background:#FFC81E;color:#000;}
+.ps-modal[dir="rtl"] .ps-row{flex-direction:row-reverse;}
+.ps-modal[dir="rtl"] .ps-row-ctrl{justify-content:flex-start;}
+.ps-modal[dir="rtl"] .ps-row-name,.ps-modal[dir="rtl"] .ps-row-time{text-align:right;}
+.ps-yt-divider{height:1px;background:rgba(255,255,255,0.12);margin:14px 0;}
+.ps-yt-title{color:#fff;font-size:14px;font-weight:700;margin-bottom:4px;}
+.ps-yt-status{color:rgba(255,255,255,0.55);font-size:11px;margin-bottom:10px;line-height:1.4;}
+.ps-yt-textarea{width:100%;min-height:64px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);border-radius:10px;color:#fff;font-size:12px;padding:8px;box-sizing:border-box;resize:vertical;font-family:monospace;margin-bottom:8px;}
+.ps-yt-row{display:flex;gap:8px;}
+.ps-yt-row .ps-btn{flex:1;padding:10px;font-size:13px;}
+.ps-yt-msg{font-size:11px;line-height:1.4;margin-top:6px;min-height:0;}
+.ps-yt-msg.ok{color:#7ee787;}
+.ps-yt-msg.err{color:#ff7b72;}
+#ps-yt-geo-options{margin-top:10px;display:flex;flex-direction:column;gap:6px;}
+.ps-yt-select{width:100%;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.18);border-radius:8px;color:#fff;padding:8px;font-size:12px;box-sizing:border-box;}
+.ps-yt-select option{background:#1a1a1e;color:#fff;}
+.ps-yt-select-label{color:rgba(255,255,255,0.6);font-size:11px;display:block;}
+</style>
+
+<div class="ps-overlay" id="ps-overlay" onclick="if(event.target===this)closePrayerSettings()">
+  <div class="ps-modal" id="ps-modal">
+    <div class="ps-header">
+      <div class="ps-title" id="ps-title"></div>
+      <div class="ps-langs" id="ps-langs"></div>
+    </div>
+    <div class="ps-hint" id="ps-hint"></div>
+    <div class="ps-list" id="ps-list"></div>
+
+    <div class="ps-yt-divider"></div>
+    <div class="ps-yt-title" id="ps-yt-title"></div>
+    <div class="ps-yt-status" id="ps-yt-status"></div>
+
+    <textarea class="ps-yt-textarea" id="ps-yt-textarea"></textarea>
+    <div class="ps-yt-row">
+      <label class="ps-btn ps-btn-secondary" id="ps-yt-file-btn" for="ps-yt-file-input" style="text-align:center;display:flex;align-items:center;justify-content:center;margin:0;"></label>
+      <button type="button" class="ps-btn ps-btn-primary" id="ps-yt-apply-btn"></button>
+    </div>
+    <input type="file" id="ps-yt-file-input" accept=".csv,.txt,text/csv,text/plain,text/comma-separated-values" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;">
+    <div class="ps-yt-msg" id="ps-yt-msg"></div>
+
+    <div class="ps-yt-divider"></div>
+
+    <button type="button" class="ps-btn ps-btn-secondary" id="ps-yt-geo-btn" style="display:none;"></button>
+    <div id="ps-yt-geo-options" style="display:none;">
+      <label class="ps-yt-select-label" id="ps-yt-method-label"></label>
+      <select class="ps-yt-select" id="ps-yt-method-select"></select>
+      <label class="ps-yt-select-label" id="ps-yt-asr-label"></label>
+      <select class="ps-yt-select" id="ps-yt-asr-select">
+        <option value="1" id="ps-yt-asr-shafi"></option>
+        <option value="2" id="ps-yt-asr-hanafi"></option>
+      </select>
+      <button type="button" class="ps-btn ps-btn-primary" id="ps-yt-geo-apply-btn" style="width:100%;"></button>
+    </div>
+    <div class="ps-yt-msg" id="ps-yt-geo-msg"></div>
+
+    <button type="button" class="ps-btn ps-btn-secondary" id="ps-yt-restore-btn" style="display:none;width:100%;margin-top:10px;"></button>
+
+    <div class="ps-footer">
+      <button type="button" class="ps-btn ps-btn-secondary" id="ps-reset-all"></button>
+      <button type="button" class="ps-btn ps-btn-primary" id="ps-close"></button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var PRAYER_KEYS=['F','Z','A','M','I'];
+  var KEY_TO_NAME={F:'Фаджр',Z:'Зухр',A:'Аср',M:'Магриб',I:'Иша'};
+
+  function refreshMain(){ try{ tick(); }catch(e){} }
+
+  function stepOffset(key,delta){
+    PRAYER_OFFSETS[key]=(PRAYER_OFFSETS[key]||0)+delta;
+    savePrayerOffsets();
+    renderPrayerRows();
+    refreshMain();
+  }
+  function resetOffset(key){
+    delete PRAYER_OFFSETS[key];
+    savePrayerOffsets();
+    renderPrayerRows();
+    refreshMain();
+  }
+  function resetAllOffsets(){
+    PRAYER_OFFSETS={};
+    savePrayerOffsets();
+    renderPrayerRows();
+    refreshMain();
+  }
+  function setLang(l){
+    saveAppLang(l);
+    applyStaticTranslations();
+    renderModalTexts();
+    renderPrayerRows();
+    refreshMain();
+    if(window.__ytOnLangChange) window.__ytOnLangChange();
+    if(window.__asmaOnLangChange) window.__asmaOnLangChange();
+    // Сообщаем нативному приложению (Android), чтобы виджет на рабочем
+    // столе тоже переключился на этот язык. В обычном браузере
+    // window.AndroidBridge просто не существует — вызов безопасно пропускается.
+    if(window.AndroidBridge && window.AndroidBridge.setLanguage){
+      try{ window.AndroidBridge.setLanguage(l); }catch(e){}
+    }
+  }
+  // Позволяет нативному Android-приложению (экран настроек) переключить
+  // язык веб-страницы точно так же, как кнопки RU/EN/AR в этом окне.
+  window.setAppLanguage = setLang;
+
+  function adjustedTimeFor(key){
+    var now=new Date();
+    var prayers=getPrayers(now);
+    var idx=PRAYER_KEYS.indexOf(key);
+    return fmtT(prayers[idx].time);
+  }
+
+  function renderPrayerRows(){
+    var list=document.getElementById('ps-list');
+    if(!list) return;
+    list.innerHTML='';
+    PRAYER_KEYS.forEach(function(key){
+      var name=KEY_TO_NAME[key];
+      var off=PRAYER_OFFSETS[key]||0;
+      var row=document.createElement('div');
+      row.className='ps-row';
+      var offStr=(off>0?'+':'')+off+' '+trUI('min');
+      row.innerHTML=
+        '<div>'+
+          '<div class="ps-row-name">'+trName(name)+'</div>'+
+          '<div class="ps-row-time">'+adjustedTimeFor(key)+'</div>'+
+        '</div>'+
+        '<div class="ps-row-ctrl">'+
+          '<button type="button" class="ps-stepbtn" data-act="minus" data-key="'+key+'">\u2212</button>'+
+          '<span class="ps-offset-val">'+offStr+'</span>'+
+          '<button type="button" class="ps-stepbtn" data-act="plus" data-key="'+key+'">+</button>'+
+          '<button type="button" class="ps-row-reset" data-act="reset" data-key="'+key+'">'+trUI('reset')+'</button>'+
+        '</div>';
+      list.appendChild(row);
+    });
+  }
+
+  function applyStaticTranslations(){
+    var elToday=document.getElementById('today-label');
+    if(elToday) elToday.textContent=trUI('today');
+    var elPwaText=document.getElementById('pwa-add-text');
+    if(elPwaText) elPwaText.textContent=trUI('pwaAdd');
+    var elPwaBtn=document.getElementById('pwa-install-btn');
+    if(elPwaBtn) elPwaBtn.textContent=trUI('pwaInstall');
+    var elQr=document.getElementById('qrMsg');
+    if(elQr) elQr.textContent=trUI('qrMsg');
+    var elNpTitle=document.getElementById('notepad-title');
+    if(elNpTitle) elNpTitle.textContent=trUI('notepadTitle');
+    var elNpBtnTitle=document.getElementById('notepad-btn-title');
+    if(elNpBtnTitle) elNpBtnTitle.textContent=trUI('notepadTitle');
+    var elPlansBtnTitle=document.getElementById('plans-btn-title');
+    if(elPlansBtnTitle) elPlansBtnTitle.textContent=trUI('plansTitle');
+    var elNpClear=document.getElementById('notepad-clear-btn');
+    if(elNpClear) elNpClear.textContent=trUI('notepadClear');
+    var elNpArea=document.getElementById('notepad-textarea');
+    if(elNpArea) elNpArea.setAttribute('placeholder',trUI('notepadPlaceholder'));
+  }
+  applyStaticTranslations();
+
+  function renderModalTexts(){
+    document.getElementById('ps-title').textContent=trUI('title');
+    document.getElementById('ps-hint').textContent=trUI('hint');
+    document.getElementById('ps-reset-all').textContent=trUI('resetAll');
+    document.getElementById('ps-close').textContent=trUI('close');
+    var langsEl=document.getElementById('ps-langs');
+    langsEl.innerHTML='';
+    [['ru','RU'],['en','EN'],['ar','AR']].forEach(function(pair){
+      var code=pair[0], label=pair[1];
+      var b=document.createElement('button');
+      b.type='button';
+      b.className='ps-lang-btn'+(APP_LANG===code?' active':'');
+      b.textContent=label;
+      b.addEventListener('click',function(){ setLang(code); });
+      langsEl.appendChild(b);
+    });
+    var modal=document.getElementById('ps-modal');
+    if(modal) modal.setAttribute('dir', APP_LANG==='ar'?'rtl':'ltr');
+  }
+
+  window.openPrayerSettings=function(){
+    renderModalTexts();
+    renderPrayerRows();
+    if(window.__ytOnOpen) window.__ytOnOpen();
+    document.getElementById('ps-overlay').classList.add('show');
+  };
+  window.closePrayerSettings=function(){
+    document.getElementById('ps-overlay').classList.remove('show');
+  };
+
+  document.getElementById('ps-list').addEventListener('click',function(e){
+    var t=e.target;
+    var act=t.getAttribute&&t.getAttribute('data-act');
+    var key=t.getAttribute&&t.getAttribute('data-key');
+    if(!act||!key) return;
+    if(act==='plus') stepOffset(key,1);
+    else if(act==='minus') stepOffset(key,-1);
+    else if(act==='reset') resetOffset(key);
+  });
+  document.getElementById('ps-reset-all').addEventListener('click',resetAllOffsets);
+  document.getElementById('ps-close').addEventListener('click',window.closePrayerSettings);
+})();
+</script>
+
+
+<script>
+(function(){
+  'use strict';
+
+  // ═══ Астрономический движок расчёта времени намазов (проверен на реальных данных) ═══
+  function ytDtr(d){ return d*Math.PI/180; }
+  function ytRtd(r){ return r*180/Math.PI; }
+  function ytDsin(d){ return Math.sin(ytDtr(d)); }
+  function ytDcos(d){ return Math.cos(ytDtr(d)); }
+  function ytDtan(d){ return Math.tan(ytDtr(d)); }
+  function ytDarcsin(x){ return ytRtd(Math.asin(Math.max(-1,Math.min(1,x)))); }
+  function ytDarccos(x){ return ytRtd(Math.acos(Math.max(-1,Math.min(1,x)))); }
+  function ytDarctan2(y,x){ return ytRtd(Math.atan2(y,x)); }
+  function ytDarccot(x){ return ytRtd(Math.atan2(1,x)); }
+  function ytFixAngle(a){ a=a%360; return a<0?a+360:a; }
+  function ytFixHour(h){ h=h%24; return h<0?h+24:h; }
+  function ytIsClamped(x){ return x>1 || x<-1; }
+
+  function ytJulianDate(year, month, day) {
+    if (month <= 2) { year -= 1; month += 12; }
+    var A = Math.floor(year / 100);
+    var B = 2 - A + Math.floor(A / 4);
+    return Math.floor(365.25 * (year + 4716)) + Math.floor(30.6001 * (month + 1)) + day + B - 1524.5;
+  }
+
+  function ytSunPosition(jd) {
+    var D = jd - 2451545.0;
+    var g = ytFixAngle(357.529 + 0.98560028 * D);
+    var q = ytFixAngle(280.459 + 0.98564736 * D);
+    var L = ytFixAngle(q + 1.915 * ytDsin(g) + 0.020 * ytDsin(2 * g));
+    var e = 23.439 - 0.00000036 * D;
+    var RA = ytFixHour(ytDarctan2(ytDcos(e) * ytDsin(L), ytDcos(L)) / 15);
+    var eqt = q / 15 - RA;
+    var decl = ytDarcsin(ytDsin(e) * ytDsin(L));
+    return { decl: decl, eqt: eqt };
+  }
+
+  function YtPrayCalc(lat, lng, fajrAngle, ishaAngle, ishaIsMinutes, ishaMinutes, asrFactor){
+    this.lat=lat; this.lng=lng;
+    this.fajrAngle=fajrAngle; this.ishaAngle=ishaAngle;
+    this.ishaIsMinutes=ishaIsMinutes; this.ishaMinutes=ishaMinutes;
+    this.asrFactor=asrFactor;
+  }
+  YtPrayCalc.prototype.midDay = function(jDate, time){
+    var eqt = ytSunPosition(jDate+time).eqt;
+    return ytFixHour(12-eqt);
+  };
+  YtPrayCalc.prototype.sunAngleTime = function(jDate, angle, time, dirAfter){
+    var decl = ytSunPosition(jDate+time).decl;
+    var noon = this.midDay(jDate, time);
+    var arg = (-ytDsin(angle)-ytDsin(decl)*ytDsin(this.lat))/(ytDcos(decl)*ytDcos(this.lat));
+    var t = 1/15*ytDarccos(arg);
+    return { value: noon + (dirAfter ? t : -t), clamped: ytIsClamped(arg) };
+  };
+  YtPrayCalc.prototype.asrTime = function(jDate, factor, time){
+    var decl = ytSunPosition(jDate+time).decl;
+    var angle = -ytDarccot(factor+ytDtan(Math.abs(this.lat-decl)));
+    return this.sunAngleTime(jDate, angle, time, true);
+  };
+  YtPrayCalc.prototype.computeDay = function(year, month, day, tz){
+    var jDate = ytJulianDate(year, month, day) - this.lng/(15*24);
+    var guess = {fajr:5,sunrise:6,dhuhr:12,asr:13,sunset:18,isha:18};
+
+    var fajrR = this.sunAngleTime(jDate, this.fajrAngle, guess.fajr/24, false);
+    var sunriseR = this.sunAngleTime(jDate, 0.833, guess.sunrise/24, false);
+    var dhuhrV = this.midDay(jDate, guess.dhuhr/24);
+    var asrR = this.asrTime(jDate, this.asrFactor, guess.asr/24);
+    var sunsetR = this.sunAngleTime(jDate, 0.833, guess.sunset/24, true);
+    var maghribR = sunsetR;
+    var ishaR;
+    if (this.ishaIsMinutes) ishaR = { value: maghribR.value + this.ishaMinutes/60, clamped:false };
+    else ishaR = this.sunAngleTime(jDate, this.ishaAngle, guess.isha/24, true);
+
+    var nightLen = ytFixHour(sunriseR.value - sunsetR.value);
+    var highLat = false;
+    if (fajrR.clamped){
+      var frac = this.fajrAngle/60;
+      fajrR = { value: ytFixHour(sunriseR.value - frac*nightLen), clamped:false };
+      highLat = true;
+    }
+    if (!this.ishaIsMinutes && ishaR.clamped){
+      var fracI = this.ishaAngle/60;
+      ishaR = { value: ytFixHour(sunsetR.value + fracI*nightLen), clamped:false };
+      highLat = true;
+    }
+
+    var raw = {fajr:fajrR.value, sunrise:sunriseR.value, dhuhr:dhuhrV, asr:asrR.value, maghrib:maghribR.value, isha:ishaR.value};
+    var out = {}, self=this;
+    Object.keys(raw).forEach(function(k){
+      out[k] = ytFixHour(raw[k] + tz - self.lng/15);
+    });
+    out._highLat = highLat;
+    return out;
+  };
+
+  function ytHourToHHMM(h){
+    var hh = Math.floor(h);
+    var mm = Math.round((h-hh)*60);
+    if (mm===60){mm=0;hh+=1;}
+    hh = ((hh%24)+24)%24;
+    return String(hh).padStart(2,'0')+':'+String(mm).padStart(2,'0');
+  }
+
+  function ytGenerateYearTable(lat, lng, params){
+    var calc = new YtPrayCalc(lat, lng, params.fajrAngle, params.ishaAngle, params.ishaIsMinutes, params.ishaMinutes, params.asrFactor);
+    var Pn={}, SRn={}, anyHighLat=false;
+    var year = new Date().getFullYear();
+    for (var mo=1; mo<=12; mo++){
+      var daysInMonth = new Date(year, mo, 0).getDate();
+      for (var da=1; da<=daysInMonth; da++){
+        var tzDate = new Date(year, mo-1, da, 12, 0, 0);
+        var tz = -tzDate.getTimezoneOffset()/60;
+        var r = calc.computeDay(year, mo, da, tz);
+        if (r._highLat) anyHighLat = true;
+        var mdKey = String(mo).padStart(2,'0')+'-'+String(da).padStart(2,'0');
+        Pn[mdKey] = { F:ytHourToHHMM(r.fajr), Z:ytHourToHHMM(r.dhuhr), A:ytHourToHHMM(r.asr), M:ytHourToHHMM(r.maghrib), I:ytHourToHHMM(r.isha) };
+        SRn[mdKey] = ytHourToHHMM(r.sunrise);
+      }
+    }
+    if (!Pn['02-29']) Pn['02-29'] = Pn['02-28'];
+    if (!SRn['02-29']) SRn['02-29'] = SRn['02-28'];
+    return { P: Pn, SR: SRn, highLat: anyHighLat };
+  }
+
+  var YT_METHODS = [
+    { id:'mwl', label:{ru:'Muslim World League (18°/17°)', en:'Muslim World League (18°/17°)', ar:'رابطة العالم الإسلامي (18°/17°)'}, fajrAngle:18, ishaAngle:17, ishaIsMinutes:false, ishaMinutes:0 },
+    { id:'isna', label:{ru:'ISNA — Сев. Америка (15°/15°)', en:'ISNA - North America (15°/15°)', ar:'الجمعية الإسلامية لأمريكا الشمالية (15°/15°)'}, fajrAngle:15, ishaAngle:15, ishaIsMinutes:false, ishaMinutes:0 },
+    { id:'egypt', label:{ru:'Египетское управление (19.5°/17.5°)', en:'Egyptian General Authority (19.5°/17.5°)', ar:'الهيئة المصرية العامة للمساحة (19.5°/17.5°)'}, fajrAngle:19.5, ishaAngle:17.5, ishaIsMinutes:false, ishaMinutes:0 },
+    { id:'karachi', label:{ru:'Университет Карачи (18°/18°)', en:'University of Karachi (18°/18°)', ar:'جامعة كراتشي (18°/18°)'}, fajrAngle:18, ishaAngle:18, ishaIsMinutes:false, ishaMinutes:0 },
+    { id:'makkah', label:{ru:'Умм-эль-Кура, Мекка (Иша = Магриб+90 мин)', en:'Umm al-Qura, Makkah (Isha = Maghrib+90min)', ar:'أم القرى، مكة (العشاء = المغرب+90 دقيقة)'}, fajrAngle:18.5, ishaAngle:0, ishaIsMinutes:true, ishaMinutes:90 },
+    { id:'tehran', label:{ru:'Тегеранский институт (17.7°/14°)', en:'Univ. of Tehran (17.7°/14°)', ar:'جامعة طهران (17.7°/14°)'}, fajrAngle:17.7, ishaAngle:14, ishaIsMinutes:false, ishaMinutes:0 }
+  ];
+
+  function ytPick(obj){ return obj[APP_LANG] || obj.ru; }
+  function ytFormat(tpl, vars){
+    return tpl.replace(/\{(\w+)\}/g, function(_, k){ return (vars && vars[k]!==undefined) ? vars[k] : ''; });
+  }
+  function ytTodayStr(){
+    var d = new Date();
+    return String(d.getDate()).padStart(2,'0')+'.'+String(d.getMonth()+1).padStart(2,'0')+'.'+d.getFullYear();
+  }
+
+  // ═══ Разбор вставленной/загруженной таблицы (CSV / текст) ═══
+  function ytParseDateToMonthDay(s){
+    s = (s||'').trim();
+    var m;
+    m = s.match(/^(\d{4})[.\-\/](\d{1,2})[.\-\/](\d{1,2})$/); // YYYY-MM-DD
+    if (m) { var mo1=+m[2], da1=+m[3]; if(ytValidMD(mo1,da1)) return ytMdKey(mo1,da1); }
+    m = s.match(/^(\d{1,2})[.\-\/](\d{1,2})[.\-\/](\d{4})$/); // DD.MM.YYYY
+    if (m) { var da2=+m[1], mo2=+m[2]; if(ytValidMD(mo2,da2)) return ytMdKey(mo2,da2); }
+    m = s.match(/^(\d{1,2})[.\-\/](\d{1,2})$/); // без года: ДД.ММ или ММ-ДД
+    if (m) {
+      var n1=+m[1], n2=+m[2];
+      if (ytValidMD(n2,n1)) return ytMdKey(n2,n1); // сначала пробуем как ДД.ММ (день.месяц)
+      if (ytValidMD(n1,n2)) return ytMdKey(n1,n2); // иначе — как ММ-ДД (месяц-день)
+    }
+    return null;
+  }
+  function ytValidMD(mo,da){ return mo>=1&&mo<=12&&da>=1&&da<=31; }
+  function ytMdKey(mo,da){ return String(mo).padStart(2,'0')+'-'+String(da).padStart(2,'0'); }
+  function ytNormalizeTime(s){
+    s = (s||'').trim();
+    var m = s.match(/^(\d{1,2}):(\d{2})(?::\d{2})?$/);
+    if (!m) return null;
+    var h=+m[1], mi=+m[2];
+    if (h<0||h>23||mi<0||mi>59) return null;
+    return h+':'+String(mi).padStart(2,'0');
+  }
+  function ytParseYearScheduleText(text){
+    var lines = (text||'').split(/\r?\n/);
+    var Pn={}, SRn={}, count=0;
+    for (var i=0;i<lines.length;i++){
+      var line = lines[i].trim();
+      if (!line) continue;
+      var parts = line.split(/[;,\t]+|\s{2,}/).map(function(s){return s.trim();}).filter(function(s){return s.length>0;});
+      if (parts.length < 7) continue;
+      var mdKey = ytParseDateToMonthDay(parts[0]);
+      if (!mdKey) continue;
+      var times = parts.slice(1,7).map(ytNormalizeTime);
+      if (times.indexOf(null) !== -1) continue;
+      Pn[mdKey] = { F:times[0], Z:times[2], A:times[3], M:times[4], I:times[5] };
+      SRn[mdKey] = times[1];
+      count++;
+    }
+    if (!Pn['02-29'] && Pn['02-28']) { Pn['02-29'] = Pn['02-28']; SRn['02-29'] = SRn['02-28']; }
+    return { P:Pn, SR:SRn, count:count };
+  }
+
+  // ═══ UI ═══
+  var YT_MIN_DAYS = 360;
+  var _ytGeoCoords = null;
+
+  function ytRenderStatus(){
+    var el = document.getElementById('ps-yt-status');
+    if (!el) return;
+    var meta = getCustomTableMeta();
+    if (!meta) {
+      el.textContent = trUI('ytStatusBuiltin');
+    } else if (meta.source === 'csv') {
+      el.textContent = ytFormat(trUI('ytStatusCsv'), { date: meta.appliedAtStr || '' });
+    } else if (meta.source === 'geo') {
+      el.textContent = ytFormat(trUI('ytStatusGeo'), { method: meta.methodLabel || '', date: meta.appliedAtStr || '' });
+    } else {
+      el.textContent = trUI('ytStatusBuiltin');
+    }
+    var restoreBtn = document.getElementById('ps-yt-restore-btn');
+    if (restoreBtn) restoreBtn.style.display = meta ? 'block' : 'none';
+  }
+
+  function ytPopulateMethodSelect(){
+    var sel = document.getElementById('ps-yt-method-select');
+    if (!sel) return;
+    var prevValue = sel.value;
+    sel.innerHTML = '';
+    YT_METHODS.forEach(function(m){
+      var opt = document.createElement('option');
+      opt.value = m.id;
+      opt.textContent = ytPick(m.label);
+      sel.appendChild(opt);
+    });
+    if (prevValue) sel.value = prevValue;
+  }
+
+  function ytRenderTexts(){
+    var elTitle = document.getElementById('ps-yt-title');
+    if (elTitle) elTitle.textContent = trUI('ytTitle');
+    var elTa = document.getElementById('ps-yt-textarea');
+    if (elTa) elTa.setAttribute('placeholder', trUI('ytTextareaPlaceholder'));
+    var elFileBtn = document.getElementById('ps-yt-file-btn');
+    if (elFileBtn) elFileBtn.textContent = trUI('ytFileBtn');
+    var elApplyBtn = document.getElementById('ps-yt-apply-btn');
+    if (elApplyBtn) elApplyBtn.textContent = trUI('ytApplyBtn');
+    var elGeoBtn = document.getElementById('ps-yt-geo-btn');
+    if (elGeoBtn) elGeoBtn.textContent = trUI('ytGeoBtn');
+    var elMethodLabel = document.getElementById('ps-yt-method-label');
+    if (elMethodLabel) elMethodLabel.textContent = trUI('ytMethodLabel');
+    var elAsrLabel = document.getElementById('ps-yt-asr-label');
+    if (elAsrLabel) elAsrLabel.textContent = trUI('ytAsrLabel');
+    var elAsrShafi = document.getElementById('ps-yt-asr-shafi');
+    if (elAsrShafi) elAsrShafi.textContent = trUI('ytAsrShafi');
+    var elAsrHanafi = document.getElementById('ps-yt-asr-hanafi');
+    if (elAsrHanafi) elAsrHanafi.textContent = trUI('ytAsrHanafi');
+    var elGeoApplyBtn = document.getElementById('ps-yt-geo-apply-btn');
+    if (elGeoApplyBtn) elGeoApplyBtn.textContent = trUI('ytGeoApplyBtn');
+    var elRestoreBtn = document.getElementById('ps-yt-restore-btn');
+    if (elRestoreBtn) elRestoreBtn.textContent = trUI('ytRestoreBtn');
+    ytPopulateMethodSelect();
+    ytRenderStatus();
+    ytApplyGeoAvailability();
+  }
+
+  function ytApplyGeoAvailability(){
+    // Геолокация отключена полностью — без интернета даёт неточные координаты
+    // и перезаписывает правильный CSV неверным расписанием.
+    var elGeoBtn = document.getElementById('ps-yt-geo-btn');
+    var elGeoOptions = document.getElementById('ps-yt-geo-options');
+    if (elGeoBtn) elGeoBtn.style.display = 'none';
+    if (elGeoOptions) elGeoOptions.style.display = 'none';
+  }
+
+  function ytShowMsg(elId, text, ok){
+    var el = document.getElementById(elId);
+    if (!el) return;
+    el.textContent = text;
+    el.className = 'ps-yt-msg ' + (ok ? 'ok' : 'err');
+  }
+
+  function ytApplyFromText(){
+    var ta = document.getElementById('ps-yt-textarea');
+    var text = ta ? ta.value : '';
+    if (!text || !text.trim()){
+      ytShowMsg('ps-yt-msg', trUI('ytParseEmpty'), false);
+      return;
+    }
+    var result = ytParseYearScheduleText(text);
+    if (result.count < YT_MIN_DAYS){
+      ytShowMsg('ps-yt-msg', ytFormat(trUI('ytParseTooFew'), {count: result.count}), false);
+      return;
+    }
+    if (!window.confirm(trUI('ytApplyConfirm'))) return;
+    saveCustomTable(result.P, result.SR, { source:'csv', appliedAtStr: ytTodayStr() });
+    ytShowMsg('ps-yt-msg', ytFormat(trUI('ytParseOk'), {count: result.count}), true);
+    ytRenderStatus();
+    try{ tick(); }catch(e){}
+  }
+
+  function ytHandleFile(file){
+    if (!file) return;
+    var reader = new FileReader();
+    reader.onload = function(e){
+      var ta = document.getElementById('ps-yt-textarea');
+      if (ta) ta.value = String(e.target.result || '');
+    };
+    reader.readAsText(file, 'UTF-8');
+  }
+
+  function ytRequestGeo(){
+    ytShowMsg('ps-yt-geo-msg', trUI('ytGeoAsking'), true);
+    if (!navigator.geolocation){
+      ytShowMsg('ps-yt-geo-msg', trUI('ytGeoDenied'), false);
+      return;
+    }
+    navigator.geolocation.getCurrentPosition(function(pos){
+      _ytGeoCoords = { lat: pos.coords.latitude, lng: pos.coords.longitude };
+      document.getElementById('ps-yt-geo-msg').textContent = '';
+      document.getElementById('ps-yt-geo-options').style.display = 'flex';
+    }, function(){
+      ytShowMsg('ps-yt-geo-msg', trUI('ytGeoDenied'), false);
+    }, { enableHighAccuracy:false, timeout:15000 });
+  }
+
+  function ytApplyFromGeo(){
+    if (!_ytGeoCoords){ return; }
+    if (!window.confirm(trUI('ytApplyConfirm'))) return;
+    ytShowMsg('ps-yt-geo-msg', trUI('ytGeoCalculating'), true);
+    setTimeout(function(){
+      var methodId = document.getElementById('ps-yt-method-select').value;
+      var asrFactor = parseInt(document.getElementById('ps-yt-asr-select').value, 10) || 1;
+      var method = YT_METHODS.filter(function(m){ return m.id===methodId; })[0] || YT_METHODS[0];
+      var gen = ytGenerateYearTable(_ytGeoCoords.lat, _ytGeoCoords.lng, {
+        fajrAngle: method.fajrAngle, ishaAngle: method.ishaAngle,
+        ishaIsMinutes: method.ishaIsMinutes, ishaMinutes: method.ishaMinutes,
+        asrFactor: asrFactor
+      });
+      saveCustomTable(gen.P, gen.SR, {
+        source:'geo', appliedAtStr: ytTodayStr(), methodLabel: ytPick(method.label)
+      });
+      var msg = ytFormat(trUI('ytGeoApplied'), { lat: _ytGeoCoords.lat.toFixed(4), lng: _ytGeoCoords.lng.toFixed(4) });
+      if (gen.highLat) msg += ' ' + trUI('ytGeoHighLat');
+      ytShowMsg('ps-yt-geo-msg', msg, true);
+      ytRenderStatus();
+      try{ tick(); }catch(e){}
+    }, 30);
+  }
+
+  function ytRestore(){
+    if (!window.confirm(trUI('ytRestoreConfirm'))) return;
+    clearCustomTable();
+    ytRenderStatus();
+    ytShowMsg('ps-yt-msg', '', true);
+    ytShowMsg('ps-yt-geo-msg', '', true);
+    try{ tick(); }catch(e){}
+  }
+
+  var elFileInput = document.getElementById('ps-yt-file-input');
+  if (elFileInput){
+    elFileInput.addEventListener('change', function(e){
+      if (e.target.files && e.target.files[0]) ytHandleFile(e.target.files[0]);
+    });
+  }
+  var elApplyBtn2 = document.getElementById('ps-yt-apply-btn');
+  if (elApplyBtn2) elApplyBtn2.addEventListener('click', ytApplyFromText);
+  var elGeoBtn2 = document.getElementById('ps-yt-geo-btn');
+  if (elGeoBtn2) elGeoBtn2.addEventListener('click', ytRequestGeo);
+  var elGeoApplyBtn2 = document.getElementById('ps-yt-geo-apply-btn');
+  if (elGeoApplyBtn2) elGeoApplyBtn2.addEventListener('click', ytApplyFromGeo);
+  var elRestoreBtn2 = document.getElementById('ps-yt-restore-btn');
+  if (elRestoreBtn2) elRestoreBtn2.addEventListener('click', ytRestore);
+
+  window.__ytOnOpen = ytRenderTexts;
+  window.__ytOnLangChange = ytRenderTexts;
+
+  // ═══ Автозагрузка расписание.csv с сервера ═══
+  // Тот же механизм, что и в index.html — если телефон в сети мечети
+  // и файл расписание.csv лежит на сервере, приложение само подтянет
+  // расписание, без похода в настройки. Офлайн или без файла — тихо
+  // остаёмся на прежней таблице (это штатное поведение PWA).
+  // Автозагрузка расписание.csv убрана намеренно:
+  // CSV привязывается один раз вручную и хранится в localStorage навсегда.
+})();
+</script>
+
+<script>
+(function() {
+  const ASMA=[
+  {a:'ٱللَّٰهُ',n:'Аллах',m:'Бог, Единый Бог, Первый и единственный создатель всего и вся'},
+  {a:'ٱلرَّحْمَـٰنُ',n:'Ар-Рахман',m:'Милостивый ко всем на этом свете'},
+  {a:'ٱلرَّحِيمُ',n:'Ар-Рахим',m:'Милующий, Милосердный на том свете только верующих'},
+  {a:'ٱلْمَـٰلِكُ',n:'Аль-Малик',m:'Владыка всего и всех'},
+  {a:'ٱلْقُدُّوسُ',n:'Аль-Куддус',m:'Священный, Свободный от недостатков'},
+  {a:'ٱلسَّلَـٰمُ',n:'Ас-Салям',m:'Дающий мир и безопасность своим созданиям'},
+  {a:'ٱلْمُؤْمِنُ',n:'Аль-Му`мин',m:'Дающий надежность и безопасность своим верным рабам'},
+  {a:'ٱلْمُهَيْمِنُ',n:'Аль-Мухаймин',m:'Подчиняющий себе'},
+  {a:'ٱلْعَزِيزُ',n:'Аль-‘Азиз',m:'Великий, Непобедимый'},
+  {a:'ٱلْجَبَّارُ',n:'Аль-Джаббар',m:'Обладающий силой, Управляющий всем по Своей Воле'},
+  {a:'ٱلْمُتَكَبِّرُ',n:'Аль-Мутакяббир',m:'Единый Обладатель Истинного Величия'},
+  {a:'ٱلْخَـٰلِقُ',n:'Аль-Халик',m:'Создатель'},
+  {a:'ٱلْبَارِئُ',n:'Аль-Бари‘',m:'Создающий без изъянов'},
+  {a:'ٱلْمُصَوِّرُ',n:'Аль-Мусаввир',m:'Придающий всему форму'},
+  {a:'ٱلْغَفَّـٰرُ',n:'Аль-Гаффар',m:'Прощающий и скрывающий грехи'},
+  {a:'ٱلْقَهَّـٰرُ',n:'Аль-Каххар',m:'Побеждающий ,Господствующий'},
+  {a:'ٱلْوَهَّابُ',n:'Аль-Ваххаб',m:'Дарующий'},
+  {a:'ٱلرَّزَّاقُ',n:'Ар-Раззак',m:'Дающий блага'},
+  {a:'ٱلْفَتَّاحُ',n:'Аль-Фаттах',m:'Победитель'},
+  {a:'ٱلْعَلِيمُ',n:'Аль-Алим',m:'Всезнающий'},
+  {a:'ٱلْقَابِضُ',n:'Аль-Кабид',m:'Сжимающий, Огорчающий'},
+  {a:'ٱلْبَاسِطُ',n:'Аль-Басит',m:'Расширяющий, Радуюущий'},
+  {a:'ٱلْخَافِضُ',n:'Аль-Хафид',m:'Унижающий'},
+  {a:'ٱلرَّافِعُ',n:'Аль-Рафи',m:'Возвышающий'},
+  {a:'ٱلْمُعِزُّ',n:'Аль-Муизз',m:'Усиливающий, Возвеличивающий, Дающий силу'},
+  {a:'ٱلْمُذِلُّ',n:'Аль-Муззлль',m:'Ослабляющий Свергающий'},
+  {a:'ٱلسَّمِيعُ',n:'Аль-Сами',m:'Всеслышащий, Слышащий абсолютно все и вся'},
+  {a:'ٱلْبَصِيرُ',n:'Аль-Басыр',m:'Всевидящий'},
+  {a:'ٱلْحَكَمُ',n:'Аль-Хакам',m:'Судья Решающий'},
+  {a:'ٱلْعَدْلُ',n:'Аль-\'Адль',m:'Справедливый'},
+  {a:'ٱللَّطِيفُ',n:'Аль-Латиф',m:'«Понимающий» – Всевышний проявляет добро и милосердие в отношении Своих творений'},
+  {a:'ٱلْخَبِيرُ',n:'Аль-Хабир',m:'«Сведущий» – Господу миров известно всё явное и сокровенное, ничего от Него скрыть невозможно, так как Он сведущ абсолютно обо всём'},
+  {a:'ٱلْحَلِيمُ',n:'Аль-Халим',m:'«Сдержанный» – Аллах не наказывает Своих рабов сразу же после совершённого ими греха, давая нам шанс раскаяться и попросить прощения за свои проступки'},
+  {a:'ٱلْعَظِيمُ',n:'Аль-Азыйм',m:'«Величайший» – величие Бога не имеет ни пределов, ни границ'},
+  {a:'ٱلْغَفُورُ',n:'Аль-Гафур',m:'«Прощающий» – Всевышний способен прощать любые грехи Своим творениям'},
+  {a:'ٱلشَّكُورُ',n:'Аш-Шакур',m:'«Вознаграждающий» – Господь наделяет Своих рабов неисчисляемой наградой за благие деяния'},
+  {a:'ٱلْعَلِيُّ',n:'Аль-Али',m:'«Всевышний» – Создатель не имеет ни конкурентов, ни сотоварищей, так как Его высочеству нет равных'},
+  {a:'ٱلْكَبِيرُ',n:'Аль-Кабир',m:'«Великий» – наш Творец не нуждается ни в ком и ни в чём'},
+  {a:'ٱلْحَفِيظُ',n:'Аль-Хафиз',m:'«Хранитель» – Аллах является хранителем всего сущего'},
+  {a:'ٱلْمُقِيتُ',n:'Аль-Мукит',m:'«Поддерживающий» – Всевышний оказывает поддержку Своим рабам, обеспечивая их пропитанием'},
+  {a:'ٱلْحَسِيبُ',n:'Аль-Хасиб',m:'«Достаточный» – Аллаху присуща самодостаточность'},
+  {a:'ٱلْجَلِيلُ',n:'Аль-Джалиль',m:'«Обладающий величием» – Создатель обладает наилучшими качествами и истинным величием'},
+  {a:'ٱلْكَرِيمُ',n:'Аль-Карим',m:'«Щедрый» – Господь проявляет безграничную щедрость'},
+  {a:'ٱلرَّقِيبُ',n:'Ар-Ракиб',m:'«Наблюдающий» – Бог держит под бдительным вниманием все Свои творения'},
+  {a:'ٱلْمُجِيبُ',n:'Аль-Муджиб',m:'«Отзывчивый» – Всевышний отвечает на дуа, молитвы и просьбы Своих рабов'},
+  {a:'ٱلْوَٰسِعُ',n:'Аль-Васи',m:'«Вездесущий» – Создатель не имеет пространственных ограничений, Он находится везде'},
+  {a:'ٱلْحَكِيمُ',n:'Аль-Хаким',m:'«Мудрый» – Господь является обладателем безграничной мудрости'},
+  {a:'الْوَدُودُ',n:'Аль-Вадуд',m:'«Любящий» – Всевышний любит все Свои творения'},
+  {a:'ٱلْمَجِيدُ',n:'Аль-Маджид',m:'«Славный» – Творец обладает не имеющим границ благородством'},
+  {a:'الباعث',n:'Аль-Баис',m:'«Воскрешающий» – Он воскресит всех рабов Своих в Судный день'},
+  {a:'الشهيد',n:'Аш-Шахид',m:'«Свидетель» – Аллах является свидетелем всего происходящего'},
+  {a:'الحق',n:'Аль-Хакку',m:'«Истинный» – Всевышний есть истинный Властелин в обоих мирах'},
+  {a:'الوكيل',n:'Аль-Вакиль',m:'«Опекающий» – лишь на Творца следует во всём полагаться, ибо этого будет достаточно для людей'},
+  {a:'القوى',n:'Аль-Кавий',m:'«Сильный» – Создатель обладает неограниченной ничем силой'},
+  {a:'المتين',n:'Аль-Матин',m:'«Непоколебимый» – никто не способен изменить замыслы Аллаха и для их осуществления Он ни в ком и ни в чём не нуждается'},
+  {a:'الولى',n:'Аль-Вали',m:'«Спутник» – Аллах всегда рядом с теми, кто поклоняется лишь Ему и испытывает к Нему искреннюю любовь'},
+  {a:'الحميد',n:'Аль-Хамид',m:'«Достойный хвалы» – Всевышний достоин всех видов хвалы, благодаря Своему совершенству'},
+  {a:'المحصى',n:'Аль-Мухси',m:'«Учитывающий» – наш Творец ведёт счёт всему и определяет для всего сущего определенные границы'},
+  {a:'المبدئ',n:'Аль-Мубди',m:'«Основатель» – то есть сотворивший всё сущее по Своему усмотрению не руководствовался каким бы то ни было образцом'},
+  {a:'المعيد',n:'Аль-Муид',m:'«Возвращающий всё живое к смерти, а затем вновь к жизни» – Аллах способен умерщвлять всё живое в этом мире, а затем вновь давать ему жизнь'},
+  {a:'المحيى',n:'Аль-Мухйи',m:'«Дарующий жизнь» – Создатель дарует жизнь кому пожелает'},
+  {a:'المميت',n:'Аль-Мумит',m:'«Дарующий смерть» – Аллах умерщвляет того, кого пожелает'},
+  {a:'الحي',n:'Аль-Хаййи',m:'«Обладающий вечной жизнью» – Всевышний не имеет временных ограничений, так как Он вечен'},
+  {a:'القيوم',n:'Аль-Каюм',m:'«Поддерживающий жизнь» – Господь не зависит ни от кого и ни от чего. Он является источником поддержания жизни на планете'},
+  {a:'الواجد',n:'Аль-Ваджид',m:'«Совершающий всё, что пожелает» – наш Творец обладает абсолютной властью над всем'},
+  {a:'الماجد',n:'Аль-Мааджид',m:'«Наиславнейший» – это имя переводится с арабского также как «Обладающий неограниченным величием», то есть никто не способен сравниться с Аллахом по этому признаку'},
+  {a:'الواحد',n:'Аль-Вахид',m:'«Единственный» – Он является Единственным Богом, достойным поклонения'},
+  {a:'الصمد',n:'Ас-Самад',m:'Ни в чем не нуждающийся'},
+  {a:'القادر',n:'Аль-Кадир',m:'Могучий, Обладатель всеобъемлющего Могущества'},
+  {a:'المقتدر',n:'Аль-Муктадир',m:'Могущественный, Обладатель беспредельного Могущества'},
+  {a:'المقدم',n:'Аль-Мукаддим',m:'Приближающий. Тот, Кто располагает творения ближе'},
+  {a:'المؤخر',n:'Аль-Муаххир',m:'Отделяющий, Тот, Кто располагает творения дальше'},
+  {a:'الأول',n:'Аль-Ауваль',m:'Первый. Тот, Чье Существование не имеет начала'},
+  {a:'الأخر',n:'Аль-Ахир',m:'Последний. Тот, Чье Существование не имеет конца'},
+  {a:'الظاهر',n:'Аз-Захир',m:'Явный посредством ясных доводов и очевидных признаков, указывающих на Него; Знающий явное'},
+  {a:'الباطن',n:'Аль-Батын',m:'Сокровенный, Тот, в отношении Которого немыслим образ; Знающий скрытое'},
+  {a:'الوالي',n:'Аль-Вали',m:'Покровитель. Властелин всех вещей, Управляющий ими'},
+  {a:'المتعالي',n:'Аль-Мута’али',m:'Превознесённый. Тот, Кто пречист от обладания качествами творений'},
+  {a:'البر',n:'Аль-Барр',m:'Добродетельный. Делающий добро для Своих творений'},
+  {a:'التواب',n:'Ат-Тавваб',m:'Принимающий. Тот, Кто прощает, кого пожелает из своих рабов и принимает их покаяние'},
+  {a:'المنتقم',n:'Аль-Мунтаким',m:'Наказывающий. Тот, Кто одерживает верх над Своими врагами и наказывает их за ослушание'},
+  {a:'العفو',n:'Аль-‘Афувву',m:'Прощающий грехи, Одаривающий милостями'},
+  {a:'الرؤوف',n:'Ар-Рауф',m:'Милостивый,Снисходительный. Синоним имени Ар-Рахим'},
+  {a:'مالك الملك',n:'Малик аль-Мульк',m:'Царь Царей, Обладатель власти – вся власть у Аллаха, и Он даёт ее, кому пожелает'},
+  {a:'ذو الجلال والإكرام',n:'Зуль-Джаляли валь-Икрам',m:'Обладатель Величия и Радушия. Тот, Кто заслуживает возвеличивания и почтения'},
+  {a:'المقسط',n:'Аль-Муксит',m:'Тот, Кто справедлив в Своих решениях'},
+  {a:'الجامع',n:'Аль-Джами',m:'Собирающий. Тот, Кто соберет все творения в День Суда'},
+  {a:'الغني',n:'Аль-Ганий',m:'Богатый, Самодостаточный. Тот, Кто не нуждается в творениях'},
+  {a:'المغني',n:'Аль-Мугни',m:'Обогащающий. Тот, Кто выполняет нужды творений'},
+  {a:'المانع',n:'Аль-Мани’',m:'Ограждающий. Помогающий верующим и Защищающий их'},
+  {a:'الضار',n:'Ад-Дарр',m:'Сокрушитель. Причиняющий вред, кому пожелает'},
+  {a:'النافع',n:'Ан-Нафи’',m:'Благотворитель. Приносящий пользу, кому пожелает'},
+  {a:'النور',n:'Ан-Нур',m:'Освещающий (путь), Наставляющий'},
+  {a:'الهادي',n:'Аль-Хади',m:'Ведущий. Тот, благодаря чьему руководству наставлены на истинный путь верующие и находит все живое то, что ему необходимо, и остерегается вреда'},
+  {a:'البديع',n:'Аль-Бади’',m:'Создающий наилучшим образом. Тот, Кто сотворил все существующее'},
+  {a:'الباقي',n:'Аль-Бакы',m:'Вечный. Тот, Чье Существование бесконечно'},
+  {a:'الوارث',n:'Аль-Варис',m:'Наследующий. Тот, к Кому отойдет всё имущество с исчезновением его владельцев'},
+  {a:'الرشيد',n:'Ар-Рашид',m:'Направляющий на правильный путь'},
+  {a:'الصبور',n:'Ас-Сабур',m:'Терпеливейший. Тот, Кто не спешит наказывать грешников'}
+  ];
+
+  function asmaDisplayName(item) {
+    return APP_LANG === 'ar' ? item.a : item.n;
+  }
+
+  function asmaGetSlot(date) {
+    const prayers = getPrayers(date);
+    const ms = date.getTime();
+    for (let i = prayers.length - 1; i >= 0; i--) {
+      if (ms >= prayers[i].time.getTime()) return i;
+    }
+    return 4;
+  }
+
+  function getAsmaIndex(date) {
+    const startOfYear = new Date(date.getFullYear(), 0, 0);
+    const dayOfYear = Math.floor((date - startOfYear) / 86400000);
+    const slot = asmaGetSlot(date);
+    return (dayOfYear * 5 + slot) % ASMA.length;
+  }
+
+  let lastAsmaIdx = -1;
+  function updateAsma() {
+    let idx;
+    try {
+      idx = getAsmaIndex(new Date());
+    } catch (e) {
+      idx = 0;
+    }
+    if (idx === lastAsmaIdx) return;
+    lastAsmaIdx = idx;
+    const item = ASMA[idx];
+    const nameArEl = document.getElementById('asma-name-ar');
+    const nameEl = document.getElementById('asma-name');
+    const meanEl = document.getElementById('asma-meaning');
+    if (nameArEl) { nameArEl.style.opacity = '0'; }
+    if (nameEl) { nameEl.style.opacity = '0'; }
+    if (meanEl) { meanEl.style.opacity = '0'; }
+    setTimeout(function() {
+      if (nameArEl) { nameArEl.textContent = item.a; nameArEl.style.opacity = '1'; }
+      if (nameEl) { nameEl.textContent = item.n; nameEl.style.opacity = '1'; }
+      if (meanEl) { meanEl.textContent = item.m; meanEl.style.opacity = '1'; }
+    }, 200);
+  }
+  setInterval(function(){
+    if (document.visibilityState === 'visible') updateAsma();
+  }, 15000);
+  setTimeout(updateAsma, 50);
+
+  // Фикс iOS: при возврате приложения из фона backdrop-filter блок
+  // иногда "теряется" визуально. Пинаем перерисовку и обновляем текст.
+  function kickAsmaRepaint() {
+    const el = document.getElementById('asma-block');
+    if (!el) return;
+    el.style.transform = 'translateZ(0) scale(0.9999)';
+    void el.offsetHeight; // форсируем reflow
+    requestAnimationFrame(function() {
+      el.style.transform = 'translateZ(0)';
+    });
+    lastAsmaIdx = -1;
+    updateAsma();
+  }
+  document.addEventListener('visibilitychange', function() {
+    if (document.visibilityState === 'visible') kickAsmaRepaint();
+  });
+  window.addEventListener('pageshow', kickAsmaRepaint);
+
+  // ═══ Полный список 99 имён — открывается по клику на табло ═══
+  function renderAsmaList() {
+    const listEl = document.getElementById('asma-list');
+    if (!listEl) return;
+    listEl.innerHTML = ASMA.map(function(item, i) {
+      return '<div class="asma-row">' +
+        '<div class="asma-row-num">' + (i + 1) + '</div>' +
+        '<div class="asma-row-body">' +
+          '<div class="asma-row-ar">' + item.a + '</div>' +
+          '<div class="asma-row-name">' + asmaDisplayName(item) + '</div>' +
+          '<div class="asma-row-meaning">' + item.m + '</div>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+  }
+
+  function renderAsmaModalTexts() {
+    const titleEl = document.getElementById('asma-modal-title');
+    if (titleEl) titleEl.textContent = trUI('asmaAllTitle');
+    const closeEl = document.getElementById('asma-modal-close');
+    if (closeEl) closeEl.textContent = trUI('close');
+    const modalEl = document.getElementById('asma-modal');
+    if (modalEl) modalEl.setAttribute('dir', APP_LANG === 'ar' ? 'rtl' : 'ltr');
+    renderAsmaList();
+  }
+
+  window.openAsmaModal = function() {
+    renderAsmaModalTexts();
+    const overlay = document.getElementById('asma-overlay');
+    if (overlay) overlay.classList.add('show');
+  };
+  window.closeAsmaModal = function() {
+    const overlay = document.getElementById('asma-overlay');
+    if (overlay) overlay.classList.remove('show');
+  };
+
+  window.__asmaOnLangChange = function() {
+    lastAsmaIdx = -1;
+    updateAsma();
+    const overlay = document.getElementById('asma-overlay');
+    if (overlay && overlay.classList.contains('show')) renderAsmaModalTexts();
+  };
+
+  const asmaBlockEl = document.getElementById('asma-block');
+  if (asmaBlockEl) asmaBlockEl.addEventListener('click', window.openAsmaModal);
+  const asmaOverlayEl = document.getElementById('asma-overlay');
+  if (asmaOverlayEl) asmaOverlayEl.addEventListener('click', function(e) {
+    if (e.target === asmaOverlayEl) window.closeAsmaModal();
+  });
+  const asmaCloseBtn = document.getElementById('asma-modal-close');
+  if (asmaCloseBtn) asmaCloseBtn.addEventListener('click', window.closeAsmaModal);
+})();
+</script>
+
 </body>
 </html>
