@@ -1,4 +1,4 @@
-const CACHE_NAME = 'namaz-v1';
+const CACHE_NAME = 'namaz-v2';
 const urlsToCache = [
   './',
   './index.html'
@@ -22,11 +22,10 @@ self.addEventListener('activate', e => {
 
 self.addEventListener('fetch', e => {
   e.respondWith(
-    caches.match(e.request).then(r => r || fetch(e.request).then(resp => {
-      return caches.open(CACHE_NAME).then(cache => {
-        cache.put(e.request, resp.clone());
-        return resp;
-      });
-    }))
+    fetch(e.request).then(resp => {
+      const respClone = resp.clone();
+      caches.open(CACHE_NAME).then(cache => cache.put(e.request, respClone));
+      return resp;
+    }).catch(() => caches.match(e.request))
   );
 });
